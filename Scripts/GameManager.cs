@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameMode gameMode;
-    public readonly int boardSideLength = 7;
+    public readonly int boardSideLength = 5;
     public BoardManager boardManager;
     public GameController controller;
     public GameController controller2;
