@@ -19,14 +19,17 @@ public class PieceInstance : MonoBehaviour
         this.color = color;
         this.board = board;
         //TODO: Set Crack Piece Material
-        if (isCrackPiece)
+        if(GameManager.Instance.gamePlayMode.doUseCrack)
         {
-            GetComponent<Renderer>().material = crackMaterial;
-            Debug.Log("isCrackPiece!!!! x: " + x + " y: " + y);
-        }
-        else
-        {
-            Debug.Log("NotCrackPiece!!!!");
+            if (isCrackPiece)
+            {
+                GetComponent<Renderer>().material = crackMaterial;
+                Debug.Log("isCrackPiece!!!! x: " + x + " y: " + y);
+            }
+            else
+            {
+                Debug.Log("NotCrackPiece!!!!");
+            }
         }
         material = GetComponent<Renderer>().material;
         switch (color)

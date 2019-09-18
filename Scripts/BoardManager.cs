@@ -39,6 +39,14 @@ public struct Piece
             return true;
         return false;
     }
+    public override bool Equals(object obj)
+    {
+        return this == (Piece)obj;
+    }
+    public override int GetHashCode()
+    {
+        return 1;
+    }
     public static bool operator !=(Piece l, Piece r)
     {
         if (l.x != r.x || l.y != r.y)
@@ -61,6 +69,11 @@ public struct Piece
         isDownHasPiece = down;
         this.x = x;
         this.y = y;
+    }
+    public override string ToString()
+    {
+        string s = "" + pieceColor + "PositionOnBoard(" + (GameManager.Instance.gamePlayMode.boardSideLength - 1 - y) + " , " + x + ")   " + "True Position:(" + x + " , " + y + ")" + "Color:" + (int)pieceColor;
+        return s;
     }
 }
 
@@ -104,10 +117,10 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public void Init(int len)
+    public void Init(GamePlayMode gpm)
     {
         selectedColor = PieceColor.NULL;
-        boardLength = len;
+        boardLength = gpm.boardSideLength;
         InitColorPool(boardLength);
         nextPieces = new List<Piece>();
         pieces = new Piece[boardLength, boardLength];
@@ -128,8 +141,8 @@ public class BoardManager : MonoBehaviour
         nextPieces.Add(pieces[0, boardLength - 1]);
         nextPieces.Add(pieces[boardLength - 1, 0]);
         nextPieces.Add(pieces[boardLength - 1, boardLength - 1]);
-
-        InitCrackPieces();
+        if(gpm.doUseCrack)
+            InitCrackPieces();
 
         boardInstance = GameManager.Instance.boardInstance;
     }
@@ -239,9 +252,10 @@ public class BoardManager : MonoBehaviour
     public void DeletePiece(int x, int y)
     {
         if (!nextPieces.Contains(pieces[x, y]))
-            Debug.LogError("No Valid Piece");
+            Debug.LogError("Not A Valid Piece");
         GameManager.Instance.GetScore(pieces[x, y].pieceColor);
         nextPieces.Remove(pieces[x, y]);
+        Debug.Log("Delete piece:" + pieces[x, y].ToString());
         pieces[x, y].isValid = false;
     }
     public void EndTurn()
@@ -257,7 +271,7 @@ public class BoardManager : MonoBehaviour
                     if (boardInstance.pieces[p.x, p.y] != null)
                         boardInstance.pieces[p.x, p.y].GoUp();
                     else
-                        Debug.LogError("Pieces has been destoryed");
+                        Debug.LogError("Pieces has been destoryed:::" + p.ToString());
                 }
             }
             isChanged = false;
