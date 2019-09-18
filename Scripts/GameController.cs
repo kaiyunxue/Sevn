@@ -10,14 +10,17 @@ public struct PlayerRecord
 public class GameController : MonoBehaviour
 {
     public PlayerRecord record;
+    public UIScorePanel uIScorePanel;
 
     public void GetScore(PieceColor color)
     {
         record.secord[(int)color]++;
+        uIScorePanel.SetScore((int)color, record.secord[(int)color]);
     }
-    public void Init(int maxColor)
+    public void Init(int maxColor, UIScorePanel p)
     {
         record.secord = new int[maxColor];
+        uIScorePanel = p;
     }
     public bool CheckDoesGetSevn()
     {

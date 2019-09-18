@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PieceColor
-{
-    Red,
-    Green,
-    White,
-    Blue,
-    Grey,
-    Black,
-    Orange,
-    NULL = 999
-}
-
-
 [System.Serializable]
 public struct Piece
 {
@@ -255,7 +242,7 @@ public class BoardManager : MonoBehaviour
             Debug.LogError("Not A Valid Piece");
         GameManager.Instance.GetScore(pieces[x, y].pieceColor);
         nextPieces.Remove(pieces[x, y]);
-        Debug.Log("Delete piece:" + pieces[x, y].ToString());
+        //Debug.Log("Delete piece:" + pieces[x, y].ToString());
         pieces[x, y].isValid = false;
     }
     public void EndTurn()

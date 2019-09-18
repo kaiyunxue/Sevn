@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PieceColor
+{
+    Red,
+    Green,
+    White,
+    Blue,
+    Grey,
+    Black,
+    Orange,
+    NULL = 999
+}
 [System.Serializable]
 public enum GameMode
 {
@@ -16,6 +27,7 @@ public struct GamePlayMode
     public GameMode gameMode;
     public int boardSideLength;
     public double selectLimitTime;
+    public Color[] colors;
     [Header("游戏细节玩法开关")]
     public bool doUseCrack;
     public bool doUseTurnTimer;
@@ -27,7 +39,7 @@ public class GameManager : MonoBehaviour
     [Header("Config")]
     public GamePlayMode gamePlayMode;
 
-    [Header("Important Objects")]
+    [Header("References")]
     public BoardManager boardManager;
     public GameController controller;
     public GameController controller2;
@@ -53,13 +65,15 @@ public class GameManager : MonoBehaviour
                 controller.name = "Player 1";
                 controller2 = Instantiate(controllerPrefab);
                 controller2.name = "Player 2";
-                controller.Init(gamePlayMode.boardSideLength);
-                controller2.Init(gamePlayMode.boardSideLength);
+                controller.Init(gamePlayMode.boardSideLength,UIManager.instance.panels[0]);
+                controller2.Init(gamePlayMode.boardSideLength, UIManager.instance.panels[1]);
                 break;
             default:
                 break;
         }
         boardInstance.Init();
+        //UI设置成单例了，方便去耦合
+        UIManager.instance.Init(gamePlayMode);
     }
     void Start()
     {
