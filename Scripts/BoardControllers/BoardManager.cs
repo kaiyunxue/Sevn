@@ -73,6 +73,7 @@ public class BoardManager : MonoBehaviour
     public List<PieceColor> colorPool;
     public PieceColor selectedColor;
     public BoardInstance boardInstance;
+    static private GamePlayMode gpm;
 
     public void InitColorPool(int len)
     {
@@ -104,26 +105,61 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public void Init(GamePlayMode gpm)
+    public bool IsValidBoard()
     {
-        selectedColor = PieceColor.NULL;
-        boardLength = gpm.boardSideLength;
-        InitColorPool(boardLength);
-        nextPieces = new List<Piece>();
-        pieces = new Piece[boardLength, boardLength];
-        for (int i = 0; i < boardLength; i++)
+        int[] moveX = { 0, 1 };
+        int[] moveY = { 1, 0 };
+        for (int i = 0; i < boardLength; ++i)
         {
-            for (int j = 0; j < boardLength; j++)
+            for (int j = 0; j < boardLength; ++j)
             {
-                bool up = !(i == 0);
-                bool down = !(i == boardLength - 1);
-                bool left = !(j == 0);
-                bool right = !(j == boardLength - 1);
-                int randomIdx = Random.Range(0, colorPool.Count - 1);
-                pieces[i, j] = new Piece(colorPool[randomIdx], left, right, up, down, i, j);
-                colorPool.RemoveAt(randomIdx);
+                Piece piece = pieces[i, j];
+                PieceColor color = piece.pieceColor;
+                for (int moveIdx = 0; moveIdx < 2; ++moveIdx)
+                {
+                    int newX = i + moveX[moveIdx];
+                    int newY = j + moveY[moveIdx];
+
+                    if (0 <= newX && newX < boardLength && 0 <= newY && newY < boardLength)
+                    {
+                        PieceColor newColor = pieces[newX, newY].pieceColor;
+                        if (newColor == color)
+                            return false;
+                    }
+                }
             }
         }
+        return true;
+    }
+
+    public void Init(GamePlayMode arg_gpm)
+    {
+        gpm = arg_gpm;
+        selectedColor = PieceColor.NULL;
+        boardLength = gpm.boardSideLength;
+        nextPieces = new List<Piece>();
+
+        for (; ; )
+        {
+            InitColorPool(boardLength);
+            pieces = new Piece[boardLength, boardLength];
+            for (int i = 0; i < boardLength; i++)
+            {
+                for (int j = 0; j < boardLength; j++)
+                {
+                    bool up = !(i == 0);
+                    bool down = !(i == boardLength - 1);
+                    bool left = !(j == 0);
+                    bool right = !(j == boardLength - 1);
+                    int randomIdx = Random.Range(0, colorPool.Count - 1);
+                    pieces[i, j] = new Piece(colorPool[randomIdx], left, right, up, down, i, j);
+                    colorPool.RemoveAt(randomIdx);
+                }
+            }
+            if (IsValidBoard())
+                break;
+        }
+
         nextPieces.Add(pieces[0, 0]);
         nextPieces.Add(pieces[0, boardLength - 1]);
         nextPieces.Add(pieces[boardLength - 1, 0]);
@@ -263,21 +299,24 @@ public class BoardManager : MonoBehaviour
             }
             isChanged = false;
 
-            foreach (var p in nextPieces)
+            if (gpm.doUseCrack)
             {
-                if(p.isValid)
+                foreach (var p in nextPieces)
                 {
-                    if (p.isCrackPiece)
+                    if (p.isValid)
                     {
-                        Debug.Log("Crack Piece Going Down!");
-                        if (boardInstance.pieces[p.x, p.y] != null)
+                        if (p.isCrackPiece)
                         {
-                            boardInstance.pieces[p.x, p.y].GoDown();
-                            PieceBeKilled(p.x, p.y);
+                            Debug.Log("Crack Piece Going Down!");
+                            if (boardInstance.pieces[p.x, p.y] != null)
+                            {
+                                boardInstance.pieces[p.x, p.y].GoDown();
+                                PieceBeKilled(p.x, p.y);
+                            }
+                            else
+                                Debug.LogError("Pieces has been destoryed");
+                            isChanged = true;
                         }
-                        else
-                            Debug.LogError("Pieces has been destoryed");
-                        isChanged = true;
                     }
                 }
             }
