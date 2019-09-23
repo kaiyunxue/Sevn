@@ -18,8 +18,7 @@ public class DebugManager : MonoBehaviour
             }
             Debug.Log(tmp);
         }
-        Debug.Log("ShowPiecesColors-----------------------------------------------------------");
-
+        Debug.Log(" ShowPiecesColors-----------------------------------------------------------");
     }
     public void ShowPiecesIsValid()
     {
