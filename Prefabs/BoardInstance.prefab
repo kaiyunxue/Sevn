@@ -47,3 +47,5 @@ MonoBehaviour:
   sideLength: 0
   piecePrefab: {fileID: -6875015213005617860, guid: 694fcef157042e94aa25bdd06ebcf432,
     type: 3}
+  boardBGPrefab: {fileID: -94741551804581858, guid: 879be40d644927e40b92a0839ca4d542,
+    type: 3}

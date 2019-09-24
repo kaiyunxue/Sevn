@@ -176,7 +176,8 @@ public class BoardManager : MonoBehaviour
     {
         foreach (var p in nextPieces)
         {
-            boardInstance.pieces[p.x, p.y].GoUp();
+            if(p.isValid)
+                boardInstance.pieces[p.x, p.y].GoUp();
         }
 
     }

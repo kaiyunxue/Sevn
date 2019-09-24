@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public BoardManager boardManager;
     public GameController controller;
     public GameController controller2;
+    public GameController currentController;
     public BoardInstance boardInstance;
 
     [Header("Prefabs")]
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         GameStart();
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
+            currentController = controller;
             controller.gameObject.SetActive(true);
             controller2.gameObject.SetActive(false);
         }
@@ -99,6 +101,8 @@ public class GameManager : MonoBehaviour
         {
             controller.gameObject.SetActive(!controller.gameObject.activeSelf);
             controller2.gameObject.SetActive(!controller.gameObject.activeSelf);
+            currentController = controller.gameObject.activeSelf ? controller : controller2;
+            boardInstance.UpdateBoard();
         }
     }
     public void GetScore(PieceColor c)
