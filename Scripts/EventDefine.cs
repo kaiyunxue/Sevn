@@ -7,4 +7,7 @@ public enum EventDefine
     OnSlideRight,
     OnSlideUp,
     OnSlideDown,
+
+    OnClickLobbyLeft,
+    OnClickLobbyRight,
 }
