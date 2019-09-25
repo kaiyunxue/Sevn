@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EventComponent : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class EventComponent : MonoBehaviour
     {
         instance = this;
         dic = new Dictionary<EventDefine, UnityEvent>();
+    }
+
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void RegistEvent(EventDefine eventDefine, UnityAction action)

@@ -54,6 +54,14 @@ public class GameManager : MonoBehaviour
     private double selectTime = 0;
     void Awake()
     {
+        if(EventComponent.instance == null)
+        {
+            Debug.Log("EventComponent.instance == nullEventComponent.instance == nullEventComponent.instance == null");
+        }
+        else
+        {
+            Debug.Log("EventComponent.instance != nullEventComponent.instance != nullEventComponent.instance != null");
+        }
         Instance = this;
         boardInstance = Instantiate(boardInstancePrefab);
         boardManager = GetComponent<BoardManager>();
@@ -76,19 +84,27 @@ public class GameManager : MonoBehaviour
         //UI设置成单例了，方便去耦合
         UIManager.instance.Init(gamePlayMode);
     }
+
+
     void Start()
     {
-        GameStart();
+        //GameStart();
+        //if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
+        //{
+        //    currentController = controller;
+        //    controller.gameObject.SetActive(true);
+        //    controller2.gameObject.SetActive(false);
+        //}
+    }
+    void GameStart()
+    {
+        boardManager.GameStart();
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
             currentController = controller;
             controller.gameObject.SetActive(true);
             controller2.gameObject.SetActive(false);
         }
-    }
-    void GameStart()
-    {
-        boardManager.GameStart();
     }
     /* 
      * 结束回合
