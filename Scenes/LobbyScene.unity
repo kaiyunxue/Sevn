@@ -490,7 +490,7 @@ PrefabInstance:
     - target: {fileID: 7494315491783470737, guid: 3e6c86ff90cb4ef4ea84a8b9558ef8f5,
         type: 3}
       propertyPath: slideSpeed
-      value: 100
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e6c86ff90cb4ef4ea84a8b9558ef8f5, type: 3}

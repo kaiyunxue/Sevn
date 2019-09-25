@@ -8,34 +8,29 @@ public class LobbyMain : LobbyUIBase
     private int leftIdx;
     private int rightIdx;
     [SerializeField]
-    private Button btnLeft;
+    private ButtonScript btnLeft;
     [SerializeField]
-    private Button btnRight;
+    private ButtonScript btnRight;
     [SerializeField]
-    private InputField inputTextLeft;
+    private LobbyCircle lobbyCircleLeft;
     [SerializeField]
-    private InputField inputTextRight;
+    private LobbyCircle lobbyCircleRight;
     // Start is called before the first frame update
     void Start()
     {
-        btnLeft.onClick.AddListener(delegate ()
+        btnLeft.onSlightClick.AddListener(delegate ()
         {
+            Debug.Log("btnLeft.onSlightClick");
+            SetNextIdxLeft(lobbyCircleLeft.GetSelectIdx());
             OnClickLeft();
         });
 
-        btnRight.onClick.AddListener(delegate ()
+        btnRight.onSlightClick.AddListener(delegate ()
         {
+            Debug.Log("btnRight.onSlightClick");
+            Debug.Log("lobbyCircleRight.GetSelectIdx(): " + lobbyCircleRight.GetSelectIdx());
+            SetNextIdxRihgt(lobbyCircleRight.GetSelectIdx());
             OnClickRight();
-        });
-
-        inputTextLeft.onValueChanged.AddListener(delegate (string valueStr)
-        {
-            SetNextIdxLeft(int.Parse(valueStr));
-        });
-
-        inputTextRight.onValueChanged.AddListener(delegate (string valueStr)
-        {
-            SetNextIdxRihgt(int.Parse(valueStr));
         });
     }
 }

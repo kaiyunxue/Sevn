@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db703076d9237224984696f1fa47389c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideSpeed: 1000
+  raycaster: {fileID: 1068851797248715054}
 --- !u!223 &69509105383290098
 Canvas:
   m_ObjectHideFlags: 0

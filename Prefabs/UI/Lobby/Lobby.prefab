@@ -102,20 +102,19 @@ MonoBehaviour:
     prefab: {fileID: 3965581952679488312, guid: 6ae712095aef03b41b4585e45cb87a37,
       type: 3}
   - order: 1
-    idx: 0
-    prefab: {fileID: 4273146543667190348, guid: a84a3c97359448a488b75e3ac7334991,
-      type: 3}
+    idx: 2
+    prefab: {fileID: 917799966509960217, guid: a84a3c97359448a488b75e3ac7334991, type: 3}
   - order: 1
     idx: 1
-    prefab: {fileID: 6612396248168664897, guid: dcb684ad8a036b440b6747a1939dc4b5,
+    prefab: {fileID: 2717752814342130169, guid: dcb684ad8a036b440b6747a1939dc4b5,
       type: 3}
   - order: -1
     idx: 0
-    prefab: {fileID: 4142878028792377383, guid: 81a13329e09b66d45b3dde3742ca8888,
+    prefab: {fileID: 4708192980777745364, guid: 81a13329e09b66d45b3dde3742ca8888,
       type: 3}
   - order: -1
     idx: 1
-    prefab: {fileID: 5582210049875946843, guid: f17aaa47d2855ab48b576f78261a3cd7,
+    prefab: {fileID: 6239786039921204346, guid: f17aaa47d2855ab48b576f78261a3cd7,
       type: 3}
 --- !u!1001 &2308657340985080414
 PrefabInstance:
