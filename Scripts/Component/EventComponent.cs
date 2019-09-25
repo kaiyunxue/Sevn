@@ -13,7 +13,7 @@ public class EventComponent : MonoBehaviour
         dic = new Dictionary<EventDefine, UnityEvent>();
     }
 
-    public void RegistEvent(EventDefine eventDefine,UnityAction action)
+    public void RegistEvent(EventDefine eventDefine, UnityAction action)
     {
         if (!dic.ContainsKey(eventDefine))
         {
@@ -24,6 +24,7 @@ public class EventComponent : MonoBehaviour
 
     public void PostEvent(EventDefine eventDefine)
     {
+        
         if (dic.ContainsKey(eventDefine))
         {
             dic[eventDefine].Invoke();
