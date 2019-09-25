@@ -113,6 +113,10 @@ public class PieceInstance : MonoBehaviour
     }
     void OnMouseUp()
     {
+        SelectAndDropMe();
+    }
+    public void SelectAndDropMe()
+    {
         if (!board.boardManager.pieces[x, y].isValid)
             return;
         if (IsPieceUp && board.boardManager.TrySelectFirstColor(color))

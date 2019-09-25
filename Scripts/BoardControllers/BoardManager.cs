@@ -85,6 +85,14 @@ public class BoardManager : MonoBehaviour
             }
     }
 
+    public void SelectRandomPiece()
+    {
+        int luckyIdx = Random.Range(0, nextPieces.Count);
+        int x = nextPieces[luckyIdx].x;
+        int y = nextPieces[luckyIdx].y;
+        boardInstance.pieces[x, y].SelectAndDropMe();
+    }
+
     public void InitCrackPieces()
     {
         int randomX = 0;
@@ -232,6 +240,7 @@ public class BoardManager : MonoBehaviour
     public void PieceBeKilled(int x, int y)
     {
         pieces[x, y].isValid = false;
+        DeletePiece(x, y);
         //changedPieces.Clear();
         if (x - 1 >= 0 && pieces[x - 1, y].isValid)
         {
