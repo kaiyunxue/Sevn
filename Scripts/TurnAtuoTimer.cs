@@ -12,6 +12,12 @@ public class TurnAtuoTimer : MonoBehaviour
     public float selectTime;
     public float waitingTime;
 
+    void Awake()
+    {
+        WhenWaitingTimeOver = new UnityEvent();
+        WhenSelectingTimeOver = new UnityEvent();
+    }
+
     public GameTurnStatus GameTurnStatus
     {
         get
