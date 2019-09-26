@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public class EventComponent : MonoBehaviour
 {
     public static EventComponent instance;
-    public Dictionary<EventDefine, UnityEvent> dic;
+    private static MultiDictionary<EVENTTYPE, EVENTID, UnityEvent> dic;
     void Awake()
     {
         instance = this;
-        dic = new Dictionary<EventDefine, UnityEvent>();
+        dic = new MultiDictionary<EVENTTYPE, EVENTID, UnityEvent>();
     }
 
     void Start()
@@ -19,21 +19,21 @@ public class EventComponent : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void RegistEvent(EventDefine eventDefine, UnityAction action)
+    public static void RegistEvent(EVENTTYPE eventType, EVENTID eventID, UnityAction action)
     {
-        if (!dic.ContainsKey(eventDefine))
+        if (dic.Get(eventType, eventID) == default(UnityEvent)) 
         {
-            dic.Add(eventDefine, new UnityEvent());
+            dic.Set(eventType, eventID, new UnityEvent());
         }
-        dic[eventDefine].AddListener(action);
+        dic.Get(eventType, eventID).AddListener(action);
     }
 
-    public void PostEvent(EventDefine eventDefine)
+    public static void PostEvent(EVENTTYPE eventType, EVENTID eventID)
     {
-        
-        if (dic.ContainsKey(eventDefine))
+        var unityEvent = dic.Get(eventType, eventID);
+        if (unityEvent != default(UnityEvent))
         {
-            dic[eventDefine].Invoke();
+            unityEvent.Invoke();
         }
         else
         {

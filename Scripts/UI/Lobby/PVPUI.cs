@@ -6,12 +6,8 @@ using UnityEngine.UI;
 public class PVPUI : LobbyUIBase
 {
     [SerializeField]
-    private Button btnLeft;
-    void Start()
+    protected override void Start()
     {
-        btnLeft.onClick.AddListener(delegate ()
-        {
-            OnClickLeft();
-        });
+        base.Start();
     }
 }

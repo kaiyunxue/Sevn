@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public enum EventDefine
+public enum EVENTTYPE
 {
-    OnSlideLeft,
-    OnSlideRight,
-    OnSlideUp,
-    OnSlideDown,
+}
 
-    OnClickLobbyLeft,
-    OnClickLobbyRight,
+public enum EVENTID
+{
 }

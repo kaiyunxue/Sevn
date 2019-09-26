@@ -50,7 +50,6 @@ public class ButtonScript : MonoBehaviour
             return;
         }
 
-
         if (Ping > 0 && LastTime > 0 && Time.time - LastTime > Ping)
         {
             if (onLongPress != null)
@@ -62,7 +61,6 @@ public class ButtonScript : MonoBehaviour
         {
             if (onSlightClick != null)
             {
-                Debug.Log("onSlightClick.Invoke()");
                 onSlightClick.Invoke();
             }
         }
@@ -71,6 +69,5 @@ public class ButtonScript : MonoBehaviour
             onMouseUp.Invoke();
         }
         LastTime = 0;
-
     }
 }

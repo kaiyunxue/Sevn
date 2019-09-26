@@ -7,14 +7,8 @@ public class SlideInOutComponent : MonoBehaviour
 {
     private Vector3 objPos;
     private Vector2 viewportSize;
-    [SerializeField]
-    private GraphicRaycaster raycaster;
     void Awake()
     {
-        if (raycaster)
-        {
-            raycaster.enabled = true;
-        }
         objPos = gameObject.transform.position;
         viewportSize = new Vector2(Screen.width, Screen.height);
     }
@@ -71,22 +65,16 @@ public class SlideInOutComponent : MonoBehaviour
 
     IEnumerator MoveToPosition(Vector3 targetPos, float speed, bool isDestory)
     {
-        if (raycaster != null)
-        {
-            raycaster.enabled = false;
-        }
+        gameObject.SendMessage("OnSlideBegin", SendMessageOptions.DontRequireReceiver);
         while (gameObject.transform.position != targetPos)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, speed * Time.deltaTime);
             yield return 0;
         }
-        if (raycaster != null) 
-        {
-            raycaster.enabled = true;
-        }
         if (isDestory)
         {
             Destroy(gameObject);
         }
+        gameObject.SendMessage("OnSlideEnd", SendMessageOptions.DontRequireReceiver);
     }
 }

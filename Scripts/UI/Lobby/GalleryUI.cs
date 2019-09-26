@@ -5,13 +5,8 @@ using UnityEngine.UI;
 
 public class GalleryUI : LobbyUIBase
 {
-    [SerializeField]
-    private Button btnRight;
-    void Start()
+    protected override void Start()
     {
-        btnRight.onClick.AddListener(delegate ()
-        {
-            OnClickRight();
-        });
+        base.Start();
     }
 }

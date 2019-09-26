@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LobbyCircle : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class LobbyCircle : MonoBehaviour
     private float selectAngle;
     [SerializeField]
     private ButtonScript[] buttonDrag;
+    [SerializeField]
+    private GameObject fanPanel;
+    [SerializeField]
+    private ButtonScript buttonCircle;
+    [SerializeField]
+    private bool isReverse;
 
     private int selectIdx;
     private float fanAngle;
@@ -33,7 +40,7 @@ public class LobbyCircle : MonoBehaviour
             bgAngle = spinAngleMin;
         }
         fanAngle = 360 / fanNum;
-        gameObject.transform.eulerAngles = new Vector3(0, 0, bgAngle);
+        fanPanel.transform.eulerAngles = new Vector3(0, 0, bgAngle);
 
         int curIdx = GetCurActiveIdx();
         for (int i = 0; i < fanNum; ++i)
@@ -64,7 +71,7 @@ public class LobbyCircle : MonoBehaviour
 
     void OnMouseDown()
     {
-        gameObjPos = gameObject.transform.position;
+        gameObjPos = fanPanel.transform.position;
         bgMousePos = Input.mousePosition;
         bgAngle = GetCurAngle();
     }
@@ -83,7 +90,7 @@ public class LobbyCircle : MonoBehaviour
         {
             targetAngle = spinAngleMin;
         }
-        gameObject.transform.eulerAngles = new Vector3(0, 0, targetAngle);
+        fanPanel.transform.eulerAngles = new Vector3(0, 0, targetAngle);
 
         int curIdx = GetCurActiveIdx();
         for (int i = 0; i < fanNum; ++i)
@@ -106,11 +113,25 @@ public class LobbyCircle : MonoBehaviour
     private int GetCurActiveIdx()
     {
         float curAngle = GetCurAngle();
-        for (int i = 0; i < fanNum; ++i)
+
+        if (isReverse)
         {
-            if (-curAngle + spinAngleMin + fanAngle * i <= selectAngle && selectAngle < -curAngle + spinAngleMin + fanAngle * (i + 1)) 
+            for (int i = 0; i < fanNum; ++i)
             {
-                return i;
+                if (curAngle + spinAngleMax - fanAngle * (i + 1) <= selectAngle && selectAngle < curAngle + spinAngleMax - fanAngle * i)
+                {
+                    return fanNum - i - 1;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < fanNum; ++i)
+            {
+                if (-curAngle + spinAngleMin + fanAngle * i <= selectAngle && selectAngle < -curAngle + spinAngleMin + fanAngle * (i + 1))
+                {
+                    return i;
+                }
             }
         }
         return -1;
@@ -118,7 +139,7 @@ public class LobbyCircle : MonoBehaviour
 
     private float GetCurAngle()
     {
-        float curAngle = gameObject.transform.eulerAngles.z;
+        float curAngle = fanPanel.transform.eulerAngles.z;
         if(curAngle<0)
         {
             curAngle += 360;
@@ -129,5 +150,20 @@ public class LobbyCircle : MonoBehaviour
     public int GetSelectIdx()
     {
         return selectIdx;
+    }
+
+    public void ShowFanPanel()
+    {
+        fanPanel.SetActive(true);
+    }
+
+    public void HideFanPanel()
+    {
+        fanPanel.SetActive(false);
+    }
+
+    public void SetClickEvent(UnityAction action)
+    {
+        buttonCircle.onSlightClick.AddListener(action);
     }
 }

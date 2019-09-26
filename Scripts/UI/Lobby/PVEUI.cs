@@ -6,17 +6,10 @@ using UnityEngine.UI;
 public class PVEUI : LobbyUIBase
 {
     [SerializeField]
-    private Button btnLeft;
-    [SerializeField]
     private Button btnPlay;
-    void Start()
+    protected override void Start()
     {
-        btnLeft.onClick.AddListener(delegate ()
-        {
-            Debug.Log("PVEUI OnClickLeft");
-            OnClickLeft();
-        });
-
+        base.Start();
         btnPlay.onClick.AddListener(delegate ()
         {
             OnClickPlay();

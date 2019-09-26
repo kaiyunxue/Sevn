@@ -8,7 +8,8 @@ public class LoadingUI : MonoBehaviour
 {
     [SerializeField]
     private Slider loadingProgress;
-
+    [SerializeField]
+    private GraphicRaycaster raycaster;
     void Start()
     {
         StartCoroutine(LoadScene());
@@ -40,6 +41,22 @@ public class LoadingUI : MonoBehaviour
             }
 
             yield return null;
+        }
+    }
+
+    public void OnSlideEnd()
+    {
+        if (raycaster != null)
+        {
+            raycaster.enabled = true;
+        }
+    }
+
+    public void OnSlideBegin()
+    {
+        if (raycaster != null)
+        {
+            raycaster.enabled = false;
         }
     }
 }

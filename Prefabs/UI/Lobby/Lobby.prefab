@@ -102,7 +102,7 @@ MonoBehaviour:
     prefab: {fileID: 3965581952679488312, guid: 6ae712095aef03b41b4585e45cb87a37,
       type: 3}
   - order: 1
-    idx: 2
+    idx: 0
     prefab: {fileID: 917799966509960217, guid: a84a3c97359448a488b75e3ac7334991, type: 3}
   - order: 1
     idx: 1
