@@ -101,9 +101,8 @@ public class Lobby : MonoBehaviour
         curUIIdx = idx;
         curUIInst = nextUIInst;
     }
-
     public void PlayGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true ;
     }
 }

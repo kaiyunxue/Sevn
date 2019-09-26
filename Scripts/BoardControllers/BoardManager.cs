@@ -140,15 +140,17 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
-    public void Init(GamePlayMode arg_gpm)
+    private IEnumerator InitCoroutine()
     {
-        gpm = arg_gpm;
-        selectedColor = PieceColor.NULL;
-        boardLength = gpm.boardSideLength;
-        nextPieces = new List<Piece>();
-
-        for (; ; )
+        int timesToYield = 10000;
+        int cnt = 0;
+        while(true)
         {
+            if (cnt-- <= 0)
+            {
+                cnt = timesToYield;
+                yield return 0;
+            }
             InitColorPool(boardLength);
             pieces = new Piece[boardLength, boardLength];
             for (int i = 0; i < boardLength; i++)
@@ -165,17 +167,31 @@ public class BoardManager : MonoBehaviour
                 }
             }
             if (IsValidBoard())
+            {
                 break;
+            }
         }
 
         nextPieces.Add(pieces[0, 0]);
         nextPieces.Add(pieces[0, boardLength - 1]);
         nextPieces.Add(pieces[boardLength - 1, 0]);
         nextPieces.Add(pieces[boardLength - 1, boardLength - 1]);
-        if(gpm.doUseCrack)
+        if (gpm.doUseCrack)
             InitCrackPieces();
 
         boardInstance = GameManager.Instance.boardInstance;
+        GameManager.Instance.ReadyToStart();
+        Debug.Log("ready to start");
+    }
+
+    public void Init(GamePlayMode arg_gpm)
+    {
+        gpm = arg_gpm;
+        selectedColor = PieceColor.NULL;
+        boardLength = gpm.boardSideLength;
+        nextPieces = new List<Piece>();
+
+        StartCoroutine(InitCoroutine());
     }
     void Start()
     {

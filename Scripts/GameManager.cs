@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIInstance;
     public GameController currentController;
     public TurnAtuoTimer timer;
+    private bool isReadyToStart;
 
     [Header("Prefabs")]
     [SerializeField] GameController controllerPrefab;
@@ -65,14 +66,28 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        timer = gameObject.AddComponent<TurnAtuoTimer>();
+        isReadyToStart = false;
+        controller2 = null;
         Instance = this;
+        timer = gameObject.AddComponent<TurnAtuoTimer>();
+    }
+
+    public void ReadyToStart()
+    {
+        isReadyToStart = true;
+    }
+
+    IEnumerator InitCoroutine()
+    {
+        UIInstance = Instantiate(uiPrefab);
+        UIInstance.Init(gamePlayMode);
         boardInstance = Instantiate(boardInstancePrefab);
         boardManager = GetComponent<BoardManager>();
         boardManager.Init(gamePlayMode);
-        controller2 = null;
-        UIInstance = Instantiate(uiPrefab);
-        UIInstance.Init(gamePlayMode);
+        while (!isReadyToStart)
+        {
+            yield return 0;
+        }
         switch (gamePlayMode.gameMode)
         {
             case GameMode.OneClientTwoPlayers:
@@ -87,9 +102,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         boardInstance.Init();
-    }
-    void Start()
-    {
+
         GameStart();
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
@@ -97,6 +110,10 @@ public class GameManager : MonoBehaviour
             controller.gameObject.SetActive(true);
             controller2.gameObject.SetActive(false);
         }
+    }
+    void Start()
+    {
+        StartCoroutine(InitCoroutine());
     }
     void GameStart()
     {
