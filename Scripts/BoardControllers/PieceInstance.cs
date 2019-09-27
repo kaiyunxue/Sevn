@@ -133,14 +133,22 @@ public class PieceInstance : MonoBehaviour
     }
     public void SelectAndDropMe()
     {
+        if (GameManager.Instance.IsGameEnded())
+            return;
         if (!board.boardManager.pieces[x, y].isValid)
             return;
         if (IsPieceUp && board.boardManager.TrySelectFirstColor(color))
         {
-            GoDown();
-            board.boardManager.PieceBeKilled(x, y);
+            DropPiece();
         }
     }
+
+    public void DropPiece()
+    {
+        GoDown();
+        board.boardManager.PieceBeKilled(x, y);
+    }
+
     public void UpdatePiece()
     {
         if (owner == null)

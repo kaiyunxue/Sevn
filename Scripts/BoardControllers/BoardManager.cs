@@ -421,8 +421,7 @@ public class BoardManager : MonoBehaviour
             if (boardInstance.pieces[p.x, p.y] != null)
             {
                 Debug.Log("Crack Piece Going Down: x: " + p.x + " y: " + p.y);
-                boardInstance.pieces[p.x, p.y].GoDown();
-                PieceBeKilled(p.x, p.y);
+                boardInstance.pieces[p.x, p.y].DropPiece();
             }
             else
                 Debug.LogError("Pieces has been destoryed");
