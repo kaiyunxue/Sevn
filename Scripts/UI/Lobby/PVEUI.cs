@@ -6,16 +6,60 @@ using UnityEngine.UI;
 public class PVEUI : LobbyUIBase
 {
     [SerializeField]
-    private Button btnPlay;
+    private Button btnPlayLevel1;
+    [SerializeField]
+    private Button btnPlayLevel2;
+    [SerializeField]
+    private Button btnPlayLevel3;
+
     protected override void Start()
     {
         base.Start();
-        btnPlay.onClick.AddListener(delegate ()
+        string iGameLevel = CacheTool.Get("iGameLevel");
+        Debug.Log(iGameLevel);
+        switch (iGameLevel)
         {
-            OnClickPlay();
+            case "3":
+                btnPlayLevel1.enabled = true;
+                btnPlayLevel2.enabled = true;
+                btnPlayLevel3.enabled = true;
+                break;
+            case "2":
+                btnPlayLevel1.enabled = true;
+                btnPlayLevel2.enabled = true;
+                btnPlayLevel3.enabled = false;
+                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
+                break;
+            case "1":
+                btnPlayLevel1.enabled = true;
+                btnPlayLevel2.enabled = false;
+                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
+                btnPlayLevel3.enabled = false;
+                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
+                break;
+            default:
+                btnPlayLevel1.enabled = true;
+                btnPlayLevel2.enabled = false;
+                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
+                btnPlayLevel3.enabled = false;
+                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
+                break;
+        }
+        btnPlayLevel1.onClick.AddListener(delegate ()
+        {
+            OnClickPlayLevel1();
         });
+        btnPlayLevel2.onClick.AddListener(delegate ()
+        {
+            OnClickPlayLevel1();
+        });
+        btnPlayLevel3.onClick.AddListener(delegate ()
+        {
+            OnClickPlayLevel1();
+        });
+
     }
-    private void OnClickPlay()
+    private void OnClickPlayLevel1()
     {
         lobby.PlayGame();
     }
