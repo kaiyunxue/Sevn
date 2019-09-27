@@ -14,17 +14,7 @@ public class TestHttpTool : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        CacheService.Set("a", "15");
-        CacheService.Set("b", "18");
-
-        Debug.Log(CacheTool.Get("a"));
-        System.Guid guid = System.Guid.NewGuid();
-        CacheService.Set("uid", guid.ToString());
-        //Debug.Log("test");
-        //StartCoroutine(HttpTool.HttpGet(url));
-        //WWWForm form = new WWWForm();
-        //form.AddField("name", "agame");
-        //StartCoroutine(HttpTool.HttpPost(postUrl, form));
+       
     }
 
     // Update is called once per frame
@@ -35,11 +25,12 @@ public class TestHttpTool : MonoBehaviour
 
     public void OnClick()
     {
-        string username = GameObject.Find("InputField").GetComponent<InputField>().text;
+        string uid = CacheService.Get("uid");
         WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        StartCoroutine(HttpTool.HttpPost(postUrl, form));
-
-        StartCoroutine(NetService.SendMessage(NetService.MSG_ID.MSG_ID_LOGIN, form));
+        if (uid != null)
+        {
+            form.AddField("uid", uid);
+        }
+        StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_LOGIN, form));
     }
 }
