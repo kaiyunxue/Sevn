@@ -37,6 +37,7 @@ public struct GamePlayMode
     public float selectLimitTime;
     public float waitingLimitTime;
     public Color[] colors;
+    public PieceInstance[] pieceInstancePrefabs;
     [Header("游戏细节玩法开关")]
     public bool doUseCrack;
     public bool doUseTurnTimer;
@@ -62,8 +63,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameController controllerPrefab;
     [SerializeField] BoardInstance boardInstancePrefab;
     [SerializeField] UIManager uiPrefab;
-    UnityAction WhenWaitingTimeOver;// = new UnityAction(OnWaitingTimeOver);
-    UnityAction WhenSelectingTimeOver;// = new UnityAction(EndTurn);
     AIController aiController;
     int round;
 
@@ -108,7 +107,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        boardInstance.Init();
+        boardInstance.Init(gamePlayMode);
 
         GameStart();
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)

@@ -9,9 +9,9 @@ public class BoardInstance : MonoBehaviour
     public PieceInstance[,] pieces;
     public BoardBackgroundController background;
     [Header("Prefabs")]
-    [SerializeField] PieceInstance piecePrefab;
+    //[SerializeField] PieceInstance piecePrefab;
     [SerializeField] BoardBackgroundController boardBGPrefab;
-    public void Init()
+    public void Init(GamePlayMode gpm)
     {
         boardManager = GameManager.Instance.boardManager;
         sideLength = boardManager.boardLength;
@@ -21,7 +21,9 @@ public class BoardInstance : MonoBehaviour
         {
             for (int j = 0; j < sideLength; j++)
             {
-                pieces[i, j] = Instantiate(piecePrefab, transform);
+                int colorID = (int)boardManager.pieces[i, j].pieceColor;
+                //pieces[i, j] = Instantiate(piecePrefab, transform);
+                pieces[i, j] = Instantiate(gpm.pieceInstancePrefabs[colorID], transform);
                 pieces[i, j].name += ("(" + i + " , " + j + ")");
                 pieces[i, j].transform.position += new Vector3((i - halfLength), 0, (j - halfLength));
                 pieces[i, j].Init(i, j, boardManager.pieces[i, j].pieceColor, boardManager.pieces[i, j].isCrackPiece, this);
