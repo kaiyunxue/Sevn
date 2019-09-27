@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum PieceColor
 {
@@ -36,11 +37,26 @@ public struct GamePlayMode
     public int boardSideLength;
     public float selectLimitTime;
     public float waitingLimitTime;
-    public Color[] colors;
-    public PieceInstance[] pieceInstancePrefabs;
     [Header("游戏细节玩法开关")]
     public bool doUseCrack;
     public bool doUseTurnTimer;
+}
+[System.Serializable]
+public struct PrefabsConfig
+{
+    [Header("棋子")]
+    public Color[] colors;
+    public PieceInstance[] pieceInstancePrefabs;
+    [Header("计分板表头")]
+    public Sprite[] UIScoreHeader;
+    [Header("计分板-我的得分")]
+    public Color[] UIcolors;
+    public Sprite[] UIScoreTextures_0;
+    public Sprite[] UIScoreTextures_1;
+    [Header("计分板-对方得分")]
+    public Sprite UIScoreBlack;
+    public Sprite UIScoreGrey;
+
 }
 [RequireComponent(typeof(BoardManager))]
 public class GameManager : MonoBehaviour
@@ -48,6 +64,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Config")]
     public GamePlayMode gamePlayMode;
+    public PrefabsConfig prefabConfig;
 
     [Header("References")]
     public BoardManager boardManager;
@@ -78,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         gamePlayMode.gameMode = GameMode.VSAI;
         UIInstance = Instantiate(uiPrefab);
-        UIInstance.Init(gamePlayMode);
+        UIInstance.Init(gamePlayMode.boardSideLength, prefabConfig);
         boardInstance = Instantiate(boardInstancePrefab);
         boardManager = GetComponent<BoardManager>();
         boardManager.Init(gamePlayMode);
@@ -93,21 +110,21 @@ public class GameManager : MonoBehaviour
                 controller.name = "Player 1";
                 controller2 = Instantiate(controllerPrefab);
                 controller2.name = "Player 2";
-                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels[0]);
-                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels[1]);
+                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels);
+                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels);
                 break;
             case GameMode.VSAI:
                 controller = Instantiate(controllerPrefab);
                 controller.name = "Player 1";
                 controller2 = Instantiate(controllerPrefab);
                 controller2.name = "AI";
-                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels[0]);
-                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels[1]);
+                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels);
+                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels);
                 break;
             default:
                 break;
         }
-        boardInstance.Init(gamePlayMode);
+        boardInstance.Init(prefabConfig);
 
         GameStart();
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)

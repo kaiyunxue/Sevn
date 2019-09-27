@@ -6,28 +6,51 @@ public class UIScorePanel : MonoBehaviour
 {
     public UIPiecesBar prefab;
     public List<UIPiecesBar> bars;
-    public void Init(GamePlayMode gpm)
+    public void Init(int length, PrefabsConfig pConfig)
     {
-        for(int i = 0; i < gpm.boardSideLength; i++)
+        for(int i = 0; i < length; i++)
         {
             UIPiecesBar b = GameObject.Instantiate(prefab);
             b.transform.SetParent(transform);
-            b.Init(gpm.boardSideLength, gpm.colors[i]);
+            b.Init(length,i, pConfig.UIcolors[i],pConfig);
             bars.Add(b);
         }
     }
-    public void SetScore(int color, int score)
+    public void SetScore(int color, int score, bool isPlayer1)
     {
         int n = bars[color].pieces.Count;
-        for(int i = 0; i < n; i++)
+        if(isPlayer1)
         {
-            if(i < score)
+            if(score < 4)
             {
-                bars[color].pieces[i].TurnOn();
+                for(int i = 0; i < score; i++)
+                {
+                    bars[color].pieces[i + 1].SetScore(ScorePieceState.Less);
+                }
             }
             else
             {
-                bars[color].pieces[i].TurnOff();
+                for (int i = 0; i < score; i++)
+                {
+                    bars[color].pieces[i + 1].SetScore(ScorePieceState.More);
+                }
+            }
+        }
+        else
+        {
+            if (score < 4)
+            {
+                for (int i = 0; i < score; i++)
+                {
+                    bars[color].pieces[n - i - 1].SetScore(ScorePieceState.Grey);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < score; i++)
+                {
+                    bars[color].pieces[n - i - 1].SetScore(ScorePieceState.Black);
+                }
             }
         }
     }

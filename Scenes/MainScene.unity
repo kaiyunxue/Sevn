@@ -1130,16 +1130,59 @@ MonoBehaviour:
     boardSideLength: 7
     selectLimitTime: 3
     waitingLimitTime: 15
-    colors:
-    - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 1, g: 1, b: 1, a: 1}
-    - {r: 0, g: 0, b: 1, a: 1}
-    - {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-    - {r: 0, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.46746844, b: 0, a: 1}
     doUseCrack: 1
     doUseTurnTimer: 1
+  prefabConfig:
+    colors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0.5086372, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0.117884636, a: 1}
+    - {r: 1, g: 0, b: 0.73024607, a: 1}
+    - {r: 0.4243703, g: 0, b: 1, a: 1}
+    - {r: 0, g: 0.86989355, b: 1, a: 1}
+    - {r: 1, g: 0.92855215, b: 0, a: 1}
+    pieceInstancePrefabs:
+    - {fileID: -6875015213005617860, guid: 694fcef157042e94aa25bdd06ebcf432, type: 3}
+    - {fileID: -6875015213005617860, guid: 1b963343c2ad13344bee2388269d51fd, type: 3}
+    - {fileID: -6875015213005617860, guid: 3d7fc2c56e6b0564a8b1866b8bb91777, type: 3}
+    - {fileID: -6875015213005617860, guid: bc107cb32eb5e724f99bdf762b83f25a, type: 3}
+    - {fileID: -6875015213005617860, guid: 4bba8dabd5cbb7c428d073c23bd5ae70, type: 3}
+    - {fileID: -6875015213005617860, guid: 67509b3a6869cf44388ebefc238f970e, type: 3}
+    - {fileID: -6875015213005617860, guid: 908138235c4f88846b44fd988284dbe6, type: 3}
+    UIScoreHeader:
+    - {fileID: 21300000, guid: b22a765e7cae5a04bac41c1d3fd6e677, type: 3}
+    - {fileID: 21300000, guid: 0c81681f5f49c0f40b297c9aea754934, type: 3}
+    - {fileID: 21300000, guid: 9cbd6d589a01810498404773a57fac58, type: 3}
+    - {fileID: 21300000, guid: 4e4aff2d75b41984abb4d55a6eefc6b7, type: 3}
+    - {fileID: 21300000, guid: 5b924c6fa6393fd41a2853ea88722999, type: 3}
+    - {fileID: 21300000, guid: 9ac6397275df47345973140845265a03, type: 3}
+    - {fileID: 21300000, guid: 86e2ec3cd17bec44683f2fab0d465abf, type: 3}
+    UIcolors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0.5086372, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0.117884636, a: 1}
+    - {r: 1, g: 0, b: 0.73024607, a: 1}
+    - {r: 0.4243703, g: 0, b: 1, a: 1}
+    - {r: 0, g: 0.86989355, b: 1, a: 1}
+    - {r: 1, g: 0.92855215, b: 0, a: 1}
+    UIScoreTextures_0:
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    - {fileID: 21300000, guid: 6e8381632b2c52948b4f77d5facd7641, type: 3}
+    UIScoreTextures_1:
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    UIScoreBlack: {fileID: 21300000, guid: 390041bb1034e8140ae33d2794e4de35, type: 3}
+    UIScoreGrey: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   boardManager: {fileID: 0}
   controller: {fileID: 0}
   controller2: {fileID: 0}

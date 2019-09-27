@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public void GetScore(PieceColor color)
     {
         record.secord[(int)color]++;
-        uIScorePanel.SetScore((int)color, record.secord[(int)color]);
+        uIScorePanel.SetScore((int)color, record.secord[(int)color],this == GameManager.Instance.controller);
     }
     public void Init(int maxColor, UIScorePanel p)
     {

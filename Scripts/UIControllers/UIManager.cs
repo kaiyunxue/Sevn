@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public UIScorePanel[] panels;
-    public void Init(GamePlayMode gpm)
+    public UIScorePanel panels;
+    public void Init(int length, PrefabsConfig pConfig)
     {
-        panels[0].Init(gpm);
-        panels[1].Init(gpm);
+        panels.Init(length, pConfig);
     }
 }
