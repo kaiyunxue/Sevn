@@ -62,6 +62,21 @@ public struct Piece
         string s = "" + pieceColor + "PositionOnBoard(" + (GameManager.Instance.gamePlayMode.boardSideLength - 1 - y) + " , " + x + ")   " + "True Position:(" + x + " , " + y + ")" + "Color:" + (int)pieceColor;
         return s;
     }
+
+    public Piece Clone()
+    {
+        Piece res = new Piece();
+        res.pieceColor = pieceColor;
+        res.isValid = isValid;
+        res.isCrackPiece = isCrackPiece;
+        res.isLeftHasPiece = isLeftHasPiece;
+        res.isRightHasPiece = isRightHasPiece;
+        res.isUpHasPiece = isUpHasPiece;
+        res.isDownHasPiece = isDownHasPiece;
+        res.x = x;
+        res.y = y;
+        return res;
+    }
 }
 
 public class BoardManager : MonoBehaviour
@@ -74,6 +89,13 @@ public class BoardManager : MonoBehaviour
     public PieceColor selectedColor;
     public BoardInstance boardInstance;
     static private GamePlayMode gpm;
+    private bool isReady;
+    private bool isCrackDone;
+
+    public bool IsReady()
+    {
+        return isReady;
+    }
 
     public void InitColorPool(int len)
     {
@@ -90,6 +112,11 @@ public class BoardManager : MonoBehaviour
         int luckyIdx = Random.Range(0, nextPieces.Count);
         int x = nextPieces[luckyIdx].x;
         int y = nextPieces[luckyIdx].y;
+        boardInstance.pieces[x, y].SelectAndDropMe();
+    }
+
+    public void SelectPiece(int x, int y)
+    {
         boardInstance.pieces[x, y].SelectAndDropMe();
     }
 
@@ -180,12 +207,12 @@ public class BoardManager : MonoBehaviour
             InitCrackPieces();
 
         boardInstance = GameManager.Instance.boardInstance;
-        GameManager.Instance.ReadyToStart();
-        Debug.Log("ready to start");
+        isReady = true;
     }
 
     public void Init(GamePlayMode arg_gpm)
     {
+        isReady = false;
         gpm = arg_gpm;
         selectedColor = PieceColor.NULL;
         boardLength = gpm.boardSideLength;
@@ -195,6 +222,7 @@ public class BoardManager : MonoBehaviour
     }
     void Start()
     {
+        isReady = false;
     }
     public void GameStart()
     {
@@ -233,6 +261,28 @@ public class BoardManager : MonoBehaviour
         if ((!p.isRightHasPiece) && (!p.isDownHasPiece))
             return true;
         return false;
+    }
+
+    public Piece[,] GetPieces()
+    {
+        Piece[,] res = new Piece[boardLength, boardLength];
+        for (int i = 0; i < boardLength; ++i)
+        {
+            for (int j = 0; j < boardLength; ++j)
+            {
+                res[i, j] = pieces[i, j].Clone();
+            }
+        }
+        return res;
+    }
+    public List<Piece> GetNextPieces()
+    {
+        List<Piece> res = new List<Piece>();
+        foreach (var v in nextPieces)
+        {
+            res.Add(v.Clone());
+        }
+        return res;
     }
     /*
      * 如果是第一次 return true
@@ -307,9 +357,22 @@ public class BoardManager : MonoBehaviour
         //Debug.Log("Delete piece:" + pieces[x, y].ToString());
         pieces[x, y].isValid = false;
     }
+
+    private bool isEndTurnDone;
+
+    public bool IsEndTurnDone()
+    {
+        return isEndTurnDone;
+    }
     public void EndTurn()
     {
+        isEndTurnDone = false;
         changedPieces.Clear();
+        StartCoroutine(EndTurnCoroutine());
+    }
+
+    private IEnumerator EndTurnCoroutine()
+    {
         bool isChanged = true;
         while (isChanged)
         {
@@ -327,26 +390,45 @@ public class BoardManager : MonoBehaviour
 
             if (gpm.doUseCrack)
             {
+                List<Piece> crackPieces = new List<Piece>();
                 foreach (var p in nextPieces)
                 {
-                    if (p.isValid)
+                    if (p.isValid && p.isCrackPiece)
                     {
-                        if (p.isCrackPiece)
-                        {
-                            Debug.Log("Crack Piece Going Down!");
-                            if (boardInstance.pieces[p.x, p.y] != null)
-                            {
-                                boardInstance.pieces[p.x, p.y].GoDown();
-                                PieceBeKilled(p.x, p.y);
-                            }
-                            else
-                                Debug.LogError("Pieces has been destoryed");
-                            isChanged = true;
-                        }
+                        crackPieces.Add(p);
+                        isChanged = true;
+                    }
+                }
+
+                if (isChanged)
+                {
+                    isCrackDone = false;
+                    StartCoroutine(CrackPiecesGoDown(crackPieces));
+                    while(!isCrackDone)
+                    {
+                        yield return 0;
                     }
                 }
             }
         }
         selectedColor = PieceColor.NULL;
+        isEndTurnDone = true;
+    }
+    private IEnumerator CrackPiecesGoDown(List<Piece>crackPieces)
+    {
+        foreach (var p in crackPieces)
+        {
+            if (boardInstance.pieces[p.x, p.y] != null)
+            {
+                Debug.Log("Crack Piece Going Down: x: " + p.x + " y: " + p.y);
+                boardInstance.pieces[p.x, p.y].GoDown();
+                PieceBeKilled(p.x, p.y);
+            }
+            else
+                Debug.LogError("Pieces has been destoryed");
+
+            yield return new WaitForSeconds(0.2f);
+        }
+        isCrackDone = true;
     }
 }

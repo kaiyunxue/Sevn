@@ -110,10 +110,26 @@ public class PieceInstance : MonoBehaviour
             material.SetColor("_Color", c);
             board.boardManager.pieces[x, y].isValid = false;
         }
+        else if(GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            effectTmp.SetActive(false);
+            UpdatePiece();
+            board.boardManager.pieces[x, y].isValid = false;
+        }
     }
     void OnMouseUp()
     {
-        SelectAndDropMe();
+        if (GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
+        {
+            SelectAndDropMe();
+        }
+        else if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            if (GameManager.Instance.currentController == GameManager.Instance.controller)
+            {
+                SelectAndDropMe();
+            }
+        }
     }
     public void SelectAndDropMe()
     {
@@ -131,15 +147,31 @@ public class PieceInstance : MonoBehaviour
         {
             return;
         }
-        if(owner == GameManager.Instance.currentController)
+        if (GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
-            Color c = material.GetColor("_Color");
-            c.a = 0.3f;
-            material.SetColor("_Color", c);
+            if (owner == GameManager.Instance.currentController)
+            {
+                Color c = material.GetColor("_Color");
+                c.a = 0.3f;
+                material.SetColor("_Color", c);
+            }
+            else
+            {
+                material.SetColor("_Color", Color.black);
+            }
         }
-        else
+        else if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         {
-            material.SetColor("_Color", Color.black);
+            if (owner == GameManager.Instance.controller)
+            {
+                Color c = material.GetColor("_Color");
+                c.a = 0.3f;
+                material.SetColor("_Color", c);
+            }
+            else
+            {
+                material.SetColor("_Color", Color.black);
+            }
         }
     }
 }

@@ -103,6 +103,6 @@ public class Lobby : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true ;
+        SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;
     }
 }

@@ -26,7 +26,8 @@ public enum GameTurnStatus
 {
     WaitingForDrop,
     DropingMore,
-    Sleeping
+    Sleeping,
+    Ending,
 }
 [System.Serializable]
 public struct GamePlayMode
@@ -63,28 +64,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiPrefab;
     UnityAction WhenWaitingTimeOver;// = new UnityAction(OnWaitingTimeOver);
     UnityAction WhenSelectingTimeOver;// = new UnityAction(EndTurn);
+    AIController aiController;
+    int round;
 
     void Awake()
     {
-        isReadyToStart = false;
         controller2 = null;
         Instance = this;
         timer = gameObject.AddComponent<TurnAtuoTimer>();
     }
 
-    public void ReadyToStart()
-    {
-        isReadyToStart = true;
-    }
 
     IEnumerator InitCoroutine()
     {
+        gamePlayMode.gameMode = GameMode.VSAI;
         UIInstance = Instantiate(uiPrefab);
         UIInstance.Init(gamePlayMode);
         boardInstance = Instantiate(boardInstancePrefab);
         boardManager = GetComponent<BoardManager>();
         boardManager.Init(gamePlayMode);
-        while (!isReadyToStart)
+        while (!boardManager.IsReady())
         {
             yield return 0;
         }
@@ -95,6 +94,14 @@ public class GameManager : MonoBehaviour
                 controller.name = "Player 1";
                 controller2 = Instantiate(controllerPrefab);
                 controller2.name = "Player 2";
+                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels[0]);
+                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels[1]);
+                break;
+            case GameMode.VSAI:
+                controller = Instantiate(controllerPrefab);
+                controller.name = "Player 1";
+                controller2 = Instantiate(controllerPrefab);
+                controller2.name = "AI";
                 controller.Init(gamePlayMode.boardSideLength, UIInstance.panels[0]);
                 controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels[1]);
                 break;
@@ -110,6 +117,13 @@ public class GameManager : MonoBehaviour
             controller.gameObject.SetActive(true);
             controller2.gameObject.SetActive(false);
         }
+        else if(gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            currentController = controller;
+            controller.gameObject.SetActive(true);
+            controller2.gameObject.SetActive(false);
+            aiController = gameObject.AddComponent<AIController>();
+        }
     }
     void Start()
     {
@@ -119,6 +133,7 @@ public class GameManager : MonoBehaviour
     {
         UnityAction WhenWaitingTimeOver = new UnityAction(OnWaitingTimeOver);
         UnityAction WhenSelectingTimeOver = new UnityAction(EndTurn);
+        round = 0;
         boardManager.GameStart();
         timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
         timer.WhenSelectingTimeOver.AddListener(WhenSelectingTimeOver);
@@ -129,8 +144,24 @@ public class GameManager : MonoBehaviour
      */
     public void EndTurn()
     {
+        ++round;
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
+        StartCoroutine(OnWaitBoardEndTurn());
+    }
+
+    private IEnumerator OnWaitBoardEndTurn()
+    {
+        while (!boardManager.IsEndTurnDone())
+        {
+            yield return 0;
+        }
+        
+        ChangePlayer();
+    }
+
+    private void ChangePlayer()
+    {
         if (gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
             controller.gameObject.SetActive(!controller.gameObject.activeSelf);
@@ -139,6 +170,23 @@ public class GameManager : MonoBehaviour
             boardInstance.UpdateBoard();
             timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
         }
+        else if (gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            controller.gameObject.SetActive(!controller.gameObject.activeSelf);
+            currentController = controller.gameObject.activeSelf ? controller : controller2;
+            boardInstance.UpdateBoard();
+            timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
+
+            if (!controller.gameObject.activeSelf)
+            {
+                aiController.StartMove(boardManager, AILevel.middle, round, timer);
+            }
+        }
+    }
+
+    public int GetCurRound()
+    {
+        return round;
     }
 
     public void OnWaitingTimeOver()
@@ -161,7 +209,26 @@ public class GameManager : MonoBehaviour
             else
             {
                 controller2.GetScore(c);
+                if (controller2.CheckDoesGetSevn())
+                {
+                    Win(false);
+                }
+            }
+        }
+        else if (gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            if (controller.gameObject.activeSelf)
+            {
+                controller.GetScore(c);
                 if (controller.CheckDoesGetSevn())
+                {
+                    Win();
+                }
+            }
+            else
+            {
+                controller2.GetScore(c);
+                if (controller2.CheckDoesGetSevn())
                 {
                     Win(false);
                 }
@@ -181,12 +248,23 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Player 2 wins!");
             }
         }
+        else if (gamePlayMode.gameMode == GameMode.VSAI)
+        {
+            if (isPlayerOne)
+            {
+                Debug.Log("Player 1 wins!");
+            }
+            else
+            {
+                Debug.Log("AI wins!");
+            }
+        }
     }
     public void StartSelect()
     {
         timer.GameTurnStatus = GameTurnStatus.DropingMore;
         //gameTurnStatus = GameTurnStatus.DropingMore;
-        ////Debug.Log("StartSelect!!!");
+        Debug.Log("StartSelect!!!");
         //selectTime = 0;
     }
 
