@@ -23,7 +23,7 @@ public class NetService : MonoBehaviour
         vMessageList.AddField("iMessageID", (int)MSG_ID.MSG_ID_TICK);
         while(true)
         {
-            yield return HttpTool.HttpPost("http://127.0.0.1:8000/api/post", vMessageList);
+            yield return HttpTool.HttpPost("http://agame.sunz.me/api/post", vMessageList);
             yield return new WaitForSeconds((float)0.5);
         }
     }
@@ -36,6 +36,6 @@ public class NetService : MonoBehaviour
     public static IEnumerator SendMessage(MSG_ID eMessageID, WWWForm vMessageList)
     {
         vMessageList.AddField("iMessageID", (int)eMessageID);
-        yield return HttpTool.HttpPost("http://127.0.0.1:8000/api/post", vMessageList);
+        yield return HttpTool.HttpPost("http://agame.sunz.me/api/post", vMessageList);
     }
 }

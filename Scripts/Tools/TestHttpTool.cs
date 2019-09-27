@@ -8,8 +8,8 @@ using System;
 
 public class TestHttpTool : MonoBehaviour
 {
-    private string url = "http://127.0.0.1:8000/api/status";
-    private string postUrl = "http://127.0.0.1:8000/api/post";
+    private string url = "http://agame.sunz.me/api/status";
+    private string postUrl = "http://agame.sunz.me/api/post";
 
     // Start is called before the first frame update
     void Awake()
@@ -18,6 +18,8 @@ public class TestHttpTool : MonoBehaviour
         CacheService.Set("b", "18");
 
         Debug.Log(CacheTool.Get("a"));
+        System.Guid guid = System.Guid.NewGuid();
+        CacheService.Set("uid", guid.ToString());
         //Debug.Log("test");
         //StartCoroutine(HttpTool.HttpGet(url));
         //WWWForm form = new WWWForm();
