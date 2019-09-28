@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameController controllerPrefab;
     [SerializeField] BoardInstance boardInstancePrefab;
     [SerializeField] UIManager uiPrefab;
-    AIController aiController;
+    public AIController aiController;
     int round;
 
     public UnityEvent UIAndBoardLogic_WhenGameEnd;
@@ -160,6 +160,7 @@ public class GameManager : MonoBehaviour
         timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
         timer.WhenSelectingTimeOver.AddListener(WhenSelectingTimeOver);
         timer.WhenWaitingTimeOver.AddListener(WhenWaitingTimeOver);
+        UIInstance.sBtn.UpdateSkillButton(0);
     }
     /* 
      * 结束回合
@@ -171,6 +172,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
         StartCoroutine(OnWaitBoardEndTurn());
+        UIInstance.sBtn.UpdateSkillButton(round);
     }
 
     private IEnumerator OnWaitBoardEndTurn()

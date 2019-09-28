@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public UIScorePanel panels;
+    public SkillButton sBtn;
     public void Init(int length, PrefabsConfig pConfig)
     {
         panels.Init(length, pConfig);
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     public void ActionsOnGameEnd()
     {
         Image[] images = GetComponentsInChildren<Image>();
+        //懒
+        sBtn.GetComponent<Button>().enabled = false;
         foreach(Image i in images)
         {
             StartCoroutine(GoDisappear(i));

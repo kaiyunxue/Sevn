@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public PlayerRecord record;
     public UIScorePanel uIScorePanel;
 
+
     public void GetScore(PieceColor color)
     {
         record.secord[(int)color]++;

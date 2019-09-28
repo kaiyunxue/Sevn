@@ -28,7 +28,11 @@ public class AIController : MonoBehaviour
     private float intervalSecond;
     List<AIResult> result;
     BoardManager boardManager;
-
+    private bool isBeSkilled = false;
+    public void MakeAIStupid()
+    {
+        isBeSkilled = true;
+    }
     void Start()
     {
         intervalSecond = 0.5f;
@@ -99,6 +103,11 @@ public class AIController : MonoBehaviour
                 break;
             }
             boardManager.SelectPiece(v.x, v.y);
+            if (isBeSkilled)
+            {
+                isBeSkilled = false;
+                break;
+            }
         }
 
         EndMove();
