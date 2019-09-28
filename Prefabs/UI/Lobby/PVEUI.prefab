@@ -801,11 +801,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 563382138906061713}
     m_Modifications:
-    - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_Name
-      value: LobbyCircleLeft
-      objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -864,22 +859,22 @@ PrefabInstance:
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 812
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1624
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
@@ -889,17 +884,17 @@ PrefabInstance:
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
@@ -916,6 +911,44 @@ PrefabInstance:
       propertyPath: spinAngleMax
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Name
+      value: LobbyCircleLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911777016531792938, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c246aefe88d242588b5c04d8b69bd80,
+        type: 3}
+    - target: {fileID: 3544071855459108815, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b0e5119db9f74d39ad060e330776fd7,
+        type: 3}
+    - target: {fileID: 1711331762320226678, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e437a2142a40942d5b9c324ad53bf3de,
+        type: 3}
     - target: {fileID: 5831215542491621126, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: spinAngleMax
