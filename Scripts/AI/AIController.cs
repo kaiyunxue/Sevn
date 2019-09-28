@@ -29,7 +29,7 @@ public class AIController : MonoBehaviour
     private Thread moveThread;
     List<AIResult> result;
     BoardManager boardManager;
-    private int ABPruningDepth = 5;
+    private int ABPruningDepth = 4;
 
     private bool isBeSkilled = false;
     public void MakeAIStupid()

@@ -1342,7 +1342,7 @@ MonoBehaviour:
     gameMode: 0
     boardSideLength: 7
     selectLimitTime: 3
-    waitingLimitTime: 15
+    waitingLimitTime: 30
     doUseCrack: 1
     doUseTurnTimer: 1
   prefabConfig:
