@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
 
             if (!controller.gameObject.activeSelf)
             {
-                aiController.StartMove(boardManager, AILevel.middle, round, timer);
+                aiController.StartMove(boardManager, AILevel.hard, round, timer);
             }
         }
     }
