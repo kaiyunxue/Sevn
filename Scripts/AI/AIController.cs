@@ -322,7 +322,7 @@ public class AIController : MonoBehaviour
         EndCalculate();
     }
 
-    private bool CheckEndGame(AIHardDataStruct curDepthData)
+    private bool CheckEndGame(ref AIHardDataStruct curDepthData)
     {
         List<Piece> curNextPieces = curDepthData.nextPieces;
         PlayerRecord curPlayerRecord = curDepthData.playerRecord;
@@ -351,7 +351,7 @@ public class AIController : MonoBehaviour
         return false;
     }
 
-    private void GetScore(AIHardDataStruct curDepthData, PieceColor color)
+    private void GetScore(ref AIHardDataStruct curDepthData, PieceColor color)
     {
         if (curDepthData.depth % 2 != 0)
         {
@@ -363,14 +363,14 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private void DeletePiece(AIHardDataStruct curDepthData, int x, int y)
+    private void DeletePiece(ref AIHardDataStruct curDepthData, int x, int y)
     {
         Piece[,] curPieces = curDepthData.pieces;
         List<Piece> curNextPieces = curDepthData.nextPieces;
 
         if (!curNextPieces.Contains(curPieces[x, y]))
             Debug.LogError("Not A Valid Piece");
-        GetScore(curDepthData, curPieces[x, y].pieceColor);
+        GetScore(ref curDepthData, curPieces[x, y].pieceColor);
         curNextPieces.Remove(curPieces[x, y]);
         curPieces[x, y].isValid = false;
     }
@@ -389,13 +389,13 @@ public class AIController : MonoBehaviour
         return false;
     }
 
-    private void SelectPiece(AIHardDataStruct curDepthData, int x, int y)
+    private void SelectPiece(ref AIHardDataStruct curDepthData, int x, int y)
     {
         Piece[,] curPieces = curDepthData.pieces;
         List<Piece> curNextPieces = curDepthData.nextPieces;
 
         curPieces[x, y].isValid = false;
-        DeletePiece(curDepthData, x, y);
+        DeletePiece(ref curDepthData, x, y);
         List<Piece> changedPieces = new List<Piece>();//去掉了注释 若不去掉注释会导致碎裂棋子重复计算
         if (x - 1 >= 0 && curPieces[x - 1, y].isValid)
         {
@@ -438,7 +438,7 @@ public class AIController : MonoBehaviour
     }
 
     //true是玩家赢 false是AI赢
-    private bool CheckWinner(AIHardDataStruct curDepthData)
+    private bool CheckWinner(ref AIHardDataStruct curDepthData)
     {
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
         //先判断是否获得一种颜色的全部棋子
@@ -487,7 +487,7 @@ public class AIController : MonoBehaviour
 
     }
 
-    private bool EngTurn(AIHardDataStruct curDepthData)
+    private bool EngTurn(ref AIHardDataStruct curDepthData)
     {
         List<Piece> nextPieces = curDepthData.nextPieces;
         Piece[,] pieces = curDepthData.pieces;
@@ -514,8 +514,8 @@ public class AIController : MonoBehaviour
                 {
                     foreach (var p in crackPieces)
                     {
-                        SelectPiece(curDepthData, p.x, p.y);
-                        if (CheckEndGame(curDepthData))
+                        SelectPiece(ref curDepthData, p.x, p.y);
+                        if (CheckEndGame(ref curDepthData))
                         {
                             return true;
                         }
@@ -526,7 +526,7 @@ public class AIController : MonoBehaviour
         return false;
     }
 
-    private int CalculateCurValue(AIHardDataStruct curDepthData)
+    private int CalculateCurValue(ref AIHardDataStruct curDepthData)
     {
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
         int playerValue = 0;
@@ -562,31 +562,31 @@ public class AIController : MonoBehaviour
     }
 
     //返回true则继续往下递归 返回false则停止
-    private bool SelectCombination(AIHardDataStruct curDepthData, List<Piece> combination)
+    private bool SelectCombination(ref AIHardDataStruct curDepthData, List<Piece> combination)
     {
         //选择棋子
         foreach (var piece in combination)
         {
-            SelectPiece(curDepthData, piece.x, piece.y);
+            SelectPiece(ref curDepthData, piece.x, piece.y);
 
-            if (CheckEndGame(curDepthData))
+            if (CheckEndGame(ref curDepthData))
             {
                 return true;
             }
         }
-        if (EngTurn(curDepthData)) 
+        if (EngTurn(ref curDepthData)) 
         {
             return true;
         }
         return false;
     }
 
-    private int CalculateValue(AIHardDataStruct curDepthData, bool isEndGame)
+    private int CalculateValue(ref AIHardDataStruct curDepthData, bool isEndGame)
     {
         int value = 0;
         if (isEndGame)
         {
-            if (CheckWinner(curDepthData))
+            if (CheckWinner(ref curDepthData))
             {
                 //玩家赢则权值最低
                 value += -1000;
@@ -598,14 +598,14 @@ public class AIController : MonoBehaviour
             }
         }
 
-        return value + CalculateCurValue(curDepthData);
+        return value + CalculateCurValue(ref curDepthData);
     }
 
     private int ABPruning(ref AIHardDataStruct curDepthData,int alpha,int beta, bool isEndGame)
     {
         if (curDepthData.depth > ABPruningDepth || isEndGame)
         {
-            return CalculateValue(curDepthData, isEndGame);
+            return CalculateValue(ref curDepthData, isEndGame);
         }
 
         Dictionary <PieceColor, List<Piece>> piecesByColor = GroupByColor(curDepthData.nextPieces);
@@ -630,7 +630,7 @@ public class AIController : MonoBehaviour
             foreach (var combination in combinations)
             {
                 AIHardDataStruct nextDepthData = curDepthData.Clone();
-                bool isNextEndGame = SelectCombination(nextDepthData, combination);
+                bool isNextEndGame = SelectCombination(ref nextDepthData, combination);
                 nextDepthData.depth++;
                 int nextValue = -ABPruning(ref nextDepthData, -beta, -alpha, isNextEndGame);
 
