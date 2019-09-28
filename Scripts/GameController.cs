@@ -6,6 +6,16 @@ using UnityEngine;
 public struct PlayerRecord
 {
     public int[] secord;
+    public PlayerRecord Clone()
+    {
+        PlayerRecord res = new PlayerRecord();
+        res.secord = new int[secord.GetLength(0)];
+        for (int i = 0; i < secord.GetLength(0); i++)
+        {
+            res.secord[i] = secord[i];
+        }
+        return res;
+    }
 }
 public class GameController : MonoBehaviour
 {
@@ -34,6 +44,10 @@ public class GameController : MonoBehaviour
             }
         }
         return false;
+    }
+    public PlayerRecord GetScoreValue()
+    {
+        return record.Clone();
     }
     public int GetControledColorNum()
     {
