@@ -1408,11 +1408,13 @@ MonoBehaviour:
   boardInstancePrefab: {fileID: 5988053371944618373, guid: 0bebbc9175b70fa4c95255d4f6af4ef2,
     type: 3}
   uiPrefab: {fileID: 333508077027253176, guid: 4e3ae52639cbd39468e2b2607809c5a4, type: 3}
+  aiController: {fileID: 0}
   UIAndBoardLogic_WhenGameEnd:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isWin: 0
 --- !u!4 &1354889520
 Transform:
   m_ObjectHideFlags: 0

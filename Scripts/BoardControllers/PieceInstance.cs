@@ -11,7 +11,6 @@ public class PieceInstance : MonoBehaviour
     [HideInInspector] public int x;
     [HideInInspector] public int y;
     [HideInInspector] public PieceColor color;
-    public GameObject effectTmp;
 
     [SerializeField] GameController owner;
 
@@ -92,13 +91,12 @@ public class PieceInstance : MonoBehaviour
     {
         if (!board.boardManager.pieces[x, y].isValid)
             return;
-        effectTmp.SetActive(true);
+        material.SetTexture("_MainTex", highlightTexture);
         IsPieceUp = true;
     }
     public void GoBack()
     {
         //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        effectTmp.SetActive(false);
         IsPieceUp = false;
     }
     public void GoDown()
@@ -115,7 +113,6 @@ public class PieceInstance : MonoBehaviour
         //}
         //else if(GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         //{
-        effectTmp.SetActive(false);
         UpdatePiece();
         board.boardManager.pieces[x, y].isValid = false;
         //}
@@ -174,29 +171,17 @@ public class PieceInstance : MonoBehaviour
         }
         if (GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
-            if (owner == GameManager.Instance.currentController)
-            {
-                Color c = material.GetColor("_Color");
-                c.a = 0.3f;
-                material.SetColor("_Color", c);
-            }
-            else
-            {
-                material.SetColor("_Color", Color.black);
-            }
+            Color c = material.GetColor("_Color");
+            c.a = 0.3f;
+            material.SetColor("_Color", c);
+            material.SetTexture("_MainTex", deadTexture);
         }
         else if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         {
-            if (owner == GameManager.Instance.controller)
-            {
-                Color c = material.GetColor("_Color");
-                c.a = 0.3f;
-                material.SetColor("_Color", c);
-            }
-            else
-            {
-                material.SetColor("_Color", Color.black);
-            }
+            Color c = material.GetColor("_Color");
+            c.a = 0.3f;
+            material.SetColor("_Color", c);
+            material.SetTexture("_MainTex", deadTexture);
         }
     }
 }

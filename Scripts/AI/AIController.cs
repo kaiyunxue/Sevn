@@ -31,6 +31,12 @@ public class AIController : MonoBehaviour
     BoardManager boardManager;
     private int ABPruningDepth = 5;
 
+    private bool isBeSkilled = false;
+    public void MakeAIStupid()
+    {
+        isBeSkilled = true;
+    }
+
     void Start()
     {
         intervalSecond = 0.5f;
@@ -109,6 +115,11 @@ public class AIController : MonoBehaviour
                 break;
             }
             boardManager.SelectPiece(v.x, v.y);
+            if (isBeSkilled)
+            {
+                isBeSkilled = false;
+                break;
+            }
         }
 
         EndMove();

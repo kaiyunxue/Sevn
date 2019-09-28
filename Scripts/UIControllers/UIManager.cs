@@ -6,17 +6,23 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public UIScorePanel panels;
+    public SkillButton sBtn;
+    public UIResult resultUI;
     public void Init(int length, PrefabsConfig pConfig)
     {
+        resultUI.gameObject.SetActive(false);
         panels.Init(length, pConfig);
     }
     public void ActionsOnGameEnd()
     {
         Image[] images = GetComponentsInChildren<Image>();
+        //懒
+        sBtn.GetComponent<Button>().enabled = false;
         foreach(Image i in images)
         {
             StartCoroutine(GoDisappear(i));
         }
+        StartCoroutine(ShowResult());
     }
     IEnumerator GoDisappear(Image image)
     {
@@ -31,5 +37,11 @@ public class UIManager : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
+    }
+    IEnumerator ShowResult()
+    {
+        yield return new WaitForSeconds(1);
+        resultUI.gameObject.SetActive(true);
+        resultUI.Init(GameManager.Instance.isWin);
     }
 }

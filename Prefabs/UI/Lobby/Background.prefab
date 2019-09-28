@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5a7263db9fa36824289eb0276e1b8650, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0448d478b6724b51a9303364222e0aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db703076d9237224984696f1fa47389c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideSpeed: 1000
 --- !u!223 &7803640518335694002
 Canvas:
   m_ObjectHideFlags: 0
