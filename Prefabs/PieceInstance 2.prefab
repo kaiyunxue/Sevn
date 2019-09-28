@@ -135,10 +135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262a1527da3d60642a106c0c62ba38f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalTexture: {fileID: 2800000, guid: 650fddd1a19d74f1187a66eb07c0d249, type: 3}
+  highlightTexture: {fileID: 2800000, guid: 4eb7159d08ab540a6bffdaa2a55816ef, type: 3}
+  deadTexture: {fileID: 0}
   x: 0
   y: 0
   color: 0
-  effectTmp: {fileID: 1572123077294047022}
   owner: {fileID: 0}
   crackMaterial: {fileID: 2100000, guid: dd4e43fc86a7ebd4188619b4d64fb07e, type: 2}
 --- !u!23 &4988765014754069255
