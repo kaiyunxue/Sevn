@@ -54,4 +54,11 @@ public class UIScorePanel : MonoBehaviour
             }
         }
     }
+    public void Disappear()
+    {
+        foreach(var v in bars)
+        {
+            v.Disappear();
+        }
+    }
 }

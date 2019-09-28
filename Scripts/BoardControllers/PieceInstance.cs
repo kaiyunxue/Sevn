@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class PieceInstance : MonoBehaviour
 {
+    [Header("正常")] public Texture normalTexture;
+    [Header("高亮")] public Texture highlightTexture;
+    [Header("按掉")] public Texture deadTexture;
     [HideInInspector] public int x;
     [HideInInspector] public int y;
     [HideInInspector] public PieceColor color;
@@ -101,20 +104,34 @@ public class PieceInstance : MonoBehaviour
     public void GoDown()
     {
         owner = GameManager.Instance.currentController;
-        if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
+        //if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
+        //{
+        //    //不管玩家是谁永远显示获取得分是自己的
+        //    effectTmp.SetActive(false);
+        //    Color c = material.GetColor("_Color");
+        //    c.a = 0.3f;
+        //    material.SetColor("_Color", c);
+        //    board.boardManager.pieces[x, y].isValid = false;
+        //}
+        //else if(GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
+        //{
+        effectTmp.SetActive(false);
+        UpdatePiece();
+        board.boardManager.pieces[x, y].isValid = false;
+        //}
+    }
+    public void StartDisappear()
+    {
+        StartCoroutine(Disappear());
+    }
+    IEnumerator Disappear()
+    {
+        while(material.GetColor("_Color").a > 0)
         {
-            //不管玩家是谁永远显示获取得分是自己的
-            effectTmp.SetActive(false);
             Color c = material.GetColor("_Color");
-            c.a = 0.3f;
+            c.a -=  Time.fixedDeltaTime;
             material.SetColor("_Color", c);
-            board.boardManager.pieces[x, y].isValid = false;
-        }
-        else if(GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
-        {
-            effectTmp.SetActive(false);
-            UpdatePiece();
-            board.boardManager.pieces[x, y].isValid = false;
+            yield return new WaitForEndOfFrame();
         }
     }
     void OnMouseUp()
@@ -133,14 +150,22 @@ public class PieceInstance : MonoBehaviour
     }
     public void SelectAndDropMe()
     {
+        if (GameManager.Instance.IsGameEnded())
+            return;
         if (!board.boardManager.pieces[x, y].isValid)
             return;
         if (IsPieceUp && board.boardManager.TrySelectFirstColor(color))
         {
-            GoDown();
-            board.boardManager.PieceBeKilled(x, y);
+            DropPiece();
         }
     }
+
+    public void DropPiece()
+    {
+        GoDown();
+        board.boardManager.PieceBeKilled(x, y);
+    }
+
     public void UpdatePiece()
     {
         if (owner == null)

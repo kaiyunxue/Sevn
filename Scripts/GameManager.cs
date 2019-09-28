@@ -28,7 +28,6 @@ public enum GameTurnStatus
     WaitingForDrop,
     DropingMore,
     Sleeping,
-    Ending,
 }
 [System.Serializable]
 public struct GamePlayMode
@@ -82,6 +81,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiPrefab;
     AIController aiController;
     int round;
+
+    public UnityEvent UIAndBoardLogic_WhenGameEnd;
 
     void Awake()
     {
@@ -140,6 +141,10 @@ public class GameManager : MonoBehaviour
             controller2.gameObject.SetActive(false);
             aiController = gameObject.AddComponent<AIController>();
         }
+        UnityAction BoardDisappear = new UnityAction(boardInstance.BoardDisappear);
+        UnityAction UIDisappear = new UnityAction(UIInstance.ActionsOnGameEnd);
+        UIAndBoardLogic_WhenGameEnd.AddListener(BoardDisappear);
+        UIAndBoardLogic_WhenGameEnd.AddListener(UIDisappear);
     }
     void Start()
     {
@@ -147,6 +152,7 @@ public class GameManager : MonoBehaviour
     }
     void GameStart()
     {
+        isGameEnded = false;
         UnityAction WhenWaitingTimeOver = new UnityAction(OnWaitingTimeOver);
         UnityAction WhenSelectingTimeOver = new UnityAction(EndTurn);
         round = 0;
@@ -161,6 +167,7 @@ public class GameManager : MonoBehaviour
     public void EndTurn()
     {
         ++round;
+        timer.GameTurnStatus = GameTurnStatus.Sleeping;
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
         StartCoroutine(OnWaitBoardEndTurn());
@@ -172,8 +179,59 @@ public class GameManager : MonoBehaviour
         {
             yield return 0;
         }
-        
-        ChangePlayer();
+        CheckEndGame();
+        if(!isGameEnded)
+        {
+            ChangePlayer();
+            timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
+        }
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("EndGame");
+        isGameEnded = true;
+        timer.GameTurnStatus = GameTurnStatus.Sleeping;
+        ShowWiner();
+        UIAndBoardLogic_WhenGameEnd.Invoke();
+    }
+
+
+    private void ShowWiner()
+    {
+        //先判断是否获得一种颜色的全部棋子
+        if (controller.CheckDoesGetSevn())
+        {
+            Win(true);
+        }
+        else if (controller2.CheckDoesGetSevn())
+        {
+            Win(false);
+        }
+        else
+        {
+            //再判断谁的分数更高
+            if (controller.GetControledColorNum() > controller2.GetControledColorNum())
+                Win(true);
+            else
+                Win(false);
+        }
+    }
+
+    private bool isGameEnded;
+    public bool IsGameEnded()
+    {
+        return isGameEnded;
+    }
+
+    private void CheckEndGame()
+    {
+        if (boardManager.nextPieces.Count <= 0)
+            EndGame();
+        if (controller.CheckDoesGetSevn())
+            EndGame();
+        if (controller2.CheckDoesGetSevn())
+            EndGame();
     }
 
     private void ChangePlayer()
@@ -217,18 +275,10 @@ public class GameManager : MonoBehaviour
             if (controller.gameObject.activeSelf)
             {
                 controller.GetScore(c);
-                if (controller.CheckDoesGetSevn())
-                {
-                    Win();
-                }
             }
             else
             {
                 controller2.GetScore(c);
-                if (controller2.CheckDoesGetSevn())
-                {
-                    Win(false);
-                }
             }
         }
         else if (gamePlayMode.gameMode == GameMode.VSAI)
@@ -236,20 +286,13 @@ public class GameManager : MonoBehaviour
             if (controller.gameObject.activeSelf)
             {
                 controller.GetScore(c);
-                if (controller.CheckDoesGetSevn())
-                {
-                    Win();
-                }
             }
             else
             {
                 controller2.GetScore(c);
-                if (controller2.CheckDoesGetSevn())
-                {
-                    Win(false);
-                }
             }
         }
+        CheckEndGame();
     }
     public void Win(bool isPlayerOne = true)
     {

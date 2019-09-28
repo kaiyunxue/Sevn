@@ -307,7 +307,7 @@ public class BoardManager : MonoBehaviour
     {
         pieces[x, y].isValid = false;
         DeletePiece(x, y);
-        //changedPieces.Clear();
+        changedPieces.Clear();//去掉了注释 若不去掉注释会导致碎裂棋子重复计算
         if (x - 1 >= 0 && pieces[x - 1, y].isValid)
         {
             pieces[x - 1, y].isDownHasPiece = false;
@@ -386,6 +386,7 @@ public class BoardManager : MonoBehaviour
                         Debug.LogError("Pieces has been destoryed:::" + p.ToString());
                 }
             }
+            yield return new WaitForSeconds(1f);
             isChanged = false;
 
             if (gpm.doUseCrack)
@@ -421,8 +422,7 @@ public class BoardManager : MonoBehaviour
             if (boardInstance.pieces[p.x, p.y] != null)
             {
                 Debug.Log("Crack Piece Going Down: x: " + p.x + " y: " + p.y);
-                boardInstance.pieces[p.x, p.y].GoDown();
-                PieceBeKilled(p.x, p.y);
+                boardInstance.pieces[p.x, p.y].DropPiece();
             }
             else
                 Debug.LogError("Pieces has been destoryed");

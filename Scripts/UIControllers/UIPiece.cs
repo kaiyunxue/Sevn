@@ -55,4 +55,18 @@ public class UIPiece : MonoBehaviour
                 break;
         }
     }
+    public void Disappear()
+    {
+        StartCoroutine(GoDisappear());
+    }
+    IEnumerator GoDisappear()
+    {
+        while(GetComponent<Image>().color.a > 0)
+        {
+            Color c = GetComponent<Image>().color;
+            c.a -= Time.fixedDeltaTime;
+            GetComponent<Image>().color = c;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

@@ -26,4 +26,11 @@ public class UIPiecesBar : MonoBehaviour
             }
         }
     }
+    public void Disappear()
+    {
+        foreach(var p in pieces)
+        {
+            p.Disappear();
+        }
+    }
 }

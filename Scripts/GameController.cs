@@ -24,13 +24,27 @@ public class GameController : MonoBehaviour
     }
     public bool CheckDoesGetSevn()
     {
+        GamePlayMode gpm = GameManager.Instance.gamePlayMode;
         foreach (int s in record.secord)
         {
-            if (s >= 7)
+            if (s >= gpm.boardSideLength)
             {
                 return true;
             }
         }
         return false;
+    }
+    public int GetControledColorNum()
+    {
+        int controledNum = 0;
+        foreach(var v in record.secord)
+        {
+            GamePlayMode gpm = GameManager.Instance.gamePlayMode;
+            if (v > gpm.boardSideLength / 2)
+            {
+                ++controledNum;
+            }
+        }
+        return controledNum;
     }
 }

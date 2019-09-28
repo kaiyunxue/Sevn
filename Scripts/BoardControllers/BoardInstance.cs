@@ -40,4 +40,11 @@ public class BoardInstance : MonoBehaviour
             p.UpdatePiece();
         }
     }
+    public void BoardDisappear()
+    {
+        foreach(var p in pieces)
+        {
+            p.StartDisappear();
+        }
+    }
 }
