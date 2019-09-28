@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour
 {
-    public void UpdateSkillButton(int turn)
+    int round = 0;
+    public void UpdateSkillButton()
     {
-        int status = (turn / 2) % 3;
+        int status = (round / 2) % 3;
+        if (round >= 6)
+            status = 2;
         Debug.Log("" + status);
         switch(status)
         {
@@ -24,9 +27,11 @@ public class SkillButton : MonoBehaviour
                 GetComponent<Image>().fillAmount = 1;
                 break;
         }
+        round++;
     }
     public void OnClick()
     {
         GameManager.Instance.aiController.MakeAIStupid();
+        round = 0;
     }
 }

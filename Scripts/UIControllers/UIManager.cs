@@ -7,8 +7,10 @@ public class UIManager : MonoBehaviour
 {
     public UIScorePanel panels;
     public SkillButton sBtn;
+    public UIResult resultUI;
     public void Init(int length, PrefabsConfig pConfig)
     {
+        resultUI.gameObject.SetActive(false);
         panels.Init(length, pConfig);
     }
     public void ActionsOnGameEnd()
@@ -20,6 +22,7 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(GoDisappear(i));
         }
+        StartCoroutine(ShowResult());
     }
     IEnumerator GoDisappear(Image image)
     {
@@ -34,5 +37,11 @@ public class UIManager : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
+    }
+    IEnumerator ShowResult()
+    {
+        yield return new WaitForSeconds(1);
+        resultUI.gameObject.SetActive(true);
+        resultUI.Init(GameManager.Instance.isWin);
     }
 }

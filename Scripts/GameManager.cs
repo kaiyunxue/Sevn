@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     int round;
 
     public UnityEvent UIAndBoardLogic_WhenGameEnd;
+    public bool isWin;
 
     void Awake()
     {
@@ -160,7 +161,7 @@ public class GameManager : MonoBehaviour
         timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
         timer.WhenSelectingTimeOver.AddListener(WhenSelectingTimeOver);
         timer.WhenWaitingTimeOver.AddListener(WhenWaitingTimeOver);
-        UIInstance.sBtn.UpdateSkillButton(0);
+        UIInstance.sBtn.UpdateSkillButton();
     }
     /* 
      * 结束回合
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
         StartCoroutine(OnWaitBoardEndTurn());
-        UIInstance.sBtn.UpdateSkillButton(round);
+        UIInstance.sBtn.UpdateSkillButton();
     }
 
     private IEnumerator OnWaitBoardEndTurn()
@@ -302,22 +303,25 @@ public class GameManager : MonoBehaviour
         {
             if (isPlayerOne)
             {
-                Debug.Log("Player 1 wins!");
+                isWin = true;
             }
             else
             {
-                Debug.Log("Player 2 wins!");
+                isWin = false;
+
             }
         }
         else if (gamePlayMode.gameMode == GameMode.VSAI)
         {
             if (isPlayerOne)
             {
-                Debug.Log("Player 1 wins!");
+                isWin = true;
+
             }
             else
             {
-                Debug.Log("AI wins!");
+                isWin = false;
+
             }
         }
     }
