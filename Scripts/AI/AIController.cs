@@ -26,8 +26,10 @@ public class AIController : MonoBehaviour
     private int moveRound;
     private TurnAtuoTimer timer;
     private float intervalSecond;
+    private Thread moveThread;
     List<AIResult> result;
     BoardManager boardManager;
+    private int ABPruningDepth = 5;
 
     void Start()
     {
@@ -48,13 +50,20 @@ public class AIController : MonoBehaviour
         switch (aiLevel)
         {
             case AILevel.easy:
-                new Thread(new ThreadStart(MoveInEasyLevel)).Start();
+                moveThread = new Thread(new ThreadStart(MoveInEasyLevel));
+                moveThread.Start();
                 break;
             case AILevel.middle:
-                new Thread(new ThreadStart(MoveInMiddleLevel)).Start();
+                moveThread = new Thread(new ThreadStart(MoveInMiddleLevel));
+                moveThread.Start();
+                break;
+            case AILevel.hard:
+                moveThread = new Thread(new ThreadStart(MoveInHardLevel));
+                moveThread.Start();
                 break;
             default:
-                new Thread(new ThreadStart(MoveInMiddleLevel)).Start();
+                moveThread = new Thread(new ThreadStart(MoveInMiddleLevel));
+                moveThread.Start();
                 break;
         }
         StartCoroutine(OnMove());
@@ -68,6 +77,7 @@ public class AIController : MonoBehaviour
         }
         if (moveRound != GameManager.Instance.GetCurRound())
         {
+            moveThread.Abort();
             EndMove();
             yield break;
         }
@@ -169,6 +179,7 @@ public class AIController : MonoBehaviour
 
     private void BeginCalculate()
     {
+        result.Clear();
         isDone = false;
     }
 
@@ -211,7 +222,6 @@ public class AIController : MonoBehaviour
         Dictionary<PieceColor, List<Piece>> piecesByColor = GroupByColor(nextPieces);
         PieceColor mostColor = GetMostColor(piecesByColor);
 
-        result.Clear();
         foreach (var v in piecesByColor[mostColor])
         {
             result.Add(new AIResult(v.x, v.y));
@@ -220,26 +230,22 @@ public class AIController : MonoBehaviour
         EndCalculate();
     }
 
-    private int ABPruningDepth = 3;
-
     private struct AIHardDataStruct
     {
         public Piece[,] pieces;
         public List<Piece> nextPieces;
         public PlayerRecord playerRecord;
         public PlayerRecord aiRecord;
+        public List<Piece> bestCombination;
         public int depth;
-        public int minValue;
-        public int maxValue;
-        public AIHardDataStruct(Piece[,] argPieces, List<Piece> argNextPieces, PlayerRecord argPlayerRecord, PlayerRecord argAiRecord, int argDepth, int argMinValue, int argMaxValue)
+        public AIHardDataStruct(Piece[,] argPieces, List<Piece> argNextPieces, PlayerRecord argPlayerRecord, PlayerRecord argAiRecord,int argDepth)
         {
             pieces = argPieces;
             nextPieces = argNextPieces;
             playerRecord = argPlayerRecord;
             aiRecord = argAiRecord;
             depth = argDepth;
-            minValue = argMinValue;
-            maxValue = argMaxValue;
+            bestCombination = new List<Piece>();
         }
 
         private Piece[,] CopyPieces()
@@ -275,12 +281,11 @@ public class AIController : MonoBehaviour
             tar.playerRecord = playerRecord.Clone();
             tar.aiRecord = aiRecord.Clone();
             tar.depth = depth;
-            tar.minValue = minValue;
-            tar.maxValue = maxValue;
 
             return tar;
         }
     }
+
     private void MoveInHardLevel()
     {
         BeginCalculate();
@@ -290,15 +295,18 @@ public class AIController : MonoBehaviour
         PlayerRecord playerRecord = GameManager.Instance.controller.GetScoreValue();
         PlayerRecord aiRecord = GameManager.Instance.controller2.GetScoreValue();
         int curDepth = 0;
-        int curMinValue = 0x7FFFFFFF;
-        int curMaxValue = -0x7FFFFFFF;
-        AIHardDataStruct curDepthData = new AIHardDataStruct(curPieces, curNextPieces, playerRecord, aiRecord, curDepth, curMinValue, curMaxValue);
-        Piece[] abRes = ABPruning(curDepthData);
+        int alpha = -0x7FFFFFFE;
+        int beta= 0x7FFFFFFE;
+        AIHardDataStruct curDepthData = new AIHardDataStruct(curPieces, curNextPieces, playerRecord, aiRecord, curDepth);
+        ABPruning(ref curDepthData, alpha, beta, false);
+        Debug.Log("curDepthData.bestCombination count: " + curDepthData.bestCombination.Count);
+        List<Piece> abRes = curDepthData.bestCombination;
 
         foreach (var v in abRes)
         {
             result.Add(new AIResult(v.x, v.y));
         }
+        Debug.Log("EndCalculate");
 
         EndCalculate();
     }
@@ -486,6 +494,15 @@ public class AIController : MonoBehaviour
                 {
                     if (p.isValid && p.isCrackPiece)
                     {
+                        crackPieces.Add(p);
+                        isChanged = true;
+                    }
+                }
+
+                if (isChanged)
+                {
+                    foreach (var p in crackPieces)
+                    {
                         SelectPiece(curDepthData, p.x, p.y);
                         if (CheckEndGame(curDepthData))
                         {
@@ -501,120 +518,128 @@ public class AIController : MonoBehaviour
     private int CalculateCurValue(AIHardDataStruct curDepthData)
     {
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
-        int playerControledNum = 0;
+        int playerValue = 0;
+        int aiValue = 0;
         foreach (var v in curDepthData.playerRecord.secord)
         {
             if (v > gpm.boardSideLength / 2)
             {
-                ++playerControledNum;
+                //++playerControledNum;
+                playerValue += 100;
             }
+            playerValue += v * 10;
         }
 
-        int aiControledNum = 0;
         foreach (var v in curDepthData.aiRecord.secord)
         {
             if (v > gpm.boardSideLength / 2)
             {
-                ++aiControledNum;
+                aiValue += 100;
             }
+            aiValue += v * 10;
         }
 
-        return (aiControledNum - playerControledNum) * 100;
+        int value = aiValue - playerValue;
+        if (curDepthData.depth % 2 == 0)
+        {
+            return value;
+        }
+        else
+        {
+            return -value;
+        }
     }
 
     //返回true则继续往下递归 返回false则停止
-    private bool SelectCombination(AIHardDataStruct curDepthData, Piece[] combination)
+    private bool SelectCombination(AIHardDataStruct curDepthData, List<Piece> combination)
     {
         //选择棋子
-        bool isEndGame = false;
         foreach (var piece in combination)
         {
             SelectPiece(curDepthData, piece.x, piece.y);
 
             if (CheckEndGame(curDepthData))
             {
-                isEndGame = true;
-                break;
+                return true;
             }
         }
-        if (!isEndGame && EngTurn(curDepthData)) 
+        if (EngTurn(curDepthData)) 
         {
-            isEndGame = true;
+            return true;
         }
+        return false;
+    }
 
-        //如果游戏结束则不用继续递归
-        int curValue;
+    private int CalculateValue(AIHardDataStruct curDepthData, bool isEndGame)
+    {
+        int value = 0;
         if (isEndGame)
         {
             if (CheckWinner(curDepthData))
             {
                 //玩家赢则权值最低
-                curValue = -1000;
+                value += -1000;
             }
             else
             {
                 //AI赢则权值最高
-                curValue = 1000;
+                value += 1000;
             }
-
-            curDepthData.minValue = curValue;
-            curDepthData.maxValue = curValue;
-
-            return false;
         }
 
-        if (curDepthData.depth > ABPruningDepth)
-        {
-            curValue = CalculateCurValue(curDepthData);
-
-            curDepthData.minValue = curValue;
-            curDepthData.maxValue = curValue;
-
-            return false;
-        }
-
-        return true;
+        return value + CalculateCurValue(curDepthData);
     }
 
-    private Piece[] ABPruning(AIHardDataStruct curDepthData)
+    private int ABPruning(ref AIHardDataStruct curDepthData,int alpha,int beta, bool isEndGame)
     {
-        Dictionary<PieceColor, List<Piece>> piecesByColor = GroupByColor(curDepthData.nextPieces);
-        Piece[] bestSingleCombination = new Piece[0];
-
-        foreach (var v in piecesByColor)
+        if (curDepthData.depth > ABPruningDepth || isEndGame)
         {
-            List<Piece[]> combination;
-            combination = Algorithms.PermutationAndCombination<Piece>.GetCombination(v.Value.ToArray(), v.Value.Count);
-            foreach (var singleCombination in combination)
+            return CalculateValue(curDepthData, isEndGame);
+        }
+
+        Dictionary <PieceColor, List<Piece>> piecesByColor = GroupByColor(curDepthData.nextPieces);
+        int bestValue = -0x7FFFFFF;
+        foreach (var pieces in piecesByColor)
+        {
+            List<List<Piece>> combinations = new List<List<Piece>>();
+            for (int i = 1; i <= pieces.Value.Count; ++i)
+            {
+                List<Piece[]> tmp;
+                tmp = Algorithms.PermutationAndCombination<Piece>.GetCombination(pieces.Value.ToArray(), i);
+                foreach (var v in tmp)
+                {
+                    List<Piece> combination = new List<Piece>();
+                    for (int j = 0; j < v.GetLength(0); ++j)
+                    {
+                        combination.Add(v[j]);
+                    }
+                    combinations.Add(combination);
+                }
+            }
+            foreach (var combination in combinations)
             {
                 AIHardDataStruct nextDepthData = curDepthData.Clone();
+                bool isNextEndGame = SelectCombination(nextDepthData, combination);
                 nextDepthData.depth++;
-                if (SelectCombination(nextDepthData, singleCombination))
+                int nextValue = -ABPruning(ref nextDepthData, -beta, -alpha, isNextEndGame);
+
+
+                if (nextValue > bestValue)
                 {
-                    ABPruning(nextDepthData);
+                    bestValue = nextValue;
+                    curDepthData.bestCombination = combination;
                 }
-                else
+                if (bestValue > alpha)
                 {
-                    if (curDepthData.depth % 2 == 0)//AI回合
-                    {
-                        if (nextDepthData.minValue > curDepthData.maxValue)
-                        {
-                            bestSingleCombination = singleCombination;
-                            curDepthData.maxValue = nextDepthData.minValue;
-                        }
-                    }
-                    else//玩家回合
-                    {
-                        if (nextDepthData.maxValue < curDepthData.minValue)
-                        {
-                            bestSingleCombination = singleCombination;
-                            curDepthData.minValue = nextDepthData.maxValue;
-                        }
-                    }
+                    alpha = bestValue;
+                }
+                if (bestValue >= beta)
+                {
+                    return bestValue;
                 }
             }
         }
 
-        return bestSingleCombination;
+        return bestValue;
     }
 }
