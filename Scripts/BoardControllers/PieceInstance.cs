@@ -173,14 +173,14 @@ public class PieceInstance : MonoBehaviour
         if (GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
             Color c = material.GetColor("_Color");
-            c.a = 0.3f;
+            c.a = 0;
             material.SetColor("_Color", c);
             material.SetTexture("_MainTex", deadTexture);
         }
         else if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         {
             Color c = material.GetColor("_Color");
-            c.a = 0.3f;
+            c.a = 0f;
             material.SetColor("_Color", c);
             material.SetTexture("_MainTex", deadTexture);
         }
