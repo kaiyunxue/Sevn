@@ -44,30 +44,31 @@ public class PieceInstance : MonoBehaviour
         material = GetComponent<Renderer>().material;
         switch (color)
         {
-            case PieceColor.Black:
-                material.SetColor("_Color", Color.black);
-                break;
-            case PieceColor.Blue:
-                material.SetColor("_Color", Color.blue);
-                break;
-            case PieceColor.Green:
-                material.SetColor("_Color", Color.green);
-                break;
-            case PieceColor.Grey:
-                material.SetColor("_Color", Color.grey);
-                break;
-            case PieceColor.Orange:
-                material.SetColor("_Color", Color.yellow);
-                break;
-            case PieceColor.Red:
-                material.SetColor("_Color", Color.red);
-                break;
-            case PieceColor.White:
-                material.SetColor("_Color", Color.white);
-                break;
-            default:
-                break;
+            //case PieceColor.Black:
+            //    material.SetColor("_Color", Color.black);
+            //    break;
+            //case PieceColor.Blue:
+            //    material.SetColor("_Color", Color.blue);
+            //    break;
+            //case PieceColor.Green:
+            //    material.SetColor("_Color", Color.green);
+            //    break;
+            //case PieceColor.Grey:
+            //    material.SetColor("_Color", Color.grey);
+            //    break;
+            //case PieceColor.Orange:
+            //    material.SetColor("_Color", Color.yellow);
+            //    break;
+            //case PieceColor.Red:
+            //    material.SetColor("_Color", Color.red);
+            //    break;
+            //case PieceColor.White:
+            //    material.SetColor("_Color", Color.white);
+            //    break;
+            //default:
+            //    break;
         }
+        material.SetTexture("_MainTex", normalTexture);
     }
     // Start is called before the first frame update
     public IEnumerator CubeMove(float speed, int yPos)
