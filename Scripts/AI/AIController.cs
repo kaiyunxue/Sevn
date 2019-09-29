@@ -536,18 +536,18 @@ public class AIController : MonoBehaviour
             if (v > gpm.boardSideLength / 2)
             {
                 //++playerControledNum;
-                playerValue += 100;
+                playerValue += 1000;
             }
-            playerValue += v * 10;
+            playerValue += (10 + v * 10) * v / 2;
         }
 
         foreach (var v in curDepthData.aiRecord.secord)
         {
             if (v > gpm.boardSideLength / 2)
             {
-                aiValue += 100;
+                aiValue += 1000;
             }
-            aiValue += v * 10;
+            aiValue += (10 + v * 10) * v / 2;
         }
 
         int value = aiValue - playerValue;
@@ -557,7 +557,7 @@ public class AIController : MonoBehaviour
         }
         else
         {
-            return -value;
+            return value;
         }
     }
 
@@ -589,16 +589,23 @@ public class AIController : MonoBehaviour
             if (CheckWinner(ref curDepthData))
             {
                 //玩家赢则权值最低
-                value += -1000;
+                value += -10000;
             }
             else
             {
                 //AI赢则权值最高
-                value += 1000;
+                value += 10000;
             }
         }
 
-        return value + CalculateCurValue(ref curDepthData);
+        if (curDepthData.depth % 2 == 0)
+        {
+            return (value + CalculateCurValue(ref curDepthData));
+        }
+        else
+        {
+            return -(value + CalculateCurValue(ref curDepthData));
+        }
     }
 
     private int ABPruning(ref AIHardDataStruct curDepthData,int alpha,int beta, bool isEndGame)
