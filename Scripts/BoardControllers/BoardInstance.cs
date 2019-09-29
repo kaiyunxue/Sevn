@@ -38,9 +38,10 @@ public class BoardInstance : MonoBehaviour
     }
     public void BoardDisappear()
     {
-        foreach(var p in pieces)
-        {
-            p.StartDisappear();
-        }
+        //暂时不需要
+        //foreach(var p in pieces)
+        //{
+        //    p.StartDisappear();
+        //}
     }
 }

@@ -5,14 +5,12 @@ using UnityEngine.Events;
 
 public class PieceInstance : MonoBehaviour
 {
-    [Header("正常")] public Texture normalTexture;
-    [Header("高亮")] public Texture highlightTexture;
-    [Header("按掉")] public Texture deadTexture;
     [HideInInspector] public int x;
     [HideInInspector] public int y;
     [HideInInspector] public PieceColor color;
 
     [SerializeField] GameController owner;
+    [SerializeField] Animator animator;
 
     public Material crackMaterial;
     Material material;
@@ -42,33 +40,13 @@ public class PieceInstance : MonoBehaviour
             }
         }
         material = GetComponent<Renderer>().material;
-        switch (color)
-        {
-            //case PieceColor.Black:
-            //    material.SetColor("_Color", Color.black);
-            //    break;
-            //case PieceColor.Blue:
-            //    material.SetColor("_Color", Color.blue);
-            //    break;
-            //case PieceColor.Green:
-            //    material.SetColor("_Color", Color.green);
-            //    break;
-            //case PieceColor.Grey:
-            //    material.SetColor("_Color", Color.grey);
-            //    break;
-            //case PieceColor.Orange:
-            //    material.SetColor("_Color", Color.yellow);
-            //    break;
-            //case PieceColor.Red:
-            //    material.SetColor("_Color", Color.red);
-            //    break;
-            //case PieceColor.White:
-            //    material.SetColor("_Color", Color.white);
-            //    break;
-            //default:
-            //    break;
-        }
-        material.SetTexture("_MainTex", normalTexture);
+        material.SetFloat("_Rate", 1f);
+        //var sprite = GetComponent<SpriteRenderer>();
+        //if (sprite != null)
+        //{
+        //    Debug.Log("normalSprite x: " + x + " y: " + y);
+        //    sprite.sprite = normalSprite;
+        //}
     }
     // Start is called before the first frame update
     public IEnumerator CubeMove(float speed, int yPos)
@@ -92,7 +70,11 @@ public class PieceInstance : MonoBehaviour
     {
         if (!board.boardManager.pieces[x, y].isValid)
             return;
-        material.SetTexture("_MainTex", highlightTexture);
+        if (animator != null)
+        {
+            animator.SetTrigger("activeTrigger");
+        }
+        material.SetFloat("_Rate", 0f);
         IsPieceUp = true;
     }
     public void GoBack()
@@ -172,17 +154,19 @@ public class PieceInstance : MonoBehaviour
         }
         if (GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
-            Color c = material.GetColor("_Color");
-            c.a = 0;
-            material.SetColor("_Color", c);
-            material.SetTexture("_MainTex", deadTexture);
+            gameObject.SetActive(false);
+            //Color c = material.GetColor("_Color");
+            //c.a = 0;
+            //material.SetColor("_Color", c);
+            //material.SetTexture("_MainTex", deadTexture);
         }
         else if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         {
-            Color c = material.GetColor("_Color");
-            c.a = 0f;
-            material.SetColor("_Color", c);
-            material.SetTexture("_MainTex", deadTexture);
+            gameObject.SetActive(false);
+            //Color c = material.GetColor("_Color");
+            //c.a = 0f;
+            //material.SetColor("_Color", c);
+            //material.SetTexture("_MainTex", deadTexture);
         }
     }
 }

@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04215751, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.1, y: -12.5}
+  m_AnchoredPosition: {x: -6.100006, y: -12.5}
   m_SizeDelta: {x: -1, y: -40.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &333508076162887722
@@ -859,8 +859,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4130749755195250748}
-  - component: {fileID: 4674824528320526661}
   - component: {fileID: 8176769046036352762}
+  - component: {fileID: 496708736246706886}
   m_Layer: 5
   m_Name: ButoonChargeGroup
   m_TagString: Untagged
@@ -890,7 +890,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &4674824528320526661
+--- !u!225 &8176769046036352762
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174975458995704796}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!95 &496708736246706886
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -909,18 +921,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!225 &8176769046036352762
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6174975458995704796}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &7044879456734896672
 GameObject:
   m_ObjectHideFlags: 0
