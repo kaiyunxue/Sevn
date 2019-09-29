@@ -51,16 +51,29 @@ public class PVEUI : LobbyUIBase
         });
         btnPlayLevel2.onClick.AddListener(delegate ()
         {
-            OnClickPlayLevel1();
+            OnClickPlayLevel2();
         });
         btnPlayLevel3.onClick.AddListener(delegate ()
         {
-            OnClickPlayLevel1();
+            OnClickPlayLevel3();
         });
 
     }
     private void OnClickPlayLevel1()
     {
+        CacheService.Set("iCurrentLevelID", "1");
+        lobby.PlayGame();
+    }
+
+    private void OnClickPlayLevel2()
+    {
+        CacheService.Set("iCurrentLevelID", "2");
+        lobby.PlayGame();
+    }
+
+    private void OnClickPlayLevel3()
+    {
+        CacheService.Set("iCurrentLevelID", "3");
         lobby.PlayGame();
     }
 }
