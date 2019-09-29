@@ -6,7 +6,7 @@ public class Message
     {
         MSG_ID_TICK = 1,
         MSG_ID_LOGIN = 2,
-
+        MSG_ID_RESULT = 3,
     };
 
     [System.Serializable]
