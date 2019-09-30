@@ -133,6 +133,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   animator: {fileID: 7791626897458613848}
   crackMaterial: {fileID: 2100000, guid: dd4e43fc86a7ebd4188619b4d64fb07e, type: 2}
+  audioSource: {fileID: -5327376780966153086}
 --- !u!65 &4988765014754069254
 BoxCollider:
   m_ObjectHideFlags: 0

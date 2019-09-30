@@ -16,8 +16,7 @@ public class PieceInstance : MonoBehaviour
     Material material;
     bool IsPieceUp;
     BoardInstance board;
-
-
+    public AudioSource audioSource;
 
     public void Init(int x, int y, PieceColor color, bool isCrackPiece, BoardInstance board)
     {
@@ -85,6 +84,7 @@ public class PieceInstance : MonoBehaviour
     public void GoDown()
     {
         owner = GameManager.Instance.currentController;
+        AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(0, 0, 0));
         //if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         //{
         //    //不管玩家是谁永远显示获取得分是自己的
