@@ -1381,32 +1381,18 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 54bb28c86c43b403e88922207339f279, type: 3}
     - {fileID: 21300000, guid: c5acf6daf40a74e26a4cf60bf7d4fda4, type: 3}
     - {fileID: 21300000, guid: 067a049d93fe249f88d95031b3c92659, type: 3}
-    UIcolors:
-    - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.5086372, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0.117884636, a: 1}
-    - {r: 0.9843138, g: 0.9176471, b: 0.41960788, a: 1}
-    - {r: 1, g: 1, b: 1, a: 1}
-    - {r: 0.38431376, g: 0.86274517, b: 0.9843138, a: 1}
-    - {r: 0.3019608, g: 0.29411766, b: 0.22352943, a: 1}
-    UIScoreTextures_0:
-    - {fileID: 21300000, guid: 97aeecf0340a94978a33433df5826f2b, type: 3}
-    - {fileID: 21300000, guid: 8e1f82bba1ab34510a70bbe7e451384f, type: 3}
-    - {fileID: 21300000, guid: e90a799813a4d4decaa0ee91044b4051, type: 3}
-    - {fileID: 21300000, guid: 25ec36434ad4d47108dafa1e8457ccd7, type: 3}
-    - {fileID: 21300000, guid: 147cc74ac37f04133b751866318a2fe3, type: 3}
-    - {fileID: 21300000, guid: cffc167b0290f49d4a240392c96f0a3a, type: 3}
-    - {fileID: 21300000, guid: 896902b2e9e554e309e2c2063ade1fd1, type: 3}
-    UIScoreTextures_1:
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    UIScoreBlack: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    UIScoreGrey: {fileID: 21300000, guid: 1bb8c8dd80d8145999c964515c43165c, type: 3}
+    UIColors:
+    - {r: 0.6509804, g: 0.2627451, b: 0.15686275, a: 1}
+    - {r: 0.69411767, g: 0.3921569, b: 0.21960786, a: 1}
+    - {r: 0.2627451, g: 0.5411765, b: 0.5137255, a: 1}
+    - {r: 0.8588236, g: 0.6313726, b: 0.36862746, a: 1}
+    - {r: 0.8745099, g: 0.7803922, b: 0.654902, a: 1}
+    - {r: 0.26666668, g: 0.36078432, b: 0.69411767, a: 1}
+    - {r: 0.31764707, g: 0.23137257, b: 0.19215688, a: 1}
+    UIScoreTextures_0: {fileID: 21300000, guid: 1bb8c8dd80d8145999c964515c43165c,
+      type: 3}
+    UIScoreTextures_1: {fileID: 21300000, guid: 1bb8c8dd80d8145999c964515c43165c,
+      type: 3}
   boardManager: {fileID: 0}
   controller: {fileID: 0}
   controller2: {fileID: 0}

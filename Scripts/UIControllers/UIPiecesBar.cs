@@ -21,7 +21,7 @@ public class UIPiecesBar : MonoBehaviour
             {
                 UIPiece p = GameObject.Instantiate(prefab);
                 p.transform.SetParent(bar);
-                p.Init(piecesColor, pConfig.UIScoreTextures_0[idx], pConfig.UIScoreTextures_1[idx], pConfig.UIScoreBlack, pConfig.UIScoreGrey);
+                p.Init(piecesColor, length, i);
                 pieces.Add(p);
             }
         }
