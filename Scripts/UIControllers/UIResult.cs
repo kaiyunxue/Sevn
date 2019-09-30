@@ -16,29 +16,27 @@ public class UIResult : MonoBehaviour
     {
         if (isWin)
         {
-            //string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
-            //string uid = CacheService.Get("uid");
-            //WWWForm form = new WWWForm();
-            //form.AddField("uid", uid);
-            //form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
-            //form.AddField("bWin", 1);
-            //NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form);
+            string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
+            string uid = CacheService.Get("uid");
+            WWWForm form = new WWWForm();
+            form.AddField("uid", uid);
+            form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
+            form.AddField("bWin", 1);
+            StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
             text.text = "胜利";
-            Debug.Log("胜利");
             button1.onClick.AddListener(new UnityAction(TurnToNextScene));
             button2.onClick.AddListener(new UnityAction(TurnToLobby));
         }
         else
         {
-            //string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
-            //string uid = CacheService.Get("uid");
-            //WWWForm form = new WWWForm();
-            //form.AddField("uid", uid);
-            //form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
-            //form.AddField("bWin", 0);
-            //NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form);
+            string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
+            string uid = CacheService.Get("uid");
+            WWWForm form = new WWWForm();
+            form.AddField("uid", uid);
+            form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
+            form.AddField("bWin", 0);
+            StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
             text.text = "输了彩笔";
-            Debug.Log("输了彩笔");
             button1.onClick.AddListener(new UnityAction(TurnToThisScene));
             button2.onClick.AddListener(new UnityAction(TurnToLobby));
         }
