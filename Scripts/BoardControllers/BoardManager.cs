@@ -257,7 +257,7 @@ public class BoardManager : MonoBehaviour
         boardLength = gpm.boardSideLength;
         nextPieces = new List<Piece>();
 
-        if (gpm.levelID == 0)
+        if (gpm.gameMode == GameMode.VSAI && gpm.levelID == 0)
         {
             InitNewbie();
         }

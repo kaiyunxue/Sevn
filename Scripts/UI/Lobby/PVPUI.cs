@@ -5,9 +5,19 @@ using UnityEngine.UI;
 
 public class PVPUI : LobbyUIBase
 {
-    [SerializeField]
+    [SerializeField] Button buttonPlay;
     protected override void Start()
     {
         base.Start();
+        buttonPlay.onClick.AddListener(delegate ()
+        {
+            OnClickPlay();
+        });
+    }
+
+    void OnClickPlay()
+    {
+        CacheService.Set("playMode", "PVP");
+        lobby.PlayGame();
     }
 }
