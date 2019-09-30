@@ -299,6 +299,8 @@ public class AIController : MonoBehaviour
 
     private void MoveInHardLevel()
     {
+        Debug.Log("MoveInHardLevel");
+
         BeginCalculate();
 
         Piece[,] curPieces = boardManager.GetPieces();

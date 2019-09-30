@@ -7,33 +7,32 @@ using UnityEngine.Events;
 
 public class UIResult : MonoBehaviour
 {
-    public string nextSceneName;
-    public string lobbySceneName;
-    public Text text;
-    public Button button1;
-    public Button button2;
+    public Button buttonToNextScene;
+    public Button buttonToLobby;
+    public Sprite spriteWin;
+    public Sprite spriteFail;
+    public Image spriteBackground;
     public void Init(bool isWin = true)
     {
         if (isWin)
         {
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
-            WWWForm form = new WWWForm();
+            spriteBackground.sprite = spriteWin;
             if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
             {
+                WWWForm form = new WWWForm();
 	            form.AddField("uid", uid);
 	            form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
 	            form.AddField("bWin", 1);
+                StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
             }
-            StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
-            text.text = "胜利";
-            button1.onClick.AddListener(new UnityAction(TurnToNextScene));
-            button2.onClick.AddListener(new UnityAction(TurnToLobby));
         }
         else
         {
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
+            spriteBackground.sprite = spriteFail;
             if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
             {
 	            WWWForm form = new WWWForm();
@@ -42,14 +41,13 @@ public class UIResult : MonoBehaviour
 	            form.AddField("bWin", 0);
 	            StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
             }
-            text.text = "输了彩笔";
-            button1.onClick.AddListener(new UnityAction(TurnToThisScene));
-            button2.onClick.AddListener(new UnityAction(TurnToLobby));
         }
+        buttonToNextScene.onClick.AddListener(new UnityAction(TurnToNextScene));
+        buttonToLobby.onClick.AddListener(new UnityAction(TurnToLobby));
     }
     void TurnToLobby()
     {
-        SceneManager.LoadScene(lobbySceneName);
+        SceneManager.LoadSceneAsync("LobbyScene").allowSceneActivation = true;
     }
     void TurnToThisScene()
     {
@@ -57,6 +55,14 @@ public class UIResult : MonoBehaviour
     }
     void TurnToNextScene()
     {
-        SceneManager.LoadScene(nextSceneName);
+        int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
+        int nextLevel = curLevel;
+        if (curLevel < 3)
+        {
+            nextLevel++;
+        }
+        CacheService.Set("playMode", "PVE");
+        CacheService.Set("iCurrentLevelID", nextLevel.ToString());
+        SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;
     }
 }
