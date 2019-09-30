@@ -192,26 +192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6397558414433770179}
     m_Modifications:
-    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: isReverse
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: spinAngleMax
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: spinAngleMin
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: bgAngle
-      value: 240
-      objectReference: {fileID: 0}
     - target: {fileID: 5785642864690582686, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -317,14 +297,70 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5704678824340917678, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: spinAngleMin
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 1917756371411090174, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: m_Name
       value: LobbyCircleRight
       objectReference: {fileID: 0}
-    - target: {fileID: 5704678824340917678, guid: c73c1dddeb95170498ad6d48acd2ecae,
+    - target: {fileID: 8068059460359477583, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 665356658513113068, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 665356658513113068, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 665356658513113068, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.86602545
+      objectReference: {fileID: 0}
+    - target: {fileID: 665356658513113068, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.49999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 665356658513113068, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6859990205077098557, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7de45d37aa9144e4192ee8cb614df0a2,
+        type: 3}
+    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: isReverse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: spinAngleMax
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: spinAngleMin
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806188796680435081, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: bgAngle
       value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []

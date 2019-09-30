@@ -505,11 +505,47 @@ PrefabInstance:
       propertyPath: spinAngleMax
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6163244842962077296, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_Name
       value: LobbyCircleLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 2285789224136404929, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.25038
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9681477
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735422644825507495, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711331762320226678, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b522f1f8b79399649b8fa1d9f1e83235,
+        type: 3}
     - target: {fileID: 5831215542491621126, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: spinAngleMax
