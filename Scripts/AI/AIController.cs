@@ -538,9 +538,8 @@ public class AIController : MonoBehaviour
             var v = curDepthData.playerRecord.secord[i];
             if (v > gpm.boardSideLength / 2)
             {
-                //++playerControledNum;
                 playerValue += 1000;
-                if (curDepthData.aiRecord.secord[i]>0)
+                if (curDepthData.aiRecord.secord[i] > 0)
                 {
                     playerValue += (10 + 4 * 10) * 4 / 2;
                 }
@@ -555,13 +554,25 @@ public class AIController : MonoBehaviour
             }
         }
 
-        foreach (var v in curDepthData.aiRecord.secord)
+        for (int i = 0; i < curDepthData.aiRecord.secord.GetLength(0); ++i)
         {
+            var v = curDepthData.aiRecord.secord[i];
             if (v > gpm.boardSideLength / 2)
             {
                 aiValue += 1000;
+                if (curDepthData.playerRecord.secord[i] > 0)
+                {
+                    aiValue += (10 + 4 * 10) * 4 / 2;
+                }
+                else
+                {
+                    aiValue += (10 + v * 10) * v / 2;
+                }
             }
-            aiValue += (10 + v * 10) * v / 2;
+            else
+            {
+                aiValue += (10 + v * 10) * v / 2;
+            }
         }
 
         int value = aiValue - playerValue;
