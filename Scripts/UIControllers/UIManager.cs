@@ -55,6 +55,15 @@ public class UIManager : MonoBehaviour
         {
             sBtn.gameObject.SetActive(false);
         }
+        OnGameStart();
+    }
+    void OnGameStart()
+    {
+        Image[] images = GetComponentsInChildren<Image>();
+        foreach (Image i in images)
+        {
+            StartCoroutine(GoAppear(i));
+        }
     }
     public void ActionsOnGameEnd()
     {
@@ -79,6 +88,19 @@ public class UIManager : MonoBehaviour
         if(image.gameObject != gameObject)
         {
             image.gameObject.SetActive(false);
+        }
+    }
+    IEnumerator GoAppear(Image image)
+    {
+        Color c = image.color;
+        c.a = 0;
+        image.color = c;
+        while (image.color.a < 1)
+        {
+            c = image.color;
+            c.a += Time.deltaTime;
+            image.color = c;
+            yield return new WaitForEndOfFrame();
         }
     }
     IEnumerator ShowResult()
