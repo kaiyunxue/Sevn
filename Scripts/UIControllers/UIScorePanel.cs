@@ -25,14 +25,14 @@ public class UIScorePanel : MonoBehaviour
             {
                 for(int i = 0; i < score; i++)
                 {
-                    bars[color].pieces[i + 1].SetScore(ScorePieceState.Less);
+                    bars[color].pieces[i].SetScore(ScorePieceState.Less);
                 }
             }
             else
             {
                 for (int i = 0; i < score; i++)
                 {
-                    bars[color].pieces[i + 1].SetScore(ScorePieceState.More);
+                    bars[color].pieces[i].SetScore(ScorePieceState.More);
                 }
             }
         }
