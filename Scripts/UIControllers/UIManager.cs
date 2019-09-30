@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct RoundTipsStruct
+{
+    public Sprite player1Turn;
+    public Sprite player2Turn;
+}
 public class UIManager : MonoBehaviour
 {
+    [Header("PVE")]
+    public RoundTipsStruct roundSpritePVE;
+    [Header("PVP")]
+    public RoundTipsStruct roundSpritePVP;
+
     public UIScorePanel panels;
     public SkillButton sBtn;
     public UIResult resultUI;
-    public Text roundText;
+    public Image player1TurnImage;
+    public Image player2TurnImage;
     public void SetRound(int round)
     {
-        GamePlayMode gpm = GameManager.Instance.gamePlayMode;
-        switch (gpm.gameMode)
+        if (round % 2 == 0)
         {
-            case GameMode.VSAI:
-                if (round % 2 == 0)
-                {
-                    roundText.text = "你的回合";
-                }
-                else
-                {
-                    roundText.text = "对手回合";
-                }
-                break;
-            case GameMode.OneClientTwoPlayers:
-                if (round % 2 == 0)
-                {
-                    roundText.text = "玩家1的回合";
-                }
-                else
-                {
-                    roundText.text = "玩家2的回合";
-                }
-                break;
+            player1TurnImage.gameObject.SetActive(true);
+            player2TurnImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            player1TurnImage.gameObject.SetActive(false);
+            player2TurnImage.gameObject.SetActive(true);
         }
     }
     public void Init(int length, PrefabsConfig pConfig)
@@ -41,6 +39,17 @@ public class UIManager : MonoBehaviour
         resultUI.gameObject.SetActive(false);
         panels.Init(length, pConfig);
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
+        switch (gpm.gameMode)
+        {
+            case GameMode.VSAI:
+                player1TurnImage.sprite = roundSpritePVE.player1Turn;
+                player2TurnImage.sprite = roundSpritePVE.player2Turn;
+                break;
+            default:
+                player1TurnImage.sprite = roundSpritePVP.player1Turn;
+                player2TurnImage.sprite = roundSpritePVP.player2Turn;
+                break;
+        }
         SetRound(0);
         if (!gpm.doUseSkill)
         {

@@ -9,10 +9,20 @@ public class UIResult : MonoBehaviour
 {
     public Button buttonToNextScene;
     public Button buttonToLobby;
+    public Button buttonContinue;
     public Sprite spriteWin;
     public Sprite spriteFail;
     public Image spriteBackground;
+    public Image awardImage;
+
+    public GameObject buttonGroup;
+    public GameObject resultPanel;
+    public GameObject resultAwardPanel;
+
+
+    public Animator awardAnimator;
     private int nextLevel;
+    public Sprite[] resultAwards;
     public void Init(bool isWin = true)
     {
         if (isWin)
@@ -25,6 +35,7 @@ public class UIResult : MonoBehaviour
             {
                 nextLevel++;
             }
+            ShowAward();
 
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
@@ -42,6 +53,8 @@ public class UIResult : MonoBehaviour
             spriteBackground.sprite = spriteFail;
             int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
             nextLevel = curLevel;
+            buttonGroup.SetActive(true);
+            ShowResult();
 
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
@@ -56,6 +69,7 @@ public class UIResult : MonoBehaviour
         }
         buttonToNextScene.onClick.AddListener(new UnityAction(TurnToNextScene));
         buttonToLobby.onClick.AddListener(new UnityAction(TurnToLobby));
+        buttonContinue.onClick.AddListener(new UnityAction(OnClickContinue));
     }
     void TurnToLobby()
     {
@@ -70,5 +84,21 @@ public class UIResult : MonoBehaviour
         CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", nextLevel.ToString());
         SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;
+    }
+    void ShowAward()
+    {
+        resultAwardPanel.SetActive(true);
+        resultPanel.SetActive(false);
+        awardAnimator.SetTrigger("activeTrigger");
+    }
+    void ShowResult()
+    {
+        resultAwardPanel.SetActive(false);
+        resultPanel.SetActive(true);
+    }
+
+    void OnClickContinue()
+    {
+        ShowResult();
     }
 }

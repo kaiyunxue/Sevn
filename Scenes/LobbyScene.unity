@@ -237,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7494315492750137384, guid: 3e6c86ff90cb4ef4ea84a8b9558ef8f5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e6c86ff90cb4ef4ea84a8b9558ef8f5, type: 3}
 --- !u!1 &232021305

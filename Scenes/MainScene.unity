@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1356,10 +1356,27 @@ MonoBehaviour:
     doUseSkill: 0
     aiLevel: 0
     levelID: 0
+  levelConfig:
+  - aiLevel: 0
+    boardLength: 5
+    isUseCrackPiece: 0
+    backgroundSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 0
+    backgroundSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 1
+    backgroundSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 1
+    backgroundSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
   prefabConfig:
     colors:
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.5086372, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0.99906826, a: 1}
     - {r: 0.30980396, g: 0.99215686, b: 0.35091427, a: 1}
     - {r: 0.9921569, g: 0.9215687, b: 0.30980393, a: 1}
     - {r: 1, g: 1, b: 1, a: 1}
@@ -1375,7 +1392,7 @@ MonoBehaviour:
     - {fileID: -6875015213005617860, guid: 908138235c4f88846b44fd988284dbe6, type: 3}
     UIScoreHeader:
     - {fileID: 21300000, guid: 81b95125534d94806b5696550409070c, type: 3}
-    - {fileID: 21300000, guid: ab6b1982a1aa940e2b4a544bc2ae7f9a, type: 3}
+    - {fileID: 21300000, guid: 3be29ee21f0c1cd45ba61803e39f420d, type: 3}
     - {fileID: 21300000, guid: 22e15ff633bb04f9cb4b6e35c64fac7e, type: 3}
     - {fileID: 21300000, guid: 2014fc1d4bd9e4cc9b2fcd65b9896ddd, type: 3}
     - {fileID: 21300000, guid: 54bb28c86c43b403e88922207339f279, type: 3}
@@ -1383,7 +1400,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 067a049d93fe249f88d95031b3c92659, type: 3}
     UIColors:
     - {r: 0.6509804, g: 0.2627451, b: 0.15686275, a: 1}
-    - {r: 0.69411767, g: 0.3921569, b: 0.21960786, a: 1}
+    - {r: 0.50980395, g: 0.2901961, b: 0.42745098, a: 1}
     - {r: 0.2627451, g: 0.5411765, b: 0.5137255, a: 1}
     - {r: 0.8588236, g: 0.6313726, b: 0.36862746, a: 1}
     - {r: 0.8745099, g: 0.7803922, b: 0.654902, a: 1}
@@ -1400,19 +1417,7 @@ MonoBehaviour:
   UIInstance: {fileID: 0}
   currentController: {fileID: 0}
   timer: {fileID: 1354889522}
-  levelConfig:
-  - aiLevel: 0
-    boardLength: 5
-    isUseCrackPiece: 0
-  - aiLevel: 2
-    boardLength: 7
-    isUseCrackPiece: 0
-  - aiLevel: 2
-    boardLength: 7
-    isUseCrackPiece: 1
-  - aiLevel: 2
-    boardLength: 7
-    isUseCrackPiece: 1
+  backgroundImage: {fileID: 1878102144}
   controllerPrefab: {fileID: 751657909035692997, guid: 818f2df09669dad4281cb8538ecd1423,
     type: 3}
   boardInstancePrefab: {fileID: 5988053371944618373, guid: 0bebbc9175b70fa4c95255d4f6af4ef2,

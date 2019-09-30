@@ -3,72 +3,127 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct LevelSpriteStruct
+{
+    public Sprite unlocked;
+    public Sprite locked;
+}
 public class PVEUI : LobbyUIBase
 {
     [SerializeField]
-    private Button btnPlayLevel0;
-    [SerializeField]
-    private Button btnPlayLevel1;
-    [SerializeField]
-    private Button btnPlayLevel2;
-    [SerializeField]
-    private Button btnPlayLevel3;
+    private GameObject[] btnPlayLevel;
+    public LevelSpriteStruct[] levelSprite;
 
     protected override void Start()
     {
         base.Start();
         string iGameLevel = CacheTool.Get("iGameLevel");
         Debug.Log(iGameLevel);
-        switch (iGameLevel)
+        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
         {
-            case "3":
-                btnPlayLevel1.enabled = true;
-                btnPlayLevel2.enabled = true;
-                btnPlayLevel3.enabled = true;
-                break;
-            case "2":
-                btnPlayLevel1.enabled = true;
-                btnPlayLevel2.enabled = true;
-                btnPlayLevel3.enabled = false;
-                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
-                break;
-            case "1":
-                btnPlayLevel1.enabled = true;
-                btnPlayLevel2.enabled = false;
-                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
-                btnPlayLevel3.enabled = false;
-                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
-                break;
-            case "0":
-                btnPlayLevel1.enabled = false;
-                btnPlayLevel1.GetComponentInChildren<Text>().text = "Level 1（未开启）";
-                btnPlayLevel2.enabled = false;
-                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
-                btnPlayLevel3.enabled = false;
-                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
-                break;
-            default:
-                btnPlayLevel1.enabled = false;
-                btnPlayLevel1.GetComponentInChildren<Text>().text = "Level 1（未开启）";
-                btnPlayLevel2.enabled = false;
-                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
-                btnPlayLevel3.enabled = false;
-                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
-                break;
+            if (i <= int.Parse(iGameLevel))
+            {
+                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+                btnPlayLevel[i].GetComponent<Button>().enabled = true;
+            }
+            else
+            {
+                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+                btnPlayLevel[i].GetComponent<Button>().enabled = false;
+            }
         }
-        btnPlayLevel0.onClick.AddListener(delegate ()
+        //switch (iGameLevel)
+        //{
+        //    case "3":
+        //        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
+        //        {
+        //            if (i <= int.Parse(iGameLevel))
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = false;
+        //            }
+        //        }
+        //        break;
+        //    case "2":
+        //        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
+        //        {
+        //            if (i < 3)
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = false;
+        //            }
+        //        }
+        //        break;
+        //    case "1":
+        //        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
+        //        {
+        //            if (i < 2)
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = false;
+        //            }
+        //        }
+        //        break;
+        //    case "0":
+        //        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
+        //        {
+        //            if (i < 1)
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = false;
+        //            }
+        //        }
+        //        break;
+        //    default:
+        //        for (int i = 0; i < btnPlayLevel.GetLength(0); ++i)
+        //        {
+        //            if (i < 1)
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].unlocked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                btnPlayLevel[i].GetComponent<Image>().sprite = levelSprite[i].locked;
+        //                btnPlayLevel[1].GetComponent<Button>().enabled = false;
+        //            }
+        //        }
+        //        break;
+        ////}
+        btnPlayLevel[0].GetComponent<Button>().onClick.AddListener(delegate ()
         {
             OnClickPlayLevel0();
         });
-        btnPlayLevel1.onClick.AddListener(delegate ()
+        btnPlayLevel[1].GetComponent<Button>().onClick.AddListener(delegate ()
         {
             OnClickPlayLevel1();
         });
-        btnPlayLevel2.onClick.AddListener(delegate ()
+        btnPlayLevel[2].GetComponent<Button>().onClick.AddListener(delegate ()
         {
             OnClickPlayLevel2();
         });
-        btnPlayLevel3.onClick.AddListener(delegate ()
+        btnPlayLevel[3].GetComponent<Button>().onClick.AddListener(delegate ()
         {
             OnClickPlayLevel3();
         });

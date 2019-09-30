@@ -69,6 +69,8 @@ public struct LevelConfig
     public int boardLength;
     [Header("使用碎裂棋子")]
     public bool isUseCrackPiece;
+    [Header("关卡内背景图")]
+    public Sprite backgroundSprite;
 }
 
 [RequireComponent(typeof(BoardManager))]
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Config")]
     public GamePlayMode gamePlayMode;
+    public LevelConfig[] levelConfig;
     public PrefabsConfig prefabConfig;
 
     [Header("References")]
@@ -87,8 +90,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIInstance;
     public GameController currentController;
     public TurnAtuoTimer timer;
-    public LevelConfig[] levelConfig;
-    private bool isReadyToStart;
+    public SpriteRenderer backgroundImage;
 
     [Header("Prefabs")]
     [SerializeField] GameController controllerPrefab;
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
                 gamePlayMode.boardSideLength = levelConfig[levelID].boardLength;
                 gamePlayMode.doUseCrack = levelConfig[levelID].isUseCrackPiece;
                 gamePlayMode.doUseSkill = true;
+                backgroundImage.sprite = levelConfig[levelID].backgroundSprite;
                 break;
 
             case "PVP":
