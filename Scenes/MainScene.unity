@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1351,8 +1351,9 @@ MonoBehaviour:
     boardSideLength: 5
     selectLimitTime: 3
     waitingLimitTime: 30
-    doUseCrack: 1
+    doUseCrack: 0
     doUseTurnTimer: 1
+    doUseSkill: 0
     aiLevel: 0
     levelID: 0
   prefabConfig:
@@ -2229,7 +2230,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7cb05245e1bec2c45b16e4d807a552b4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 07d14a6bdb50f40369efc235e54b19cf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
