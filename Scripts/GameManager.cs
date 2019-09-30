@@ -241,10 +241,10 @@ public class GameManager : MonoBehaviour
         CheckEndGame();
         if(!isGameEnded)
         {
-            ChangePlayer();
-            timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
             UIInstance.sBtn.UpdateSkillButton();
             UIInstance.SetRound(round);
+            ChangePlayer();
+            timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
         }
     }
 

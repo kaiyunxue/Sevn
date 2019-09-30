@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class Login : MonoBehaviour
 {
     // Start is called before the first frame update
     public VideoPlayer vp;
-    public GameObject videoTexture;
+    public GameObject videoPanel;
+    public Button buttonSkip;
     void Awake()
     {
         vp.Stop();
-        videoTexture.SetActive(false);
+        videoPanel.SetActive(false);
+        buttonSkip.onClick.AddListener(delegate ()
+        {
+            TurnToLobby();
+        });
     }
     void Start()
     {
@@ -40,13 +46,17 @@ public class Login : MonoBehaviour
     void OnLoginSuccess()
     {
         vp.loopPointReached += VideoPlayerEnd;
-        videoTexture.SetActive(true);
         vp.Play();
+        videoPanel.SetActive(true);
     }
 
     void VideoPlayerEnd(UnityEngine.Video.VideoPlayer vp)
     {
+        TurnToLobby();
+    }
+
+    void TurnToLobby()
+    {
         SceneManager.LoadScene("LobbyScene");
-        //videoTexture.SetActive(false);
     }
 }
