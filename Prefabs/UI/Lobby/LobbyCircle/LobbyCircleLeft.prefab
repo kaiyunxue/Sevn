@@ -23,7 +23,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2285789224136404929}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.25038, w: 0.9681477}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -31,11 +31,11 @@ RectTransform:
   - {fileID: 4431900365647137318}
   m_Father: {fileID: 1175560994394634817}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 29}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6163244842962077296
 GameObject:
@@ -128,7 +128,7 @@ MonoBehaviour:
   spinAngleMin: 0
   spinAngleMax: 60
   spinSpeed: 0.3
-  bgAngle: 0
+  bgAngle: 29
   fanNum: 3
   fanStatus:
   - {fileID: 6561162311418074149}
@@ -457,6 +457,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonDragLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 154864559109597109, guid: ddaaea738b64e67448b41b5b263304cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,16 +572,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5172400408500889219, guid: ddaaea738b64e67448b41b5b263304cf,
         type: 3}
       propertyPath: m_IsActive
@@ -614,6 +614,27 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 390041bb1034e8140ae33d2794e4de35,
+        type: 3}
+    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 876972164212660176, guid: ddaaea738b64e67448b41b5b263304cf,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1711331762320226678}
     - target: {fileID: 154864559109597109, guid: ddaaea738b64e67448b41b5b263304cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -722,27 +743,6 @@ PrefabInstance:
     - target: {fileID: 3222239479011479506, guid: ddaaea738b64e67448b41b5b263304cf,
         type: 3}
       propertyPath: m_CullTransparentMesh
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 876972164212660176, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 1711331762320226678}
-    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 390041bb1034e8140ae33d2794e4de35,
-        type: 3}
-    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065916156707641444, guid: ddaaea738b64e67448b41b5b263304cf,
-        type: 3}
-      propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5172400408500889219, guid: ddaaea738b64e67448b41b5b263304cf,

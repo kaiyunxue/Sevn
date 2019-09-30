@@ -41,13 +41,13 @@ public class SlideInOutComponent : MonoBehaviour
     public void SlideOutLeft(float speed, bool isDestory)
     {
         Vector3 bgPos = gameObject.transform.position;
-        Vector3 targetPos = new Vector3(viewportSize.x + bgPos.x, bgPos.y, bgPos.z);
+        Vector3 targetPos = new Vector3(viewportSize.x + bgPos.x, objPos.y, objPos.z);
         StartCoroutine(MoveToPosition(targetPos, speed, isDestory));
     }
     public void SlideOutRight(float speed, bool isDestory)
     {
         Vector3 bgPos = gameObject.transform.position;
-        Vector3 targetPos = new Vector3(bgPos.x - viewportSize.x, bgPos.y, bgPos.z);
+        Vector3 targetPos = new Vector3(bgPos.x - viewportSize.x, objPos.y, objPos.z);
         StartCoroutine(MoveToPosition(targetPos, speed, isDestory));
     }
     public void SlideOutUp(float speed, bool isDestory)
@@ -65,14 +65,17 @@ public class SlideInOutComponent : MonoBehaviour
 
     IEnumerator MoveToPosition(Vector3 targetPos, float speed, bool isDestory)
     {
+        Debug.Log("SlideOutRight isDestory: " + isDestory);
         gameObject.SendMessage("OnSlideBegin", SendMessageOptions.DontRequireReceiver);
-        while (gameObject.transform.position != targetPos)
+        float errRange = 0.01f;
+        while (Vector3.Distance(gameObject.transform.position, targetPos) > errRange) 
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, speed * Time.deltaTime);
             yield return 0;
         }
         if (isDestory)
         {
+            Debug.Log("Destory");
             Destroy(gameObject);
         }
         gameObject.SendMessage("OnSlideEnd", SendMessageOptions.DontRequireReceiver);
