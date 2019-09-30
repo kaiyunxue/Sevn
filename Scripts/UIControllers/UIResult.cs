@@ -12,13 +12,22 @@ public class UIResult : MonoBehaviour
     public Sprite spriteWin;
     public Sprite spriteFail;
     public Image spriteBackground;
+    private int nextLevel;
     public void Init(bool isWin = true)
     {
         if (isWin)
         {
+            Debug.Log("Win");
+            spriteBackground.sprite = spriteWin;
+            int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
+            nextLevel = curLevel;
+            if (curLevel < 3)
+            {
+                nextLevel++;
+            }
+
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
-            spriteBackground.sprite = spriteWin;
             if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
             {
                 WWWForm form = new WWWForm();
@@ -30,9 +39,12 @@ public class UIResult : MonoBehaviour
         }
         else
         {
+            spriteBackground.sprite = spriteFail;
+            int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
+            nextLevel = curLevel;
+
             string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
             string uid = CacheService.Get("uid");
-            spriteBackground.sprite = spriteFail;
             if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
             {
 	            WWWForm form = new WWWForm();
@@ -55,12 +67,6 @@ public class UIResult : MonoBehaviour
     }
     void TurnToNextScene()
     {
-        int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
-        int nextLevel = curLevel;
-        if (curLevel < 3)
-        {
-            nextLevel++;
-        }
         CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", nextLevel.ToString());
         SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;

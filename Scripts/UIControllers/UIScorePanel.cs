@@ -12,6 +12,7 @@ public class UIScorePanel : MonoBehaviour
         {
             UIPiecesBar b = GameObject.Instantiate(prefab);
             b.transform.SetParent(transform);
+            b.transform.localScale = new Vector3(1, 1, 1);
             b.Init(length, i, pConfig.UIColors[i], pConfig);
             bars.Add(b);
         }

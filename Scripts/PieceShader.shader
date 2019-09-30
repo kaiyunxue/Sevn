@@ -67,8 +67,9 @@ Shader "Unlit/PieceShader"
 				fixed4 backCol60 = tex2D(_BackTex60, i.texcoord);
 				fixed4 texCol = tex2D(_MainTex, i.texcoord);
 				fixed4 col = texCol;
-				col.rgb = col.rgb * (_Rate * backCol.rgb + (1-_Rate) * backCol60);
+				col.rgb = col.rgb * (_Rate * backCol.rgb + (1 - _Rate) * backCol60);
 				col = col * _Color;
+				col.a = 0.0;
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
