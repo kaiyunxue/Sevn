@@ -21,7 +21,8 @@ public enum GameMode
     OneClientTwoPlayers,
     VSAI,
     VSPlayer,
-    Story
+    Story,
+    Teaching
 }
 public enum GameTurnStatus
 {
@@ -162,6 +163,14 @@ public class GameManager : MonoBehaviour
                 controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels);
                 break;
             case GameMode.VSAI:
+                controller = Instantiate(controllerPrefab);
+                controller.name = "Player 1";
+                controller2 = Instantiate(controllerPrefab);
+                controller2.name = "AI";
+                controller.Init(gamePlayMode.boardSideLength, UIInstance.panels);
+                controller2.Init(gamePlayMode.boardSideLength, UIInstance.panels);
+                break;
+            case GameMode.Teaching:
                 controller = Instantiate(controllerPrefab);
                 controller.name = "Player 1";
                 controller2 = Instantiate(controllerPrefab);
