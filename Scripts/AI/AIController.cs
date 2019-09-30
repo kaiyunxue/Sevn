@@ -533,14 +533,26 @@ public class AIController : MonoBehaviour
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
         int playerValue = 0;
         int aiValue = 0;
-        foreach (var v in curDepthData.playerRecord.secord)
+        for (int i = 0; i < curDepthData.playerRecord.secord.GetLength(0); ++i)
         {
+            var v = curDepthData.playerRecord.secord[i];
             if (v > gpm.boardSideLength / 2)
             {
                 //++playerControledNum;
                 playerValue += 1000;
+                if (curDepthData.aiRecord.secord[i]>0)
+                {
+                    playerValue += (10 + 4 * 10) * 4 / 2;
+                }
+                else
+                {
+                    playerValue += (10 + v * 10) * v / 2;
+                }
             }
-            playerValue += (10 + v * 10) * v / 2;
+            else
+            {
+                playerValue += (10 + v * 10) * v / 2;
+            }
         }
 
         foreach (var v in curDepthData.aiRecord.secord)

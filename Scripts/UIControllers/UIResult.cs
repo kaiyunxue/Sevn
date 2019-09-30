@@ -50,6 +50,7 @@ public class UIResult : MonoBehaviour
         }
         else
         {
+            Debug.Log("Fail");
             spriteBackground.sprite = spriteFail;
             int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
             nextLevel = curLevel;
@@ -93,8 +94,10 @@ public class UIResult : MonoBehaviour
     }
     void ShowResult()
     {
+        Debug.Log("ShowResult");
         resultAwardPanel.SetActive(false);
         resultPanel.SetActive(true);
+        awardAnimator.SetTrigger("resultFadeIn");
     }
 
     void OnClickContinue()
