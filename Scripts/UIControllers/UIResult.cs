@@ -89,7 +89,7 @@ public class UIResult : MonoBehaviour
     {
         resultAwardPanel.SetActive(true);
         resultPanel.SetActive(false);
-        awardAnimator.SetTrigger("activeTrigger");
+        awardAnimator.SetTrigger("fadeIn");
     }
     void ShowResult()
     {
@@ -99,6 +99,6 @@ public class UIResult : MonoBehaviour
 
     void OnClickContinue()
     {
-        ShowResult();
+        awardAnimator.SetTrigger("fadeOut");
     }
 }

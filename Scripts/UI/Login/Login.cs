@@ -16,14 +16,15 @@ public class Login : MonoBehaviour
     {
         vp.Stop();
         videoPanel.SetActive(false);
-        buttonSkip.onClick.AddListener(delegate ()
-        {
-            TurnToLobby();
-        });
+
     }
     void Start()
     {
         EventComponent.RegistEvent(EVENTTYPE.Login, EVENTID.LoginSuccess, new UnityAction(OnLoginSuccess));
+        buttonSkip.onClick.AddListener(delegate ()
+        {
+            TurnToLobby();
+        });
     }
 
     // Update is called once per frame
