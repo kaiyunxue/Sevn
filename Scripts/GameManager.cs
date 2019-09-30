@@ -228,7 +228,9 @@ public class GameManager : MonoBehaviour
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
         StartCoroutine(OnWaitBoardEndTurn());
+
         UIInstance.sBtn.UpdateSkillButton();
+        UIInstance.SetRound(round);
     }
 
     private IEnumerator OnWaitBoardEndTurn()

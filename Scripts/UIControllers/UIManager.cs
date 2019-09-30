@@ -8,12 +8,41 @@ public class UIManager : MonoBehaviour
     public UIScorePanel panels;
     public SkillButton sBtn;
     public UIResult resultUI;
+    public Text roundText;
+    public void SetRound(int round)
+    {
+        GamePlayMode gpm = GameManager.Instance.gamePlayMode;
+        switch (gpm.gameMode)
+        {
+            case GameMode.VSAI:
+                if (round % 2 == 0)
+                {
+                    roundText.text = "你的回合";
+                }
+                else
+                {
+                    roundText.text = "对手回合";
+                }
+                break;
+            case GameMode.OneClientTwoPlayers:
+                if (round % 2 == 0)
+                {
+                    roundText.text = "玩家1的回合";
+                }
+                else
+                {
+                    roundText.text = "玩家2的回合";
+                }
+                break;
+        }
+    }
     public void Init(int length, PrefabsConfig pConfig)
     {
         resultUI.gameObject.SetActive(false);
         panels.Init(length, pConfig);
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
-        if(!gpm.doUseSkill)
+        SetRound(0);
+        if (!gpm.doUseSkill)
         {
             sBtn.gameObject.SetActive(false);
         }
