@@ -12,6 +12,11 @@ public class UIManager : MonoBehaviour
     {
         resultUI.gameObject.SetActive(false);
         panels.Init(length, pConfig);
+        GamePlayMode gpm = GameManager.Instance.gamePlayMode;
+        if(!gpm.doUseSkill)
+        {
+            sBtn.gameObject.SetActive(false);
+        }
     }
     public void ActionsOnGameEnd()
     {

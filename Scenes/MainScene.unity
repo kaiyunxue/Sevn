@@ -1348,11 +1348,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePlayMode:
     gameMode: 0
-    boardSideLength: 7
+    boardSideLength: 5
     selectLimitTime: 3
     waitingLimitTime: 30
     doUseCrack: 1
     doUseTurnTimer: 1
+    aiLevel: 0
+    levelID: 0
   prefabConfig:
     colors:
     - {r: 1, g: 0, b: 0, a: 1}
@@ -1411,6 +1413,19 @@ MonoBehaviour:
   UIInstance: {fileID: 0}
   currentController: {fileID: 0}
   timer: {fileID: 1354889522}
+  levelConfig:
+  - aiLevel: 0
+    boardLength: 5
+    isUseCrackPiece: 0
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 0
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 1
+  - aiLevel: 2
+    boardLength: 7
+    isUseCrackPiece: 1
   controllerPrefab: {fileID: 751657909035692997, guid: 818f2df09669dad4281cb8538ecd1423,
     type: 3}
   boardInstancePrefab: {fileID: 5988053371944618373, guid: 0bebbc9175b70fa4c95255d4f6af4ef2,

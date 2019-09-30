@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PVEUI : LobbyUIBase
 {
     [SerializeField]
+    private Button btnPlayLevel0;
+    [SerializeField]
     private Button btnPlayLevel1;
     [SerializeField]
     private Button btnPlayLevel2;
@@ -37,14 +39,27 @@ public class PVEUI : LobbyUIBase
                 btnPlayLevel3.enabled = false;
                 btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
                 break;
+            case "0":
+                btnPlayLevel1.enabled = false;
+                btnPlayLevel1.GetComponentInChildren<Text>().text = "Level 1（未开启）";
+                btnPlayLevel2.enabled = false;
+                btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
+                btnPlayLevel3.enabled = false;
+                btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
+                break;
             default:
-                btnPlayLevel1.enabled = true;
+                btnPlayLevel1.enabled = false;
+                btnPlayLevel1.GetComponentInChildren<Text>().text = "Level 1（未开启）";
                 btnPlayLevel2.enabled = false;
                 btnPlayLevel2.GetComponentInChildren<Text>().text = "Level 2（未开启）";
                 btnPlayLevel3.enabled = false;
                 btnPlayLevel3.GetComponentInChildren<Text>().text = "Level 3（未开启）";
                 break;
         }
+        btnPlayLevel0.onClick.AddListener(delegate ()
+        {
+            OnClickPlayLevel0();
+        });
         btnPlayLevel1.onClick.AddListener(delegate ()
         {
             OnClickPlayLevel1();
@@ -59,20 +74,30 @@ public class PVEUI : LobbyUIBase
         });
 
     }
+    private void OnClickPlayLevel0()
+    {
+        CacheService.Set("playMode", "PVE");
+        CacheService.Set("iCurrentLevelID", "0");
+        lobby.PlayGame();
+    }
+
     private void OnClickPlayLevel1()
     {
+        CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", "1");
         lobby.PlayGame();
     }
 
     private void OnClickPlayLevel2()
     {
+        CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", "2");
         lobby.PlayGame();
     }
 
     private void OnClickPlayLevel3()
     {
+        CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", "3");
         lobby.PlayGame();
     }

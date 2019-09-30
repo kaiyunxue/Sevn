@@ -39,6 +39,10 @@ public struct GamePlayMode
     [Header("游戏细节玩法开关")]
     public bool doUseCrack;
     public bool doUseTurnTimer;
+    public bool doUseSkill;
+
+    public AILevel aiLevel;
+    public int levelID;
 }
 [System.Serializable]
 public struct PrefabsConfig
@@ -57,6 +61,17 @@ public struct PrefabsConfig
     public Sprite UIScoreGrey;
 
 }
+[System.Serializable]
+public struct LevelConfig
+{
+    [Header("AI难度")]
+    public AILevel aiLevel;
+    [Header("棋盘宽度")]
+    public int boardLength;
+    [Header("使用碎裂棋子")]
+    public bool isUseCrackPiece;
+}
+
 [RequireComponent(typeof(BoardManager))]
 public class GameManager : MonoBehaviour
 {
@@ -73,6 +88,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIInstance;
     public GameController currentController;
     public TurnAtuoTimer timer;
+    public LevelConfig[] levelConfig;
     private bool isReadyToStart;
 
     [Header("Prefabs")]
@@ -92,10 +108,40 @@ public class GameManager : MonoBehaviour
         timer = gameObject.AddComponent<TurnAtuoTimer>();
     }
 
+    void InitPlayMode()
+    {
+        string playMode = CacheService.Get("playMode");
+        switch(playMode)
+        {
+            case "PVE":
+                gamePlayMode.gameMode = GameMode.VSAI;
+
+                int levelID = int.Parse(CacheService.Get("iCurrentLevelID"));
+                gamePlayMode.levelID = levelID;
+                gamePlayMode.aiLevel = levelConfig[levelID].aiLevel;
+                gamePlayMode.boardSideLength = levelConfig[levelID].boardLength;
+                gamePlayMode.doUseCrack = levelConfig[levelID].isUseCrackPiece;
+                gamePlayMode.doUseSkill = true;
+                break;
+
+            case "PVP":
+                gamePlayMode.gameMode = GameMode.OneClientTwoPlayers;
+                gamePlayMode.boardSideLength = 7;
+                gamePlayMode.doUseSkill = false;
+                break;
+
+            default:
+                break;
+        }
+
+
+    }
+
 
     IEnumerator InitCoroutine()
     {
-        gamePlayMode.gameMode = GameMode.VSAI;
+        InitPlayMode();
+        //gamePlayMode.gameMode = GameMode.VSAI;
         UIInstance = Instantiate(uiPrefab);
         UIInstance.Init(gamePlayMode.boardSideLength, prefabConfig);
         boardInstance = Instantiate(boardInstancePrefab);

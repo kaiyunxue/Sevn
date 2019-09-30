@@ -107,6 +107,21 @@ public class BoardManager : MonoBehaviour
             }
     }
 
+    public void InitNewbieColorPool()
+    {
+        int[] colorIdxPool = new int[]{
+            0,1,2,3,1,
+            3,4,0,2,0,
+            1,2,4,1,4,
+            2,0,3,4,3,
+            4,1,0,3,2
+        };
+        foreach(var colorIdx in colorIdxPool)
+        {
+            colorPool.Add((PieceColor)colorIdx);
+        }
+    }
+
     public void SelectRandomPiece()
     {
         int luckyIdx = Random.Range(0, nextPieces.Count);
@@ -167,6 +182,31 @@ public class BoardManager : MonoBehaviour
         return true;
     }
 
+    private void InitNewbie()
+    {
+        InitNewbieColorPool();
+        pieces = new Piece[boardLength, boardLength];
+        for (int i = 0; i < boardLength; i++)
+        {
+            for (int j = 0; j < boardLength; j++)
+            {
+                bool up = !(i == 0);
+                bool down = !(i == boardLength - 1);
+                bool left = !(j == 0);
+                bool right = !(j == boardLength - 1);
+                pieces[i, j] = new Piece(colorPool[i * boardLength + j], left, right, up, down, i, j);
+            }
+        }
+
+        nextPieces.Add(pieces[0, 0]);
+        nextPieces.Add(pieces[0, boardLength - 1]);
+        nextPieces.Add(pieces[boardLength - 1, 0]);
+        nextPieces.Add(pieces[boardLength - 1, boardLength - 1]);
+
+        boardInstance = GameManager.Instance.boardInstance;
+        isReady = true;
+    }
+
     private IEnumerator InitCoroutine()
     {
         int timesToYield = 10000;
@@ -212,13 +252,20 @@ public class BoardManager : MonoBehaviour
 
     public void Init(GamePlayMode arg_gpm)
     {
-        isReady = false;
         gpm = arg_gpm;
         selectedColor = PieceColor.NULL;
         boardLength = gpm.boardSideLength;
         nextPieces = new List<Piece>();
 
-        StartCoroutine(InitCoroutine());
+        if (gpm.levelID == 0)
+        {
+            InitNewbie();
+        }
+        else
+        {
+            isReady = false;
+            StartCoroutine(InitCoroutine());
+        }
     }
     void Start()
     {
