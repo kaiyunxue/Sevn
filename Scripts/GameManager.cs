@@ -53,13 +53,11 @@ public struct PrefabsConfig
     public PieceInstance[] pieceInstancePrefabs;
     [Header("计分板表头")]
     public Sprite[] UIScoreHeader;
+    public Color[] UIColors;
     [Header("计分板-我的得分")]
-    public Color[] UIcolors;
-    public Sprite[] UIScoreTextures_0;
-    public Sprite[] UIScoreTextures_1;
+    public Sprite UIScoreTextures_0;
     [Header("计分板-对方得分")]
-    public Sprite UIScoreBlack;
-    public Sprite UIScoreGrey;
+    public Sprite UIScoreTextures_1;
 
 }
 [System.Serializable]
@@ -228,9 +226,6 @@ public class GameManager : MonoBehaviour
         //Debug.Log("On Click EndTurn");
         boardManager.EndTurn();
         StartCoroutine(OnWaitBoardEndTurn());
-
-        UIInstance.sBtn.UpdateSkillButton();
-        UIInstance.SetRound(round);
     }
 
     private IEnumerator OnWaitBoardEndTurn()
@@ -239,11 +234,14 @@ public class GameManager : MonoBehaviour
         {
             yield return 0;
         }
+
         CheckEndGame();
         if(!isGameEnded)
         {
             ChangePlayer();
             timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
+            UIInstance.sBtn.UpdateSkillButton();
+            UIInstance.SetRound(round);
         }
     }
 

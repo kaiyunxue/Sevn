@@ -12,48 +12,23 @@ public class UIScorePanel : MonoBehaviour
         {
             UIPiecesBar b = GameObject.Instantiate(prefab);
             b.transform.SetParent(transform);
-            b.Init(length,i, pConfig.UIcolors[i],pConfig);
+            b.Init(length, i, pConfig.UIColors[i], pConfig);
             bars.Add(b);
         }
     }
     public void SetScore(int color, int score, bool isPlayer1)
     {
         int n = bars[color].pieces.Count;
-        if(isPlayer1)
+        if (isPlayer1)
         {
-            if(score < 4)
-            {
-                for(int i = 0; i < score; i++)
-                {
-                    bars[color].pieces[i].SetScore(ScorePieceState.Less);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < score; i++)
-                {
-                    bars[color].pieces[i].SetScore(ScorePieceState.More);
-                }
-            }
+            bars[color].pieces[score - 1].SetScore(ScorePieceState.Player1);
         }
         else
         {
-            if (score < 4)
-            {
-                for (int i = 0; i < score; i++)
-                {
-                    bars[color].pieces[n - i - 1].SetScore(ScorePieceState.Grey);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < score; i++)
-                {
-                    bars[color].pieces[n - i - 1].SetScore(ScorePieceState.Black);
-                }
-            }
+            bars[color].pieces[n - score].SetScore(ScorePieceState.Player2);
         }
     }
+
     public void Disappear()
     {
         foreach(var v in bars)

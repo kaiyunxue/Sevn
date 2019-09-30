@@ -5,31 +5,30 @@ using UnityEngine.UI;
 
 public enum ScorePieceState
 {
-    Less,
-    More,
-    Grey,
-    Black
+    Player1,
+    Player2,
 }
 public class UIPiece : MonoBehaviour
 {
     Color myColor;
-    [SerializeField] Sprite texture0;
-    [SerializeField] Sprite texture1;
-    [SerializeField] Sprite textureB;
-    [SerializeField] Sprite textureG;
+    [SerializeField] GameObject border;
+    [SerializeField] GameObject image;
+    [SerializeField] GameObject imageFailed;
     public void SetHeader(Sprite header)
     {
         GetComponent<Image>().sprite = header;
     }
-    public void Init(Color c, Sprite texture0, Sprite texture1, Sprite textureB, Sprite textureG)
+    public void Init(Color c, int length, int idx)
     {
-        c.a = 0.3f;
-        myColor = c;
-        GetComponent<Image>().color = c;
-        this.texture0 = texture0;
-        this.texture1 = texture1;
-        this.textureB = textureB;
-        this.textureG = textureG;
+        if (idx == length / 2 + 1)
+        {
+            border.SetActive(true);
+        }
+        if (idx > 0)
+        {
+            image.SetActive(false);
+        }
+        image.GetComponent<Image>().color = c;
     }
     public void InitEffect()
     {
@@ -39,21 +38,16 @@ public class UIPiece : MonoBehaviour
     {
         switch(status)
         {
-            case ScorePieceState.Black:
-                GetComponent<Image>().sprite = textureB;
+            case ScorePieceState.Player1:
+                imageFailed.SetActive(false);
                 break;
-            case ScorePieceState.Grey:
-                GetComponent<Image>().sprite = textureG;
-                break;
-            case ScorePieceState.Less:
-                GetComponent<Image>().sprite = texture0;
-                break;
-            case ScorePieceState.More:
-                GetComponent<Image>().sprite = texture1;
+            case ScorePieceState.Player2:
+                imageFailed.SetActive(true);
                 break;
             default:
                 break;
         }
+        image.SetActive(true);
     }
     public void Disappear()
     {
