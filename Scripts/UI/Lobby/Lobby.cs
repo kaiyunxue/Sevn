@@ -4,11 +4,13 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Lobby : MonoBehaviour
 {
     public GameObject backgroundInst;
     public float slideSpeed;
+
     [Serializable]
     private struct UIConfig
     {
@@ -40,6 +42,7 @@ public class Lobby : MonoBehaviour
         curUIInst = Instantiate(prefab);
         curUIInst.transform.SetParent(gameObject.transform);
         curUIInst.GetComponent<LobbyUIBase>().SetLobbyInst(this);
+
     }
 
     public void OnClickLeft(int idx)

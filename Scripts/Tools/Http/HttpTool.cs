@@ -51,7 +51,7 @@ public class HttpTool : MonoBehaviour
                     CacheTool.Set("uid", user.uid);
                     CacheTool.Set("iGameLevel", user.iGameLevel.ToString());
                     Debug.Log("now insert userinfo, uid:" + user.uid + "iGameLevel:" + user.iGameLevel);
-                    SceneManager.LoadScene("LobbyScene");
+                    EventComponent.PostEvent(EVENTTYPE.Login, EVENTID.LoginSuccess);
                     break;
                 default:
                     break;
