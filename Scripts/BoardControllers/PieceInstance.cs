@@ -84,6 +84,7 @@ public class PieceInstance : MonoBehaviour
     public void GoDown()
     {
         owner = GameManager.Instance.currentController;
+        Debug.Log("GoDown()");
         AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(0, 0, 0));
         //if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         //{
