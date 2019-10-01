@@ -47,6 +47,7 @@ public class UIResult : MonoBehaviour
 	            form.AddField("bWin", 1);
                 StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
             }
+            CacheService.Set("iCurrentLevelID", (int.Parse(iCurrentLevelID) + 1).ToString());
         }
         else
         {
