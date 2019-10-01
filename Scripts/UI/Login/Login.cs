@@ -8,23 +8,11 @@ using UnityEngine.Video;
 
 public class Login : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public VideoPlayer vp;
-    public GameObject videoPanel;
-    public Button buttonSkip;
-    void Awake()
-    {
-        vp.Stop();
-        videoPanel.SetActive(false);
-
-    }
+    public VideoClip videoClip;
+    public VideoComponent videoComponent;
     void Start()
     {
         EventComponent.RegistEvent(EVENTTYPE.Login, EVENTID.LoginSuccess, new UnityAction(OnLoginSuccess));
-        buttonSkip.onClick.AddListener(delegate ()
-        {
-            TurnToLobby();
-        });
     }
 
     // Update is called once per frame
@@ -46,12 +34,11 @@ public class Login : MonoBehaviour
 
     void OnLoginSuccess()
     {
-        vp.loopPointReached += VideoPlayerEnd;
-        vp.Play();
-        videoPanel.SetActive(true);
+        videoComponent.gameObject.SetActive(true);
+        videoComponent.PlayVideo(videoClip, new UnityAction(OnVideoPlayerEnd));
     }
 
-    void VideoPlayerEnd(UnityEngine.Video.VideoPlayer vp)
+    void OnVideoPlayerEnd()
     {
         TurnToLobby();
     }
