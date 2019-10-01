@@ -132,6 +132,8 @@ MonoBehaviour:
   color: 0
   owner: {fileID: 0}
   animator: {fileID: 3631600118729213790}
+  audioPlayerClick: {fileID: 8300000, guid: 846c72e545ccc46a3a1c94c025529268, type: 3}
+  audioAIClick: {fileID: 8300000, guid: 9834eb71a00874fa08a539f39b8d8932, type: 3}
   crackMaterial: {fileID: 2100000, guid: dd4e43fc86a7ebd4188619b4d64fb07e, type: 2}
   audioSource: {fileID: -5327376780966153086}
 --- !u!65 &4988765014754069254

@@ -11,6 +11,8 @@ public class PieceInstance : MonoBehaviour
 
     [SerializeField] GameController owner;
     [SerializeField] Animator animator;
+    [SerializeField] AudioClip audioPlayerClick;
+    [SerializeField] AudioClip audioAIClick;
 
     public Material crackMaterial;
     Material material;
@@ -85,6 +87,15 @@ public class PieceInstance : MonoBehaviour
     {
         owner = GameManager.Instance.currentController;
         Debug.Log("GoDown()");
+        if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI && GameManager.Instance.GetCurRound() % 2 != 0)
+        {
+            //仅在AI对战且在AI回合播放AI消除音效
+            audioSource.clip = audioAIClick;
+        }
+        else
+        {
+            audioSource.clip = audioPlayerClick;
+        }
         AudioSource.PlayClipAtPoint(audioSource.clip, new Vector3(0, 0, 0));
         //if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         //{

@@ -83,10 +83,10 @@ MonoBehaviour:
     lockedSprite: {fileID: 21300000, guid: ab6575ef735065649aa863de0c49f759, type: 3}
     videoClip: {fileID: 0}
   - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
-    lockedSprite: {fileID: 21300000, guid: ab6575ef735065649aa863de0c49f759, type: 3}
+    lockedSprite: {fileID: 21300000, guid: bc8913b117248ea48814876eb6b8a52f, type: 3}
     videoClip: {fileID: 0}
   - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
-    lockedSprite: {fileID: 21300000, guid: ab6575ef735065649aa863de0c49f759, type: 3}
+    lockedSprite: {fileID: 21300000, guid: bc8913b117248ea48814876eb6b8a52f, type: 3}
     videoClip: {fileID: 0}
   videoComponent: {fileID: 7329290570319357210}
 --- !u!223 &2737826613507600023
@@ -1180,6 +1180,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 563382138906061713}
     m_Modifications:
+    - target: {fileID: 8780252793038782954, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: spinAngleMax
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1294,11 +1299,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8780252793038782954, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: spinAngleMax
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 699318284150726962, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
