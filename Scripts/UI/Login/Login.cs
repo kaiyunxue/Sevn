@@ -34,6 +34,7 @@ public class Login : MonoBehaviour
 
     void OnLoginSuccess()
     {
+        if (videoComponent.gameObject.activeSelf) return;
         videoComponent.gameObject.SetActive(true);
         videoComponent.PlayVideo(videoClip, new UnityAction(OnVideoPlayerEnd));
     }
