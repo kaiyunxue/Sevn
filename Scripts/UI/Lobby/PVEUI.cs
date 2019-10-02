@@ -58,6 +58,7 @@ public class PVEUI : LobbyUIBase
             CacheService.Set("iCurrentLevelID", level.ToString());
             lobby.PlayGame();
         });
+
         if (levelConfig[level].videoClip != null)
         {
             videoComponent.gameObject.SetActive(true);
@@ -65,6 +66,7 @@ public class PVEUI : LobbyUIBase
             GameObject mainCamera = GameObject.Find("Main Camera");
             AudioSource audioSource = mainCamera.GetComponent<AudioSource>();
             audioSource.Pause();
+            lobby.PreloadGame();
         }
         else
         {

@@ -10,6 +10,7 @@ public class Login : MonoBehaviour
 {
     public VideoClip videoClip;
     public VideoComponent videoComponent;
+    AsyncOperation loadSceneAsync;
     void Start()
     {
         EventComponent.RegistEvent(EVENTTYPE.Login, EVENTID.LoginSuccess, new UnityAction(OnLoginSuccess));
@@ -37,6 +38,8 @@ public class Login : MonoBehaviour
         if (videoComponent.gameObject.activeSelf) return;
         videoComponent.gameObject.SetActive(true);
         videoComponent.PlayVideo(videoClip, new UnityAction(OnVideoPlayerEnd));
+        loadSceneAsync = SceneManager.LoadSceneAsync("LobbyScene");
+        loadSceneAsync.allowSceneActivation = false;
     }
 
     void OnVideoPlayerEnd()
@@ -46,6 +49,6 @@ public class Login : MonoBehaviour
 
     void TurnToLobby()
     {
-        SceneManager.LoadScene("LobbyScene");
+        loadSceneAsync.allowSceneActivation = true;
     }
 }

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 7656784875970102733}
   skipButton: {fileID: 7656784875674326466}
-  doubleClickIntervalTime: 0.2
+  doubleClickIntervalTime: 0.7
 --- !u!1 &7656784874845897969
 GameObject:
   m_ObjectHideFlags: 0
