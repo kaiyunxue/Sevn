@@ -146,6 +146,8 @@ public class PieceInstance : MonoBehaviour
             return;
         if (!board.boardManager.pieces[x, y].isValid)
             return;
+        if(!GameManager.Instance.IsTurnStart())
+            return;
         if (IsPieceUp && board.boardManager.TrySelectFirstColor(color))
         {
             DropPiece();

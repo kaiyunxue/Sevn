@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiPrefab;
     public AIController aiController;
     int round;
+    bool isTurnStart;
 
     public UnityEvent UIAndBoardLogic_WhenGameEnd;
     public bool isWin;
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
     {
         controller2 = null;
         Instance = this;
+        isTurnStart = false;
         timer = gameObject.AddComponent<TurnAtuoTimer>();
     }
 
@@ -218,12 +220,14 @@ public class GameManager : MonoBehaviour
         timer.WhenSelectingTimeOver.AddListener(WhenSelectingTimeOver);
         timer.WhenWaitingTimeOver.AddListener(WhenWaitingTimeOver);
         UIInstance.sBtn.UpdateSkillButton();
+        isTurnStart = true;
     }
     /* 
      * 结束回合
      */
     public void EndTurn()
     {
+        isTurnStart = false;
         ++round;
         timer.GameTurnStatus = GameTurnStatus.Sleeping;
         //Debug.Log("On Click EndTurn");
@@ -245,7 +249,13 @@ public class GameManager : MonoBehaviour
             UIInstance.SetRound(round);
             ChangePlayer();
             timer.GameTurnStatus = GameTurnStatus.WaitingForDrop;
+            isTurnStart = true;
         }
+    }
+
+    public bool IsTurnStart()
+    {
+        return isTurnStart;
     }
 
     public void EndGame()

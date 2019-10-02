@@ -96,9 +96,10 @@ public class AIController : MonoBehaviour
                 if (timer.waitingTime > intervalSecond * result.Count)
                 {
                     float maxRandSec = timer.waitingTime - intervalSecond * result.Count;
+                    float minRandSec = 1f;
                     maxRandSec = maxRandSec > 5 ? 5 : maxRandSec;
-                    float randSec = UnityEngine.Random.Range(0f, maxRandSec);
-                    Debug.Log("randSec: " + randSec);
+                    minRandSec = maxRandSec > minRandSec ? minRandSec : maxRandSec;
+                    float randSec = UnityEngine.Random.Range(minRandSec, maxRandSec);
                     yield return new WaitForSeconds(randSec);
                 }
             }
@@ -536,7 +537,11 @@ public class AIController : MonoBehaviour
         for (int i = 0; i < curDepthData.playerRecord.secord.GetLength(0); ++i)
         {
             var v = curDepthData.playerRecord.secord[i];
-            if (v > gpm.boardSideLength / 2)
+            if (curDepthData.aiRecord.secord[i] > gpm.boardSideLength / 2)
+            {
+                playerValue = v > 0 ? 10 : 0;
+            }
+            else if (v > gpm.boardSideLength / 2)
             {
                 playerValue += 1000;
                 if (curDepthData.aiRecord.secord[i] > 0)
@@ -557,7 +562,11 @@ public class AIController : MonoBehaviour
         for (int i = 0; i < curDepthData.aiRecord.secord.GetLength(0); ++i)
         {
             var v = curDepthData.aiRecord.secord[i];
-            if (v > gpm.boardSideLength / 2)
+            if (curDepthData.playerRecord.secord[i] > gpm.boardSideLength / 2)
+            {
+                aiValue = v > 0 ? 10 : 0;
+            }
+            else if (v > gpm.boardSideLength / 2)
             {
                 aiValue += 1000;
                 if (curDepthData.playerRecord.secord[i] > 0)
