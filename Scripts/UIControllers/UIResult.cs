@@ -11,6 +11,12 @@ public struct ResultSprite
     public Sprite player1Win;
     public Sprite player2Win;
 }
+[System.Serializable]
+public struct ResultAwardSprite
+{
+    public Sprite lockSprite;
+    public Sprite unlockSprite;
+}
 public class UIResult : MonoBehaviour
 {
     public Button buttonToNextScene;
@@ -20,6 +26,8 @@ public class UIResult : MonoBehaviour
     public ResultSprite PVPSprite;
     public Image spriteBackground;
     public Image awardImage;
+    public Image imageLock;
+    public Image imageUnlock;
 
     public GameObject buttonGroup;
     public GameObject resultPanel;
@@ -28,7 +36,7 @@ public class UIResult : MonoBehaviour
 
     public Animator awardAnimator;
     private int nextLevel;
-    public Sprite[] resultAwards;
+    public ResultAwardSprite[] resultAwards;
     public void Init(bool isWin = true)
     {
         if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
@@ -36,13 +44,16 @@ public class UIResult : MonoBehaviour
             if (isWin)
             {
                 Debug.Log("Win");
-                spriteBackground.sprite = PVESprite.player1Win;
                 int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
                 nextLevel = curLevel;
                 if (curLevel < 3)
                 {
                     nextLevel++;
                 }
+
+                spriteBackground.sprite = PVESprite.player1Win;
+                imageLock.sprite = resultAwards[curLevel].lockSprite;
+                imageUnlock.sprite = resultAwards[curLevel].unlockSprite;
                 ShowAward();
 
                 string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
