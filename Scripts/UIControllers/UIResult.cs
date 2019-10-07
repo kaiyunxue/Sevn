@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+[System.Serializable]
+public struct ResultSprite
+{
+    public Sprite player1Win;
+    public Sprite player2Win;
+}
 public class UIResult : MonoBehaviour
 {
     public Button buttonToNextScene;
@@ -12,6 +18,8 @@ public class UIResult : MonoBehaviour
     public Button buttonContinue;
     public Sprite spriteWin;
     public Sprite spriteFail;
+    public ResultSprite PVESprite;
+    public ResultSprite PVPSprite;
     public Image spriteBackground;
     public Image awardImage;
 
@@ -25,70 +33,89 @@ public class UIResult : MonoBehaviour
     public Sprite[] resultAwards;
     public void Init(bool isWin = true)
     {
-        if (isWin)
+        if (GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
         {
-            Debug.Log("Win");
-            spriteBackground.sprite = spriteWin;
-            int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
-            nextLevel = curLevel;
-            if (curLevel < 3)
+            if (isWin)
             {
-                nextLevel++;
-            }
-            ShowAward();
+                Debug.Log("Win");
+                spriteBackground.sprite = PVESprite.player1Win;
+                int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
+                nextLevel = curLevel;
+                if (curLevel < 3)
+                {
+                    nextLevel++;
+                }
+                ShowAward();
 
-            string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
-            string uid = CacheService.Get("uid");
-            if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
-            {
-                WWWForm form = new WWWForm();
-	            form.AddField("uid", uid);
-	            form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
-	            form.AddField("bWin", 1);
-                StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
+                string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
+                string uid = CacheService.Get("uid");
+                if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
+                {
+                    WWWForm form = new WWWForm();
+                    form.AddField("uid", uid);
+                    form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
+                    form.AddField("bWin", 1);
+                    StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
+                }
+                string iGameLevel = CacheService.Get("iGameLevel");
+                if (iGameLevel == iCurrentLevelID)
+                {
+                    CacheService.Set("iGameLevel", (int.Parse(iCurrentLevelID) + 1).ToString());
+                }
             }
-            string iGameLevel = CacheService.Get("iGameLevel");
-            if (iGameLevel == iCurrentLevelID)
+            else
             {
-                CacheService.Set("iGameLevel", (int.Parse(iCurrentLevelID) + 1).ToString());
+                Debug.Log("Fail");
+                spriteBackground.sprite = PVESprite.player2Win;
+                int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
+                nextLevel = curLevel;
+                buttonGroup.SetActive(true);
+                ShowResult();
+
+                string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
+                string uid = CacheService.Get("uid");
+                if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
+                {
+                    WWWForm form = new WWWForm();
+                    form.AddField("uid", uid);
+                    form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
+                    form.AddField("bWin", 0);
+                    StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
+                }
             }
+            buttonToNextScene.onClick.AddListener(new UnityAction(TurnToNextScene));
+            buttonToLobby.onClick.AddListener(new UnityAction(TurnToLobby));
+            buttonContinue.onClick.AddListener(new UnityAction(OnClickContinue));
         }
-        else
+        else if(GameManager.Instance.gamePlayMode.gameMode == GameMode.OneClientTwoPlayers)
         {
-            Debug.Log("Fail");
-            spriteBackground.sprite = spriteFail;
-            int curLevel = int.Parse(CacheService.Get("iCurrentLevelID"));
-            nextLevel = curLevel;
+            if (isWin)
+            {
+                spriteBackground.sprite = PVPSprite.player1Win;
+            }
+            else
+            {
+                spriteBackground.sprite = PVPSprite.player2Win;
+            }
             buttonGroup.SetActive(true);
             ShowResult();
 
-            string iCurrentLevelID = CacheService.Get("iCurrentLevelID");
-            string uid = CacheService.Get("uid");
-            if (uid != null && iCurrentLevelID != null && GameManager.Instance.gamePlayMode.gameMode == GameMode.VSAI)
-            {
-	            WWWForm form = new WWWForm();
-	            form.AddField("uid", uid);
-	            form.AddField("iCurrentLevelID", int.Parse(iCurrentLevelID));
-	            form.AddField("bWin", 0);
-	            StartCoroutine(NetService.SendMessage(Message.MSG_ID.MSG_ID_RESULT, form));
-            }
+            buttonToNextScene.onClick.AddListener(new UnityAction(Restart));
+            buttonToLobby.onClick.AddListener(new UnityAction(TurnToLobby));
         }
-        buttonToNextScene.onClick.AddListener(new UnityAction(TurnToNextScene));
-        buttonToLobby.onClick.AddListener(new UnityAction(TurnToLobby));
-        buttonContinue.onClick.AddListener(new UnityAction(OnClickContinue));
     }
     void TurnToLobby()
     {
         SceneManager.LoadSceneAsync("LobbyScene").allowSceneActivation = true;
     }
-    void TurnToThisScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
     void TurnToNextScene()
     {
         CacheService.Set("playMode", "PVE");
         CacheService.Set("iCurrentLevelID", nextLevel.ToString());
+        SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;
+    }
+    void Restart()
+    {
         SceneManager.LoadSceneAsync("MainScene").allowSceneActivation = true;
     }
     void ShowAward()

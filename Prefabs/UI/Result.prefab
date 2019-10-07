@@ -231,7 +231,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1171717423177964499}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -351,7 +351,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1171717423177964499}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -461,6 +461,12 @@ MonoBehaviour:
   buttonContinue: {fileID: 2925757601208123730}
   spriteWin: {fileID: 21300000, guid: 1d7a88498c4419b4a9c7789468ac37d2, type: 3}
   spriteFail: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
+  PVESprite:
+    player1Win: {fileID: 21300000, guid: 1d7a88498c4419b4a9c7789468ac37d2, type: 3}
+    player2Win: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
+  PVPSprite:
+    player1Win: {fileID: 21300000, guid: 1d7a88498c4419b4a9c7789468ac37d2, type: 3}
+    player2Win: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
   spriteBackground: {fileID: 4884175283959715054}
   awardImage: {fileID: 6035130182620684519}
   buttonGroup: {fileID: 8911469928753713018}
@@ -838,8 +844,8 @@ RectTransform:
   - {fileID: 7385618478269791885}
   - {fileID: 3738293124029161582}
   - {fileID: 1369857797879859825}
-  - {fileID: 1634796035903275387}
   - {fileID: 4900905502893511866}
+  - {fileID: 1634796035903275387}
   m_Father: {fileID: 8252453059400088289}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
