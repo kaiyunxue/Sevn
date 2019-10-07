@@ -16,8 +16,6 @@ public class UIResult : MonoBehaviour
     public Button buttonToNextScene;
     public Button buttonToLobby;
     public Button buttonContinue;
-    public Sprite spriteWin;
-    public Sprite spriteFail;
     public ResultSprite PVESprite;
     public ResultSprite PVPSprite;
     public Image spriteBackground;
