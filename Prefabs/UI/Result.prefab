@@ -459,8 +459,6 @@ MonoBehaviour:
   buttonToNextScene: {fileID: 2612291232386564779}
   buttonToLobby: {fileID: 3361114000964252906}
   buttonContinue: {fileID: 2925757601208123730}
-  spriteWin: {fileID: 21300000, guid: 1d7a88498c4419b4a9c7789468ac37d2, type: 3}
-  spriteFail: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
   PVESprite:
     player1Win: {fileID: 21300000, guid: 1d7a88498c4419b4a9c7789468ac37d2, type: 3}
     player2Win: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
@@ -474,9 +472,9 @@ MonoBehaviour:
   resultAwardPanel: {fileID: 7454918264869546572}
   awardAnimator: {fileID: 8258299149865418154}
   resultAwards:
-  - {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
-  - {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
-  - {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
+  - {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+  - {fileID: 21300000, guid: ca7e2ff79a482a541b6f6d086d3f2f19, type: 3}
+  - {fileID: 21300000, guid: d2d2e6d8514cbf843a9eb350730632b5, type: 3}
   - {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
 --- !u!95 &8258299149865418154
 Animator:

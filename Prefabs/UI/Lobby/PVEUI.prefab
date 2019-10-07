@@ -78,15 +78,15 @@ MonoBehaviour:
   levelConfig:
   - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
     lockedSprite: {fileID: 21300000, guid: ab6575ef735065649aa863de0c49f759, type: 3}
-    videoClip: {fileID: 32900000, guid: 8a8b25b92d0005b47869254d75ac92ce, type: 3}
-  - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
-    lockedSprite: {fileID: 21300000, guid: ab6575ef735065649aa863de0c49f759, type: 3}
+    videoClip: {fileID: 32900000, guid: c4ee7ed2de9e3473a9265a5da0d343d5, type: 3}
+  - unlockedSprite: {fileID: 21300000, guid: d8f0c3e12dd76d745bbc2c3b9a57c2da, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 07813d0679a916a46a87608c0d971274, type: 3}
+    videoClip: {fileID: 0}
+  - unlockedSprite: {fileID: 21300000, guid: fa3d096418a93d64a9d32e2fa3bd8d9f, type: 3}
+    lockedSprite: {fileID: 21300000, guid: f8da17ba36906e941b59a61f3bbe2b33, type: 3}
     videoClip: {fileID: 0}
   - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
-    lockedSprite: {fileID: 21300000, guid: bc8913b117248ea48814876eb6b8a52f, type: 3}
-    videoClip: {fileID: 0}
-  - unlockedSprite: {fileID: 21300000, guid: 29d64e9881ce48c449bcffb4e11ab79d, type: 3}
-    lockedSprite: {fileID: 21300000, guid: bc8913b117248ea48814876eb6b8a52f, type: 3}
+    lockedSprite: {fileID: 21300000, guid: f8da17ba36906e941b59a61f3bbe2b33, type: 3}
     videoClip: {fileID: 0}
   videoComponent: {fileID: 7329290570319357210}
 --- !u!223 &2737826613507600023
@@ -1038,16 +1038,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 563382138906061713}
     m_Modifications:
-    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
-        type: 3}
-      propertyPath: m_Name
-      value: VideoComponent
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7656784874541938694, guid: b3817763fd718ed4485fc23f52e82c97,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1153,6 +1143,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
+        type: 3}
+      propertyPath: m_Name
+      value: VideoComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3817763fd718ed4485fc23f52e82c97, type: 3}
 --- !u!224 &4863904707433046590 stripped
@@ -1180,11 +1180,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 563382138906061713}
     m_Modifications:
-    - target: {fileID: 8780252793038782954, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: spinAngleMax
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1300,6 +1295,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8780252793038782954, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: spinAngleMax
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 699318284150726962, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1310,12 +1310,27 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6163244842962077296, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_Name
       value: LobbyCircleLeft
       objectReference: {fileID: 0}
     - target: {fileID: 4192786783254951730, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285789224136404929, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262888087703544985, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1340,6 +1355,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -29
       objectReference: {fileID: 0}
+    - target: {fileID: 6246843526771141721, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2911777016531792938, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_Sprite
@@ -1358,26 +1378,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e437a2142a40942d5b9c324ad53bf3de,
         type: 3}
-    - target: {fileID: 6163244842962077296, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2285789224136404929, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262888087703544985, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6246843526771141721, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5831215542491621126, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: spinAngleMax
