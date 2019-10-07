@@ -467,8 +467,8 @@ MonoBehaviour:
     player2Win: {fileID: 21300000, guid: 45b364a176fa0884a95d56f52e6aa151, type: 3}
   spriteBackground: {fileID: 4884175283959715054}
   awardImage: {fileID: 6035130182620684519}
-  imageLock: {fileID: 0}
-  imageUnlock: {fileID: 0}
+  imageLock: {fileID: 8549781265204361769}
+  imageUnlock: {fileID: 6035130182620684519}
   buttonGroup: {fileID: 8911469928753713018}
   resultPanel: {fileID: 2148129987521339589}
   resultAwardPanel: {fileID: 7454918264869546572}
