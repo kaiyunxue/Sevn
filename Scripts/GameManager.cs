@@ -271,11 +271,11 @@ public class GameManager : MonoBehaviour
     private void ShowWiner()
     {
         //先判断是否获得一种颜色的全部棋子
-        if (controller.CheckDoesGetSevn())
+        if (controller.CheckWin())
         {
             Win(true);
         }
-        else if (controller2.CheckDoesGetSevn())
+        else if (controller2.CheckWin())
         {
             Win(false);
         }
@@ -299,9 +299,9 @@ public class GameManager : MonoBehaviour
     {
         if (boardManager.nextPieces.Count <= 0)
             EndGame();
-        if (controller.CheckDoesGetSevn())
+        if (controller.CheckWin())
             EndGame();
-        if (controller2.CheckDoesGetSevn())
+        if (controller2.CheckWin())
             EndGame();
     }
 

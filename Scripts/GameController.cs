@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         record.secord = new int[maxColor];
         uIScorePanel = p;
     }
-    public bool CheckDoesGetSevn()
+    private bool CheckDoesGetSevn()
     {
         GamePlayMode gpm = GameManager.Instance.gamePlayMode;
         foreach (int s in record.secord)
@@ -43,6 +43,34 @@ public class GameController : MonoBehaviour
                 return true;
             }
         }
+        return false;
+    }
+    public bool CheckWin()
+    {
+        if (CheckDoesGetSevn())
+        {
+            return true;
+        }
+
+        GamePlayMode gpm = GameManager.Instance.gamePlayMode;
+        int controllNum = 0;
+        int takeNum = 0;
+        foreach (int s in record.secord)
+        {
+            if (s > 0)
+            {
+                takeNum++;
+            }
+            if (s > gpm.boardSideLength/2)
+            {
+                controllNum++;
+            }
+        }
+        if (controllNum > gpm.boardSideLength / 2 && takeNum >= gpm.boardSideLength)
+        {
+            return true;
+        }
+
         return false;
     }
     public PlayerRecord GetScoreValue()
