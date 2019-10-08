@@ -474,8 +474,8 @@ MonoBehaviour:
   resultAwardPanel: {fileID: 7454918264869546572}
   awardAnimator: {fileID: 8258299149865418154}
   resultAwards:
-  - lockSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
-    unlockSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
+  - lockSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
+    unlockSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
   - lockSprite: {fileID: 21300000, guid: 62af740680c0c8a48b5439f1e60113df, type: 3}
     unlockSprite: {fileID: 21300000, guid: ca7e2ff79a482a541b6f6d086d3f2f19, type: 3}
   - lockSprite: {fileID: 21300000, guid: 1f8bbb55787c61a48abb411db8ea81b8, type: 3}
