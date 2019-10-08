@@ -929,9 +929,9 @@ MonoBehaviour:
   lobbyCircleLeft: {fileID: 0}
   lobbyCircleRight: {fileID: 437535516715395977}
   gallerySpriteCfg:
-  - lockedSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
-    unlockedSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
-    maximumSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
+  - lockedSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+    maximumSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
   - lockedSprite: {fileID: 21300000, guid: 62af740680c0c8a48b5439f1e60113df, type: 3}
     unlockedSprite: {fileID: 21300000, guid: ca7e2ff79a482a541b6f6d086d3f2f19, type: 3}
     maximumSprite: {fileID: 21300000, guid: ca7e2ff79a482a541b6f6d086d3f2f19, type: 3}
@@ -1286,11 +1286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2045532741768408701}
     m_Modifications:
-    - target: {fileID: 1917756371411090174, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: m_Name
-      value: LobbyCircleRight
-      objectReference: {fileID: 0}
     - target: {fileID: 5785642864690582686, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1400,6 +1395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: spinAngleMin
       value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917756371411090174, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_Name
+      value: LobbyCircleRight
       objectReference: {fileID: 0}
     - target: {fileID: 8353826073230118744, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
