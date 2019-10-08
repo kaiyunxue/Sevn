@@ -102,11 +102,12 @@ MonoBehaviour:
   lobbyCircleRight: {fileID: 6645313653525269400}
   audioSource: {fileID: 974354107581919608}
   modelAudios:
-  - {fileID: 8300000, guid: 846c72e545ccc46a3a1c94c025529268, type: 3}
-  - {fileID: 8300000, guid: 9834eb71a00874fa08a539f39b8d8932, type: 3}
-  - {fileID: 8300000, guid: ebd15a8b13f87485bb09ee0836f2ff4e, type: 3}
+  - {fileID: 8300000, guid: 99d8794c0d16f4699a764f06c060e714, type: 3}
+  - {fileID: 8300000, guid: 806baa4a811ed47f297f377458415e6d, type: 3}
+  - {fileID: 8300000, guid: 3f16f737fe0b44a8ca35004242d1d3d2, type: 3}
+  - {fileID: 8300000, guid: e50b5856c572e4d61ad22a9fb2cdacdf, type: 3}
   firstIntervalSecond: 2
-  audioIntervalSecond: 5
+  audioIntervalSecond: 9
 --- !u!223 &8421418400394102098
 Canvas:
   m_ObjectHideFlags: 0
@@ -395,11 +396,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1491838760384454326}
     m_Modifications:
-    - target: {fileID: 1917756371411090174, guid: c73c1dddeb95170498ad6d48acd2ecae,
-        type: 3}
-      propertyPath: m_Name
-      value: LobbyCircleRight
-      objectReference: {fileID: 0}
     - target: {fileID: 5785642864690582686, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -515,6 +511,11 @@ PrefabInstance:
       propertyPath: fanPanel
       value: 
       objectReference: {fileID: 8999445432313651065}
+    - target: {fileID: 1917756371411090174, guid: c73c1dddeb95170498ad6d48acd2ecae,
+        type: 3}
+      propertyPath: m_Name
+      value: LobbyCircleRight
+      objectReference: {fileID: 0}
     - target: {fileID: 1036382504556925064, guid: c73c1dddeb95170498ad6d48acd2ecae,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -914,11 +915,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1491838760384454326}
     m_Modifications:
-    - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
-        type: 3}
-      propertyPath: m_Name
-      value: LobbyCircleLeft
-      objectReference: {fileID: 0}
     - target: {fileID: 1175560994394634817, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1148,6 +1144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523438447378994209, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
+        type: 3}
+      propertyPath: m_Name
+      value: LobbyCircleLeft
       objectReference: {fileID: 0}
     - target: {fileID: 3748551592481148418, guid: 7a1922d5dd9db1a46ac12fcd87e07d66,
         type: 3}
