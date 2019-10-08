@@ -29,7 +29,7 @@ public class AIController : MonoBehaviour
     private Thread moveThread;
     List<AIResult> result;
     BoardManager boardManager;
-    private int ABPruningDepth = 4;
+    private int ABPruningDepth = 5;
 
     private bool isBeSkilled = false;
     public void MakeAIStupid()
@@ -351,6 +351,43 @@ public class AIController : MonoBehaviour
                 return true;
             }
         }
+
+        int controllNum = 0;
+        int takeNum = 0;
+        foreach (int s in curAiRecord.secord)
+        {
+            if (s > 0)
+            {
+                takeNum++;
+            }
+            if (s > gpm.boardSideLength / 2)
+            {
+                controllNum++;
+            }
+        }
+        if (controllNum > gpm.boardSideLength / 2 && takeNum >= gpm.boardSideLength)
+        {
+            return true;
+        }
+
+        controllNum = 0;
+        takeNum = 0;
+        foreach (int s in curPlayerRecord.secord)
+        {
+            if (s > 0)
+            {
+                takeNum++;
+            }
+            if (s > gpm.boardSideLength / 2)
+            {
+                controllNum++;
+            }
+        }
+        if (controllNum > gpm.boardSideLength / 2 && takeNum >= gpm.boardSideLength)
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -539,7 +576,7 @@ public class AIController : MonoBehaviour
             var v = curDepthData.playerRecord.secord[i];
             if (curDepthData.aiRecord.secord[i] > gpm.boardSideLength / 2)
             {
-                playerValue = v > 0 ? 10 : 0;
+                playerValue += v > 0 ? 20 : 0;
             }
             else if (v > gpm.boardSideLength / 2)
             {
@@ -564,7 +601,7 @@ public class AIController : MonoBehaviour
             var v = curDepthData.aiRecord.secord[i];
             if (curDepthData.playerRecord.secord[i] > gpm.boardSideLength / 2)
             {
-                aiValue = v > 0 ? 10 : 0;
+                aiValue += v > 0 ? 20 : 0;
             }
             else if (v > gpm.boardSideLength / 2)
             {

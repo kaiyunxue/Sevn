@@ -25,7 +25,7 @@ public class LobbyMain : LobbyUIBase
             int randIdx = Random.Range(0, modelAudios.Length);
             audioSource.clip = modelAudios[randIdx];
             audioSource.Play();
-            yield return new WaitForSeconds(audioIntervalSecond);
+            yield return new WaitForSeconds(audioIntervalSecond + audioSource.clip.length);
         }
     }
 }
