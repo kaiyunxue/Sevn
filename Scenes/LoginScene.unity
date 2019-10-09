@@ -691,7 +691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -388}
+  m_AnchoredPosition: {x: 88, y: -388}
   m_SizeDelta: {x: 300, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241980177
@@ -916,16 +916,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 692944887}
     m_Modifications:
-    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
-        type: 3}
-      propertyPath: m_Name
-      value: VideoComponent
-      objectReference: {fileID: 0}
-    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7656784874541938694, guid: b3817763fd718ed4485fc23f52e82c97,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1030,6 +1020,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
+        type: 3}
+      propertyPath: m_Name
+      value: VideoComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656784874541938693, guid: b3817763fd718ed4485fc23f52e82c97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7656784875970102732, guid: b3817763fd718ed4485fc23f52e82c97,
         type: 3}
