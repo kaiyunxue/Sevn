@@ -106,8 +106,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 806baa4a811ed47f297f377458415e6d, type: 3}
   - {fileID: 8300000, guid: 3f16f737fe0b44a8ca35004242d1d3d2, type: 3}
   - {fileID: 8300000, guid: e50b5856c572e4d61ad22a9fb2cdacdf, type: 3}
+  - {fileID: 8300000, guid: b00e5eca8c6900a4eaea499d8582e418, type: 3}
   firstIntervalSecond: 2
-  audioIntervalSecond: 9
+  audioIntervalSecond: 7
 --- !u!223 &8421418400394102098
 Canvas:
   m_ObjectHideFlags: 0
