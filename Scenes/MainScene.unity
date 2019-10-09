@@ -1360,7 +1360,7 @@ MonoBehaviour:
   - aiLevel: 0
     boardLength: 5
     isUseCrackPiece: 0
-    backgroundSprite: {fileID: 21300000, guid: 50c91653e35b94146b2761e8502d6f21, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: b0fbcd83654db864399e02c51b1c0821, type: 3}
   - aiLevel: 2
     boardLength: 7
     isUseCrackPiece: 0
