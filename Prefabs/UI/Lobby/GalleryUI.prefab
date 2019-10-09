@@ -938,9 +938,9 @@ MonoBehaviour:
   - lockedSprite: {fileID: 21300000, guid: 1f8bbb55787c61a48abb411db8ea81b8, type: 3}
     unlockedSprite: {fileID: 21300000, guid: d2d2e6d8514cbf843a9eb350730632b5, type: 3}
     maximumSprite: {fileID: 21300000, guid: daa313d5081f89e41a1d2a972d52f988, type: 3}
-  - lockedSprite: {fileID: 21300000, guid: e73ba70bf5e9a47fe9b5250f6c069554, type: 3}
-    unlockedSprite: {fileID: 21300000, guid: e73ba70bf5e9a47fe9b5250f6c069554, type: 3}
-    maximumSprite: {fileID: 21300000, guid: e73ba70bf5e9a47fe9b5250f6c069554, type: 3}
+  - lockedSprite: {fileID: 21300000, guid: 772ebdd8b8a6cff4485d0ae14851632f, type: 3}
+    unlockedSprite: {fileID: 21300000, guid: 772ebdd8b8a6cff4485d0ae14851632f, type: 3}
+    maximumSprite: {fileID: 21300000, guid: 772ebdd8b8a6cff4485d0ae14851632f, type: 3}
   btnGalleryLevel:
   - {fileID: 6877775332964321566}
   - {fileID: 7296223762850212455}
