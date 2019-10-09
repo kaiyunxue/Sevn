@@ -85,8 +85,8 @@ MonoBehaviour:
   - unlockedSprite: {fileID: 21300000, guid: fa3d096418a93d64a9d32e2fa3bd8d9f, type: 3}
     lockedSprite: {fileID: 21300000, guid: f8da17ba36906e941b59a61f3bbe2b33, type: 3}
     videoClip: {fileID: 0}
-  - unlockedSprite: {fileID: 21300000, guid: fa3d096418a93d64a9d32e2fa3bd8d9f, type: 3}
-    lockedSprite: {fileID: 21300000, guid: f8da17ba36906e941b59a61f3bbe2b33, type: 3}
+  - unlockedSprite: {fileID: 21300000, guid: 69f4757191d6cdd4592f771b6d587af5, type: 3}
+    lockedSprite: {fileID: 21300000, guid: 69f4757191d6cdd4592f771b6d587af5, type: 3}
     videoClip: {fileID: 0}
   videoComponent: {fileID: 7329290570319357210}
 --- !u!223 &2737826613507600023
