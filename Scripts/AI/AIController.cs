@@ -304,6 +304,13 @@ public class AIController : MonoBehaviour
 
         BeginCalculate();
 
+        if (GameManager.Instance.boardManager.GetPieceRemainNum() > 20)
+            ABPruningDepth = 4;
+        else if(GameManager.Instance.boardManager.GetPieceRemainNum() > 10)
+            ABPruningDepth = 5;
+        else
+            ABPruningDepth = 6;
+
         Piece[,] curPieces = boardManager.GetPieces();
         List<Piece> curNextPieces = boardManager.GetNextPieces();
         PlayerRecord playerRecord = GameManager.Instance.controller.GetScoreValue();
@@ -312,6 +319,7 @@ public class AIController : MonoBehaviour
         int alpha = -0x7FFFFFFE;
         int beta= 0x7FFFFFFE;
         AIHardDataStruct curDepthData = new AIHardDataStruct(curPieces, curNextPieces, playerRecord, aiRecord, curDepth);
+        Debug.Log("ABPruningDepth: " + ABPruningDepth);
         ABPruning(ref curDepthData, alpha, beta, false);
         Debug.Log("curDepthData.bestCombination count: " + curDepthData.bestCombination.Count);
         List<Piece> abRes = curDepthData.bestCombination;

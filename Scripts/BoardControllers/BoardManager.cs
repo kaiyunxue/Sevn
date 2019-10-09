@@ -91,6 +91,7 @@ public class BoardManager : MonoBehaviour
     static private GamePlayMode gpm;
     private bool isReady;
     private bool isCrackDone;
+    private int pieceRemainNum;
 
     public bool IsReady()
     {
@@ -250,13 +251,18 @@ public class BoardManager : MonoBehaviour
         isReady = true;
     }
 
+    public int GetPieceRemainNum()
+    {
+        return pieceRemainNum;
+    }
+
     public void Init(GamePlayMode arg_gpm)
     {
         gpm = arg_gpm;
         selectedColor = PieceColor.NULL;
         boardLength = gpm.boardSideLength;
         nextPieces = new List<Piece>();
-
+        pieceRemainNum = gpm.boardSideLength * gpm.boardSideLength;
         if (gpm.gameMode == GameMode.VSAI && gpm.levelID == 0)
         {
             InitNewbie();
@@ -353,6 +359,7 @@ public class BoardManager : MonoBehaviour
     public void PieceBeKilled(int x, int y)
     {
         pieces[x, y].isValid = false;
+        pieceRemainNum--;
         DeletePiece(x, y);
         changedPieces.Clear();//去掉了注释 若不去掉注释会导致碎裂棋子重复计算
         if (x - 1 >= 0 && pieces[x - 1, y].isValid)
